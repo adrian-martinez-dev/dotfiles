@@ -550,8 +550,11 @@ let g:gruvbox_material_background = 'hard'
 let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'blue'
 
+" 'default', 'aura', 'neon'
+let g:edge_style = 'default'
+
 try
-  colorscheme sonokai
+  colorscheme edge
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -682,7 +685,7 @@ let g:indent_blankline_char = '│'
 let g:indent_blankline_show_first_indent_level = v:false
 let g:indent_blankline_filetype_exclude = ['help', 'startify', 'fugitive', 'git']
 let g:indent_blankline_buftype_exclude = ['terminal']
-let g:indent_blankline_char_highlight_list = ['NonText', 'LineNr', 'Structure', 'Directory', 'Question', 'Constant']
+let g:indent_blankline_char_highlight_list = ['Title', 'LineNr', 'MoreMsg', 'Directory', 'Question']
 " let g:indent_blankline_char_highlight_list = ['LineNr', 'NonText']
 
 " airline
