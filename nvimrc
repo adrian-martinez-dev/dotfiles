@@ -58,7 +58,8 @@ Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Snippets & AutoComplete
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
@@ -115,21 +116,6 @@ if WINDOWS()
 endif
 
 set shiftwidth=2
-" augroup IndentSettings
-"     autocmd!
-"     autocmd Filetype html setlocal ts=2 sw=2
-"     autocmd Filetype htmldjango setlocal ts=2 sw=2
-"     autocmd Filetype php setlocal ts=4 sw=4
-"     autocmd Filetype vue setlocal ts=2 sw=2
-"     autocmd Filetype javascript setlocal ts=2 sw=2
-"     autocmd Filetype blade setlocal ts=2 sw=2
-"     autocmd Filetype typescript setlocal ts=4 sw=4
-"     autocmd Filetype scss setlocal ts=4 sw=4
-"     autocmd Filetype vim setlocal ts=4 sw=4
-"     autocmd Filetype css setlocal ts=4 sw=4
-"     autocmd Filetype cucumber setlocal ts=2 sw=2
-"     autocmd Filetype json setlocal ts=2 sw=2
-" augroup END
 
 " True color
 set termguicolors
@@ -481,6 +467,8 @@ augroup END
 let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-eslint',
                               \ 'coc-prettier',
+                              \ 'coc-tailwindcss',
+                              \ 'coc-react-refactor',
                               \ 'coc-css',
                               \ 'coc-json',
                               \ 'coc-pyright',
@@ -522,6 +510,10 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>D <Plug>(coc-codeaction)
+xmap <leader>x <Plug>(coc-codeaction-selected)
+nmap <leader>x <Plug>(coc-codeaction-selected)
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
@@ -554,7 +546,7 @@ let g:sonokai_cursor = 'blue'
 let g:edge_style = 'default'
 
 try
-  colorscheme edge
+  colorscheme sonokai
 catch
   " echo 'Colorscheme not found'
 endtry
