@@ -7,6 +7,13 @@
         "ecmascript": 6,
         "jsx": true
     },
+    "parserOptions": {
+        "ecmaVersion": 2017
+    },
+
+    "env": {
+        "es6": true
+    }
     "plugins": [
         "react"
     ],

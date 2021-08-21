@@ -44,6 +44,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
+Plug 'danilamihailov/beacon.nvim'
 
 " Colorschemes
 Plug 'sainnhe/gruvbox-material'
@@ -121,7 +122,7 @@ set shiftwidth=2
 set termguicolors
 
 " Cursor line
-set cursorline
+" set cursorline
 
 :set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
@@ -204,18 +205,18 @@ augroup END
 
 " PDB
 " pip install pdbpp
-augroup SetBreakpoints
-    autocmd!
-    autocmd FileType python map <silent> <leader>x oimport pdb; pdb.set_trace()  # noqa: E702<esc>
-    autocmd FileType python map <silent> <leader>X Oimport pdb; pdb.set_trace()  # noqa: E702<esc>
-augroup END
+" augroup SetBreakpoints
+"     autocmd!
+"     autocmd FileType python map <silent> <leader>x oimport pdb; pdb.set_trace()  # noqa: E702<esc>
+"     autocmd FileType python map <silent> <leader>X Oimport pdb; pdb.set_trace()  # noqa: E702<esc>
+" augroup END
 
-" Only show cursorline in the current window
-augroup CursorLineOnlyInActiveWindow
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
-    autocmd WinLeave,InsertEnter * setlocal nocursorline
-augroup END
+" Only show sursorline in the current window
+" augroup CursorLineOnlyInActiveWindow
+"     autocmd!
+"     autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
+"     autocmd WinLeave,InsertEnter * setlocal nocursorline
+" augroup END
 
 " Disable list on preview window
 augroup DisableThingsFromWindows
@@ -471,7 +472,6 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-react-refactor',
                               \ 'coc-css',
                               \ 'coc-json',
-                              \ 'coc-pyright',
                               \ 'coc-highlight',
                               \ 'coc-emmet',
                               \ 'coc-ultisnips' ]
