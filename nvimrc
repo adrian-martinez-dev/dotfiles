@@ -34,6 +34,7 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-dirvish'
 Plug 'phaazon/hop.nvim'
+Plug 'easymotion/vim-easymotion'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
@@ -554,7 +555,7 @@ let g:sonokai_cursor = 'blue'
 let g:edge_style = 'default'
 
 try
-  colorscheme edge
+  colorscheme sonokai
 catch
   " echo 'Colorscheme not found'
 endtry
