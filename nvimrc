@@ -59,7 +59,8 @@ Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Snippets & AutoComplete
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
 Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
@@ -136,7 +137,7 @@ set shiftwidth=2
 set termguicolors
 
 " Cursor line
-set cursorline
+" set cursorline
 
 :set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
@@ -286,9 +287,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link VertSplit Ignore
     autocmd ColorScheme * hi! link StatusLineNC Ignore
     autocmd ColorScheme * hi! link StatusLine TabLine
-    autocmd ColorScheme * hi! link HopNextKey Search
-    autocmd ColorScheme * hi! link HopNextKey1 Search
-    autocmd ColorScheme * hi! link HopNextKey2 Search
+    autocmd ColorScheme * hi! link Beacon Cursor
     " autocmd ColorScheme * hi Pmenu gui=none
     " autocmd ColorScheme * hi TabLineSel cterm=none gui=bold
 augroup END
@@ -482,6 +481,8 @@ augroup END
 let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-eslint',
                               \ 'coc-prettier',
+                              \ 'coc-tailwindcss',
+                              \ 'coc-react-refactor',
                               \ 'coc-css',
                               \ 'coc-json',
                               \ 'coc-pyright',
@@ -523,6 +524,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <leader>D <Plug>(coc-codeaction)
+xmap <leader>x <Plug>(coc-codeaction-selected)
+nmap <leader>x <Plug>(coc-codeaction-selected)
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
