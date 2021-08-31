@@ -34,7 +34,6 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-dirvish'
 Plug 'phaazon/hop.nvim'
-Plug 'easymotion/vim-easymotion'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
@@ -45,6 +44,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
+Plug 'danilamihailov/beacon.nvim'
 
 " Colorschemes
 Plug 'sainnhe/gruvbox-material'
@@ -219,18 +219,18 @@ augroup END
 
 " PDB
 " pip install pdbpp
-augroup SetBreakpoints
-    autocmd!
-    autocmd FileType python map <silent> <leader>x oimport pdb; pdb.set_trace()  # noqa: E702<esc>
-    autocmd FileType python map <silent> <leader>X Oimport pdb; pdb.set_trace()  # noqa: E702<esc>
-augroup END
+" augroup SetBreakpoints
+"     autocmd!
+"     autocmd FileType python map <silent> <leader>x oimport pdb; pdb.set_trace()  # noqa: E702<esc>
+"     autocmd FileType python map <silent> <leader>X Oimport pdb; pdb.set_trace()  # noqa: E702<esc>
+" augroup END
 
 " Only show cursorline in the current window
-augroup CursorLineOnlyInActiveWindow
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
-    autocmd WinLeave,InsertEnter * setlocal nocursorline
-augroup END
+" augroup CursorLineOnlyInActiveWindow
+"     autocmd!
+"     autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
+"     autocmd WinLeave,InsertEnter * setlocal nocursorline
+" augroup END
 
 " Disable list on preview window
 augroup DisableThingsFromWindows
