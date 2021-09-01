@@ -8,10 +8,11 @@ windows:
       layout: even-vertical
       panes:
         - cd ~/Workspace/proxied/permnet-loanpool
-        - cd ~/Workspace/proxied/permnet-server; ./run.sh
+        # - cd ~/Workspace/proxied/permnet-server; ./run.sh
+        - cd ~/Workspace/proxied/permnet-server
   - editor:
       layout: main-vertical
       panes:
         - nvim -S ~/.local/share/nvim/session/date
-        - cd ~/Workspace/node-proxy; npm start
+        # - cd ~/Workspace/node-proxy; npm start
         - cd ~/Workspace/date-ui; npm start
