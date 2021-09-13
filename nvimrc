@@ -690,8 +690,8 @@ let g:indent_blankline_char = '│'
 let g:indent_blankline_show_first_indent_level = v:false
 let g:indent_blankline_filetype_exclude = ['help', 'startify', 'fugitive', 'git']
 let g:indent_blankline_buftype_exclude = ['terminal']
-let g:indent_blankline_char_highlight_list = ['Title', 'LineNr', 'MoreMsg', 'Directory', 'Question']
-" let g:indent_blankline_char_highlight_list = ['LineNr', 'NonText']
+" let g:indent_blankline_char_highlight_list = ['Title', 'LineNr', 'MoreMsg', 'Directory', 'Question']
+let g:indent_blankline_char_highlight_list = ['LineNr', 'NonText']
 
 " airline
 let g:airline_powerline_fonts = 1
