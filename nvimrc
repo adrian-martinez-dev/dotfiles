@@ -92,7 +92,7 @@ set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 set autoindent
 set noshowcmd
 set nofixendofline
-" set number
+set number
 " set foldcolumn="auto:3"
 set mouse=a
 
