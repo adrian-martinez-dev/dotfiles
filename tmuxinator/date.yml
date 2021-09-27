@@ -3,6 +3,9 @@
 name: date
 root: ~/
 
+startup_window: editor
+# startup_pane: 1
+
 windows:
   - backend:
       layout: even-vertical

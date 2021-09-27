@@ -641,7 +641,7 @@ let g:fzf_colors =
 command! -nargs=* Manage T docker-compose -f local.yml run --rm django python manage.py <args>
 command! -nargs=* Test T docker-compose -f local.yml run --rm django pytest <args>
 command! PullDotfiles T cd ~/dotfiles; git pull;
-command! SyncDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
+command! PushDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 
 " Hop
 nmap s :HopChar1<enter>
