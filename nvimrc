@@ -92,7 +92,7 @@ set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 set autoindent
 set noshowcmd
 set nofixendofline
-set number
+" set number
 " set foldcolumn="auto:3"
 set mouse=a
 
@@ -305,6 +305,8 @@ command! -nargs=* VT vsplit | terminal <args>
 
 " Search word under cursor and show results in quickfix without moving it
 nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
+" console.log
+nnoremap <Leader>L "ayiw<CR>iconsole.log('<C-R>a: ', <C-R>a);<CR><Esc>
 
 if !exists('g:vscode')
     nnoremap <leader>M :top 11sp term://$SHELL<cr>
