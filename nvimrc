@@ -66,8 +66,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 
 " Syntax highlighting
-Plug 'sheerun/vim-polyglot'
-Plug 'vobornik/vim-mql4'
+" Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
@@ -688,6 +688,8 @@ let g:coc_fzf_preview = ''
 let g:coc_fzf_opts = []
 
 " indentline
+let g:indent_blankline_space_char_blankline = " "
+let g:indent_blankline_show_current_context = v:true
 let g:indent_blankline_char = '│'
 let g:indent_blankline_show_first_indent_level = v:false
 let g:indent_blankline_filetype_exclude = ['help', 'startify', 'fugitive', 'git']
@@ -745,3 +747,15 @@ augroup AnyFold
   autocmd Filetype javascript AnyFoldActivate
   autocmd Filetype python AnyFoldActivate
 augroup END
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  indent = {
+    enable = true
+  }
+}
+EOF

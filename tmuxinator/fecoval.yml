@@ -1,11 +1,11 @@
 # /home/adrian/.config/tmuxinator/fecoval.yml
 
 name: fecoval
-root: ~/Workspace/fecoval-web
+root: ~/Workspace/fecoval
 
 windows:
   - editor:
-      layout: main-vertical
+      layout: main-horizontal
       panes:
         - nvim -S ~/.local/share/nvim/session/fecoval
         - docker-compose -f local.yml up
