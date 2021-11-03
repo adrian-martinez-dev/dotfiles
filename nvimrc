@@ -38,13 +38,13 @@ Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
 Plug 'gcmt/taboo.vim'
-Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
 Plug 'danilamihailov/beacon.nvim'
+Plug 'romainl/vim-cool'
 
 " Colorschemes
 Plug 'sainnhe/gruvbox-material'
@@ -227,11 +227,11 @@ augroup END
 " augroup END
 
 " Only show cursorline in the current window
-" augroup CursorLineOnlyInActiveWindow
-"     autocmd!
-"     autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
-"     autocmd WinLeave,InsertEnter * setlocal nocursorline
-" augroup END
+augroup CursorLineOnlyInActiveWindow
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
+    autocmd WinLeave,InsertEnter * setlocal nocursorline
+augroup END
 
 " Disable list on preview window
 augroup DisableThingsFromWindows
@@ -295,8 +295,6 @@ augroup END
 " Mappings
 let g:mapleader = ','
 
-nnoremap <esc><esc> :noh<cr>
-
 " Backtick
 inoremap '' `
 
@@ -316,7 +314,7 @@ endif
 " Insert source bin/activate
 tnoremap <leader>va source venv/bin/activate<cr>
 
-" " Jump to tag
+" Jump to tag
 nnoremap <leader>T <C-]>
 
 " Find files
@@ -358,7 +356,7 @@ nnoremap <C-left> 5<C-W>>
 nnoremap <leader>s :%s///gI<left><left><left><left>
 vnoremap <leader>s :s///gI<left><left><left><left>
 
-" All results from quickfix
+"Substitute all results from quickfix
 nnoremap <leader>R :cfdo %s///g \| update<c-left><c-left><left><left><left><left>
 
 " Select current line (no indentation)
@@ -556,12 +554,13 @@ let g:gruvbox_material_background = 'hard'
 " default, atlantis, andromeda, shusia, maia
 let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'blue'
+let g:edge_cursor = 'red'
 
 " 'default', 'aura', 'neon'
 let g:edge_style = 'default'
 
 try
-  colorscheme sonokai
+  colorscheme edge
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -624,21 +623,6 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
-
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
 
 command! -nargs=* Manage T docker-compose -f local.yml run --rm django python manage.py <args>
 command! -nargs=* Test T docker-compose -f local.yml run --rm django pytest <args>
@@ -748,6 +732,16 @@ augroup AnyFold
   autocmd Filetype python AnyFoldActivate
 augroup END
 
+" Execute 'lnoremap x X' and 'lnoremap X x' for each letter a-z.
+for c in range(char2nr('A'), char2nr('Z'))
+  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
+  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
+endfor
+
+augroup ImInsert
+  autocmd InsertLeave * set iminsert=0
+augroup END
+
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -758,4 +752,5 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   }
 }
+require'hop'.setup()
 EOF
