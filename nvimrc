@@ -117,21 +117,6 @@ if WINDOWS()
 endif
 
 set shiftwidth=2
-" augroup IndentSettings
-"     autocmd!
-"     autocmd Filetype html setlocal ts=2 sw=2
-"     autocmd Filetype htmldjango setlocal ts=2 sw=2
-"     autocmd Filetype php setlocal ts=4 sw=4
-"     autocmd Filetype vue setlocal ts=2 sw=2
-"     autocmd Filetype javascript setlocal ts=2 sw=2
-"     autocmd Filetype blade setlocal ts=2 sw=2
-"     autocmd Filetype typescript setlocal ts=4 sw=4
-"     autocmd Filetype scss setlocal ts=4 sw=4
-"     autocmd Filetype vim setlocal ts=4 sw=4
-"     autocmd Filetype css setlocal ts=4 sw=4
-"     autocmd Filetype cucumber setlocal ts=2 sw=2
-"     autocmd Filetype json setlocal ts=2 sw=2
-" augroup END
 
 " True color
 set termguicolors
@@ -227,11 +212,11 @@ augroup END
 " augroup END
 
 " Only show cursorline in the current window
-augroup CursorLineOnlyInActiveWindow
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
-    autocmd WinLeave,InsertEnter * setlocal nocursorline
-augroup END
+" augroup CursorLineOnlyInActiveWindow
+"     autocmd!
+"     autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
+"     autocmd WinLeave,InsertEnter * setlocal nocursorline
+" augroup END
 
 " Disable list on preview window
 augroup DisableThingsFromWindows
@@ -288,8 +273,6 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link StatusLineNC Ignore
     autocmd ColorScheme * hi! link StatusLine TabLine
     autocmd ColorScheme * hi! link Beacon Cursor
-    " autocmd ColorScheme * hi Pmenu gui=none
-    " autocmd ColorScheme * hi TabLineSel cterm=none gui=bold
 augroup END
 
 " Mappings

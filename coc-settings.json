@@ -1,11 +1,14 @@
 {
   "coc.preferences.extensionUpdateCheck": "daily",
   "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.checkCurrentLine": true,
-  "diagnostic.enable": true,
+  "diagnostic.enableMessage": "always",
+  "diagnostic.messageTarget": "echo",
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.enableSign": false,
   "diagnostic.errorSign": "E",
   "diagnostic.warningSign": "W",
-  "diagnostic.messageTarget": "echo",
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextPrefix": " >> ",
   "javascript.validate.enable": false,
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
@@ -18,8 +21,8 @@
     "vue-html": "html",
     "javascript": "javascriptreact"
   },
-	"prettier.semi": false,
-	"prettier.singleQuote": true,
-	"prettier.arrowParens": "avoid",
-	"prettier.trailingComma": "none"
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.arrowParens": "avoid",
+  "prettier.trailingComma": "none"
 }
