@@ -54,7 +54,8 @@ Plug 'sainnhe/edge'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-Plug 'airblade/vim-gitgutter'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 
@@ -411,31 +412,13 @@ inoremap <c-x><c-k> <c-x><c-k>
 let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 
 " Git
-set updatetime=300
-
-nmap <silent><leader>gn :GitGutterNextHunk<CR>
-nmap <silent><leader>gp :GitGutterPrevHunk<CR>
-nmap <silent><Leader>gs :GitGutterStageHunk<CR>
-nmap <silent><Leader>gr :GitGutterUndoHunk<CR>
-nmap <silent><Leader>gq :GitGutterQuickFix\|copen<CR>
-nmap <silent><Leader>ge :GitGutterPreviewHunk<CR>
 nmap <Leader>gc :T git checkout 
-nmap <Leader>gS :T git push --set-upstream origin 
 nmap <Leader>gP :T git push<cr>
 " nmap <silent><Leader>gd :-1tabedit %<CR>:Gdiff<cr>
 nmap <silent><Leader>gd :Gvdiffsplit<cr>
 nmap <silent><Leader>gD :Ghdiffsplit<cr>
 nmap <silent><Leader>gl :Glog<cr>
 nmap <silent><Leader>gb :Gbrowse<cr>
-
-let g:gitgutter_preview_win_floating = 1
-let g:gitgutter_sign_added = '┃'
-let g:gitgutter_sign_modified = '┃'
-let g:gitgutter_sign_modified_removed = '┃'
-let g:gitgutter_sign_removed_first_line = '▔'
-let g:gitgutter_sign_removed = '▶'
-" let g:gitgutter_set_sign_backgrounds = 1
-" let g:gitgutter_override_sign_column_highlight = 0
 
 " Startify
 nnoremap <leader>S :SSave!<cr>
@@ -735,5 +718,25 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   }
 }
-require'hop'.setup()
+require('hop').setup()
+require('gitsigns').setup {
+  keymaps = {
+    -- Default keymap options
+    noremap = true,
+
+    ['n <leader>gn'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+    ['n <leader>gp'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+
+    ['n <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+    ['v <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+    ['n <leader>gu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+    ['n <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+    ['v <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+    ['n <leader>gR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+    ['n <leader>ge'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+    ['n <leader>gB'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+    ['n <leader>gS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
+    ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
+  },
+}
 EOF
