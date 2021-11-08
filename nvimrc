@@ -29,6 +29,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
 Plug 'mhinz/vim-startify'
@@ -69,6 +70,7 @@ Plug 'alvan/vim-closetag'
 " Syntax highlighting
 " Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'p00f/nvim-ts-rainbow'
 
 call plug#end()
 
@@ -519,14 +521,14 @@ let g:gruvbox_material_background = 'hard'
 
 " default, atlantis, andromeda, shusia, maia
 let g:sonokai_style = 'default'
-let g:sonokai_cursor = 'blue'
+let g:sonokai_cursor = 'red'
 let g:edge_cursor = 'red'
 
 " 'default', 'aura', 'neon'
 let g:edge_style = 'default'
 
 try
-  colorscheme edge
+  colorscheme sonokai
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -720,13 +722,16 @@ require'nvim-treesitter.configs'.setup {
 }
 require('hop').setup()
 require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '┃', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '┃', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
   keymaps = {
-    -- Default keymap options
-    noremap = true,
-
     ['n <leader>gn'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
     ['n <leader>gp'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
-
     ['n <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
     ['v <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
     ['n <leader>gu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
@@ -738,5 +743,12 @@ require('gitsigns').setup {
     ['n <leader>gS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
     ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
   },
+}
+require("nvim-treesitter.configs").setup {
+  rainbow = {
+    enable = true,
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+  }
 }
 EOF
