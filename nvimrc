@@ -38,10 +38,8 @@ Plug 'phaazon/hop.nvim'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
-" Plug 'gcmt/taboo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'edkolev/tmuxline.vim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
 Plug 'danilamihailov/beacon.nvim'
@@ -68,7 +66,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 
 " Syntax highlighting
-" Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'p00f/nvim-ts-rainbow'
 
@@ -265,8 +262,8 @@ set laststatus=2
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit Ignore
-    autocmd ColorScheme * hi! link StatusLineNC Ignore
-    autocmd ColorScheme * hi! link StatusLine TabLine
+    " autocmd ColorScheme * hi! link StatusLineNC Ignore
+    " autocmd ColorScheme * hi! link StatusLine TabLine
     autocmd ColorScheme * hi! link Beacon Cursor
 augroup END
 
@@ -594,15 +591,6 @@ let g:user_emmet_settings = {
 \  },
 \}
 
-" taboo
-" https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#fonts
-" https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf
-" nnoremap <leader>en :TabooRename 
-
-" let taboo_close_tabs_label = "X" 
-" let taboo_tab_format = " %f%m "
-" let taboo_renamed_tab_format = " [%l]%m "
-
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
 let g:closetag_filetypes = 'javascript'
@@ -639,8 +627,9 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = {'tabs'},
-    lualine_b = {'filename'},
-    lualine_z = {'CWD'}
+    lualine_b = {'CWD'},
+    lualine_y = {'buffers'},
+    lualine_z = {'hostname'},
   },
   extensions = {'fzf', 'quickfix', 'fugitive'}
 }
