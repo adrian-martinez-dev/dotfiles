@@ -628,8 +628,7 @@ require('lualine').setup {
   tabline = {
     lualine_a = {'tabs'},
     lualine_b = {'CWD'},
-    lualine_y = {'buffers'},
-    lualine_z = {'hostname'},
+    lualine_z = {'buffers'},
   },
   extensions = {'fzf', 'quickfix', 'fugitive'}
 }
