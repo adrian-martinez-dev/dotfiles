@@ -38,9 +38,9 @@ Plug 'phaazon/hop.nvim'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
-Plug 'gcmt/taboo.vim'
+" Plug 'gcmt/taboo.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'vim-airline/vim-airline'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
@@ -206,14 +206,6 @@ augroup FirstLineCommit
     autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 augroup END
 
-" PDB
-" pip install pdbpp
-" augroup SetBreakpoints
-"     autocmd!
-"     autocmd FileType python map <silent> <leader>x oimport pdb; pdb.set_trace()  # noqa: E702<esc>
-"     autocmd FileType python map <silent> <leader>X Oimport pdb; pdb.set_trace()  # noqa: E702<esc>
-" augroup END
-
 " Only show cursorline in the current window
 " augroup CursorLineOnlyInActiveWindow
 "     autocmd!
@@ -250,7 +242,7 @@ function! ActiveStatus()
     let statusline.="%{&readonly?'\ \ ':''}"
     let statusline.="\ %=%-20.(%l/%L,%c%)\ %{&filetype}\ "
     let statusline.="\ "
-    let statusline.="%{SleuthIndicator()}\ "
+    " let statusline.="%{SleuthIndicator()}\ "
     return statusline
 endfunction
 
@@ -545,41 +537,21 @@ nnoremap <Leader>a :Rg
 "Start searching the word under the cursor:
 nnoremap <leader>A :Rg <C-R><C-W><cr>
 
-if !exists('g:vscode')
-  tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-  nnoremap <silent><leader>d :Commands<cr>
-  nnoremap <silent><leader>r :Registers<cr>
-  nnoremap <silent><leader>v :Buffers<cr>
-  nnoremap <silent><leader>l :BLines<cr>
-  " nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
-  nnoremap <silent><leader>F :Files<cr>
-  nnoremap <silent><leader>f :GFiles<cr>
-  nnoremap <leader>V :Windows<cr>
-endif
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+nnoremap <silent><leader>d :Commands<cr>
+nnoremap <silent><leader>r :Registers<cr>
+nnoremap <silent><leader>v :Buffers<cr>
+nnoremap <silent><leader>l :BLines<cr>
+" nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
+nnoremap <silent><leader>F :Files<cr>
+nnoremap <silent><leader>f :GFiles<cr>
+nnoremap <leader>V :Windows<cr>
 
 augroup fzfpopupter
   autocmd!
   autocmd FileType fzf exe 'tnoremap <buffer><nowait> <C-j> <Down>'
         \ | tnoremap <buffer><nowait> <C-k> <Up>
 augroup END
-
-" Yank history
-function! s:get_registers() abort
-  redir => l:regs
-  silent registers
-  redir END
-  return split(l:regs, '\n')[1:]
-endfunction
-
-function! s:registers(...) abort
-  let l:opts = {
-        \ 'source': s:get_registers(),
-        \ 'sink': {x -> feedkeys(matchstr(x, '\v^\S+\ze.*') . (a:1 ? 'P' : 'p'), 'x')},
-        \ 'options': '--prompt="Reg> "'
-        \ }
-  call fzf#run(fzf#wrap(l:opts))
-endfunction
-command! -bang Registers call s:registers('<bang>' ==# '!')
 
 " CTRL-A CTRL-Q to select all and build quickfix list
 function! s:build_quickfix_list(lines)
@@ -625,11 +597,11 @@ let g:user_emmet_settings = {
 " taboo
 " https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#fonts
 " https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf
-nnoremap <leader>en :TabooRename 
+" nnoremap <leader>en :TabooRename 
 
-let taboo_close_tabs_label = "X" 
-let taboo_tab_format = " %f%m "
-let taboo_renamed_tab_format = " [%l]%m "
+" let taboo_close_tabs_label = "X" 
+" let taboo_tab_format = " %f%m "
+" let taboo_renamed_tab_format = " [%l]%m "
 
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
@@ -649,75 +621,41 @@ let g:indent_blankline_buftype_exclude = ['terminal']
 " let g:indent_blankline_char_highlight_list = ['Title', 'LineNr', 'MoreMsg', 'Directory', 'Question']
 let g:indent_blankline_char_highlight_list = ['LineNr', 'NonText']
 
-" airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#tabs_label = 'T'
-let g:airline#extensions#tabline#show_tab_count = 0
-let g:airline#extensions#tabline#tab_min_count = 2
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#whitespace#enabled = 0
-
-let g:airline_mode_map = {
-    \ '__'     : '-',
-    \ 'c'      : 'C',
-    \ 'i'      : 'I',
-    \ 'ic'     : 'I',
-    \ 'ix'     : 'I',
-    \ 'n'      : 'N',
-    \ 'multi'  : 'M',
-    \ 'ni'     : 'N',
-    \ 'no'     : 'N',
-    \ 'R'      : 'R',
-    \ 'Rv'     : 'R',
-    \ 's'      : 'S',
-    \ 'S'      : 'S',
-    \ ''     : 'S',
-    \ 't'      : 'T',
-    \ 'v'      : 'V',
-    \ 'V'      : 'V',
-    \ ''     : 'V',
-    \ }
-
-function! Render_Only_File(...)
-  let builder = a:1
-  let context = a:2
-  call builder.add_section('file', ' %f ')
-  return 1
-endfunction
-
-try
-  call airline#add_inactive_statusline_func('Render_Only_File')
-catch
-  " echo 'Airline not installed'
-endtry
-
 " anyfold
 augroup AnyFold
   autocmd Filetype javascript AnyFoldActivate
   autocmd Filetype python AnyFoldActivate
 augroup END
 
-" Execute 'lnoremap x X' and 'lnoremap X x' for each letter a-z.
-for c in range(char2nr('A'), char2nr('Z'))
-  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
-  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
-endfor
-
-augroup ImInsert
-  autocmd InsertLeave * set iminsert=0
-augroup END
-
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
+require('lualine').setup {
+  options = {
+    icons_enabled = false,
+  },
+  sections = {
+    lualine_a = {
+      {'mode', fmt = function(str) return str:sub(1,1) end}
+    },
+  },
+  tabline = {
+    lualine_a = {'tabs'},
+    lualine_b = {'filename'},
+    lualine_z = {'CWD'}
+  },
+  extensions = {'fzf', 'quickfix', 'fugitive'}
+}
+require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
   indent = {
     enable = true
+  },
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
   }
 }
 require('hop').setup()
@@ -743,12 +681,5 @@ require('gitsigns').setup {
     ['n <leader>gS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
     ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
   },
-}
-require("nvim-treesitter.configs").setup {
-  rainbow = {
-    enable = true,
-    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-    max_file_lines = nil, -- Do not enable for files with more than n lines, int
-  }
 }
 EOF
