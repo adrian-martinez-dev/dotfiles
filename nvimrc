@@ -599,16 +599,6 @@ let g:closetag_filetypes = 'javascript'
 let g:coc_fzf_preview = ''
 let g:coc_fzf_opts = []
 
-" indentline
-let g:indent_blankline_space_char_blankline = " "
-let g:indent_blankline_show_current_context = v:true
-let g:indent_blankline_char = '│'
-let g:indent_blankline_show_first_indent_level = v:false
-let g:indent_blankline_filetype_exclude = ['help', 'startify', 'fugitive', 'git']
-let g:indent_blankline_buftype_exclude = ['terminal']
-" let g:indent_blankline_char_highlight_list = ['Title', 'LineNr', 'MoreMsg', 'Directory', 'Question']
-let g:indent_blankline_char_highlight_list = ['LineNr', 'NonText']
-
 " anyfold
 augroup AnyFold
   autocmd Filetype javascript AnyFoldActivate
@@ -616,6 +606,18 @@ augroup AnyFold
 augroup END
 
 lua <<EOF
+require('indent_blankline').setup {
+    char = '│',
+    space_char_blankline = ' ',
+    buftype_exclude = {'terminal'},
+    filetype_exclude = {'help', "startify", 'fugitive', 'git'},
+    char_highlight_list = {
+        'NonText',
+        'LineNr',
+    },
+    show_current_context = true,
+    show_current_context_start = true,
+}
 require('lualine').setup {
   options = {
     icons_enabled = false,
