@@ -204,11 +204,11 @@ augroup FirstLineCommit
 augroup END
 
 " Only show cursorline in the current window
-" augroup CursorLineOnlyInActiveWindow
-"     autocmd!
-"     autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
-"     autocmd WinLeave,InsertEnter * setlocal nocursorline
-" augroup END
+augroup CursorLineOnlyInActiveWindow
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * setlocal cursorline
+    autocmd WinLeave,InsertEnter * setlocal nocursorline
+augroup END
 
 " Disable list on preview window
 augroup DisableThingsFromWindows
@@ -409,7 +409,7 @@ nmap <Leader>gP :T git push<cr>
 nmap <silent><Leader>gd :Gvdiffsplit<cr>
 nmap <silent><Leader>gD :Ghdiffsplit<cr>
 nmap <silent><Leader>gl :Glog<cr>
-nmap <silent><Leader>gb :Gbrowse<cr>
+nmap <silent><Leader>gb :GBrowse<cr>
 
 " Startify
 nnoremap <leader>S :SSave!<cr>
