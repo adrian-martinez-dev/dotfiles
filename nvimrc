@@ -607,16 +607,16 @@ augroup END
 
 lua <<EOF
 require('indent_blankline').setup {
-    char = '│',
-    space_char_blankline = ' ',
-    buftype_exclude = {'terminal'},
-    filetype_exclude = {'help', "startify", 'fugitive', 'git'},
-    char_highlight_list = {
-        'NonText',
-        'LineNr',
-    },
-    show_current_context = true,
-    show_current_context_start = true,
+  char = '│',
+  space_char_blankline = ' ',
+  buftype_exclude = {'terminal'},
+  filetype_exclude = {'help', "startify", 'fugitive', 'git'},
+  char_highlight_list = {
+      'NonText',
+      'LineNr',
+  },
+  show_current_context = true,
+  show_current_context_start = true,
 }
 require('lualine').setup {
   options = {
