@@ -4,7 +4,7 @@
   "diagnostic.enableMessage": "always",
   "diagnostic.messageTarget": "echo",
   "diagnostic.virtualTextCurrentLineOnly": false,
-  "diagnostic.enableSign": false,
+  "diagnostic.enableSign": true,
   "diagnostic.errorSign": "E",
   "diagnostic.warningSign": "W",
   "diagnostic.virtualText": true,
