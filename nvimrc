@@ -92,7 +92,7 @@ set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 set autoindent
 set noshowcmd
 set nofixendofline
-" set number
+set number
 " set foldcolumn="auto:3"
 set mouse=a
 
@@ -186,7 +186,6 @@ augroup END
 " Term start in insert mode
 augroup TermCmd
     autocmd!
-    autocmd TermOpen * setlocal winfixheight winfixwidth
     autocmd TermOpen * startinsert
 augroup END
 
@@ -217,14 +216,12 @@ augroup DisableThingsFromWindows
     autocmd VimEnter,WinEnter,BufWinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
     autocmd FileType qf,help,fugitive setlocal signcolumn=no nonumber colorcolumn= nolist
     autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
-    autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber
+    autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth
 augroup END
 
 " Fillchars
 set fillchars=vert:│,fold:-,diff:·,stlnc:─,eob:\ 
-if has("folding_fillchars")
-  set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
-endif
+set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
 
 function! CWD()
     let l:path = fnamemodify(getcwd(),":t")
@@ -511,15 +508,14 @@ let g:gruvbox_material_background = 'hard'
 " colorscheme gruvbox-material
 
 " default, atlantis, andromeda, shusia, maia
-let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'red'
-let g:edge_cursor = 'red'
 
 " 'default', 'aura', 'neon'
-let g:edge_style = 'default'
+" let g:edge_style = 'default'
+let g:edge_cursor = 'red'
 
 try
-  colorscheme sonokai
+  colorscheme edge
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -612,18 +608,27 @@ augroup AnyFold
   autocmd Filetype python AnyFoldActivate
 augroup END
 
+" let g:indent_blankline_char_highlight_list = ['Title', 'LineNr', 'MoreMsg', 'Directory', 'Question']
+  " char_highlight_list = {
+  "     'NonText',
+  "     'LineNr',
+  " },
 lua <<EOF
 require('indent_blankline').setup {
-  char = '│',
   space_char_blankline = ' ',
   buftype_exclude = {'terminal'},
   filetype_exclude = {'help', "startify", 'fugitive', 'git'},
-  char_highlight_list = {
-      'NonText',
-      'LineNr',
-  },
-  show_current_context = true,
+  show_current_context = false,
   show_current_context_start = true,
+  show_first_indent_level = false,
+  char = '▏',
+  char_highlight_list = {
+      'Title',
+      'LineNr',
+      'MoreMsg',
+      'Directory',
+      'Question',
+  },
 }
 require('nvim-treesitter.configs').setup {
   highlight = {
