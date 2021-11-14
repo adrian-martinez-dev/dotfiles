@@ -27,7 +27,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'ibhagwan/fzf-lua'
 Plug 'vijaymarupudi/nvim-fzf'
-Plug 'kyazdani42/nvim-web-devicons'
 Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -524,7 +523,7 @@ catch
 endtry
 
 " fzf
-let $FZF_DEFAULT_OPTS='--reverse'
+" let $FZF_DEFAULT_OPTS='--reverse'
 
 nnoremap <Leader>a :FzfLua grep<cr>
 nnoremap <leader>A :FzfLua grep_cword<cr>
@@ -534,7 +533,7 @@ tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nnoremap <silent><leader>d :FzfLua commands<cr>
 nnoremap <silent><leader>r :FzfLua registers<cr>
 nnoremap <silent><leader>v :FzfLua buffers<cr>
-nnoremap <silent><leader>l :FzfLua blines file_icons=falso<cr>
+nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
 nnoremap <silent><leader>F :FzfLua files<cr>
 nnoremap <silent><leader>f :FzfLua git_files<cr>
 nnoremap <silent><leader>r :FzfLua registers<cr>
@@ -656,5 +655,22 @@ require('gitsigns').setup {
   },
 }
 require('neoclip').setup()
-require('nvim-web-devicons').setup()
+require('fzf-lua').setup {
+  winopts = {
+    height           = 0.6,            -- window height
+    width            = 0.8,            -- window width
+    preview = {
+      vertical       = 'down:45%',      -- up|down:size
+      horizontal     = 'right:60%',     -- right|left:size
+      layout         = 'flex',          -- horizontal|vertical|flex
+      flip_columns   = 136,             -- #cols to switch to horizontal on flex
+    },
+  },
+  previewers = {
+    builtin = {
+      delay           = 100,          -- delay(ms) displaying the preview 100
+      syntax          = false,         -- preview syntax highlight?
+    },
+  },
+}
 EOF
