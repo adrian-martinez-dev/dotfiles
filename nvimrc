@@ -25,7 +25,9 @@ endif
 " General
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'ibhagwan/fzf-lua'
+Plug 'vijaymarupudi/nvim-fzf'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -44,6 +46,7 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
+Plug 'AckslD/nvim-neoclip.lua'
 
 " Colorschemes
 Plug 'sainnhe/gruvbox-material'
@@ -296,7 +299,7 @@ nnoremap <leader>T <C-]>
 
 " Find buffer
 "nnoremap <leader>b :buffer *
-nnoremap <leader>B :ls<CR>:b<Space>
+" nnoremap <leader>B :ls<CR>:b<Space>
 nnoremap <leader>tn :tabnew<CR>
 
 " Next/prev tab
@@ -522,25 +525,19 @@ endtry
 
 " fzf
 let $FZF_DEFAULT_OPTS='--reverse'
-let g:fzf_preview_window = ['down:50%', 'ctrl-s']
-let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.6 } }
-let g:fzf_buffers_jump = 0
-let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
-" Grepper
-nnoremap <Leader>a :Rg 
-"Start searching the word under the cursor:
-nnoremap <leader>A :Rg <C-R><C-W><cr>
+nnoremap <Leader>a :FzfLua grep<cr>
+nnoremap <leader>A :FzfLua grep_cword<cr>
+" nnoremap <leader>B :FzfLua grep_visual<cr>
 
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-nnoremap <silent><leader>d :Commands<cr>
-nnoremap <silent><leader>r :Registers<cr>
-nnoremap <silent><leader>v :Buffers<cr>
-nnoremap <silent><leader>l :BLines<cr>
-" nnoremap <expr><leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
-nnoremap <silent><leader>F :Files<cr>
-nnoremap <silent><leader>f :GFiles<cr>
-nnoremap <leader>V :Windows<cr>
+nnoremap <silent><leader>d :FzfLua commands<cr>
+nnoremap <silent><leader>r :FzfLua registers<cr>
+nnoremap <silent><leader>v :FzfLua buffers<cr>
+nnoremap <silent><leader>l :FzfLua blines file_icons=falso<cr>
+nnoremap <silent><leader>F :FzfLua files<cr>
+nnoremap <silent><leader>f :FzfLua git_files<cr>
+nnoremap <silent><leader>r :FzfLua registers<cr>
 
 augroup fzfpopupter
   autocmd!
@@ -548,17 +545,7 @@ augroup fzfpopupter
         \ | tnoremap <buffer><nowait> <C-k> <Up>
 augroup END
 
-" CTRL-A CTRL-Q to select all and build quickfix list
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-endfunction
-
-let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
+" Commands
 command! -nargs=* Manage T docker-compose -f local.yml run --rm django python manage.py <args>
 command! -nargs=* Test T docker-compose -f local.yml run --rm django pytest <args>
 command! PullDotfiles T cd ~/dotfiles; git pull;
@@ -668,4 +655,6 @@ require('gitsigns').setup {
     ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
   },
 }
+require('neoclip').setup()
+require('nvim-web-devicons').setup()
 EOF
