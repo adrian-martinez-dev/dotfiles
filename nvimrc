@@ -24,9 +24,9 @@ endif
 
 " General
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'ibhagwan/fzf-lua'
 Plug 'vijaymarupudi/nvim-fzf'
+Plug 'ibhagwan/fzf-lua'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -523,12 +523,8 @@ catch
 endtry
 
 " fzf
-" let $FZF_DEFAULT_OPTS='--reverse'
-
 nnoremap <Leader>a :FzfLua grep<cr>
 nnoremap <leader>A :FzfLua grep_cword<cr>
-" nnoremap <leader>B :FzfLua grep_visual<cr>
-
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nnoremap <silent><leader>d :FzfLua commands<cr>
 nnoremap <silent><leader>r :FzfLua registers<cr>
@@ -672,4 +668,5 @@ require('fzf-lua').setup {
     },
   },
 }
+require('nvim-web-devicons').setup()
 EOF
