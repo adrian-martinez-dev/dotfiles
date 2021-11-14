@@ -607,7 +607,6 @@ require('indent_blankline').setup {
   show_current_context = false,
   show_current_context_start = true,
   show_first_indent_level = false,
-  char = '▏',
   char_highlight_list = {
       'Title',
       'LineNr',
@@ -668,8 +667,8 @@ require('fzf-lua').setup {
   },
   previewers = {
     builtin = {
-      delay           = 100,          -- delay(ms) displaying the preview 100
-      syntax          = false,         -- preview syntax highlight?
+      delay          = 200,          -- delay(ms) displaying the preview 100
+      syntax         = true,         -- preview syntax highlight?
     },
   },
 }
