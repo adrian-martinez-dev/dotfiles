@@ -1,7 +1,9 @@
 set visualbell t_vb=
 
 " Gui font
+" fc-cache -f -v
 " fc-list | grep iosevka
+" https://github.com/Iosevka-Mayukai/Iosevka-Mayukai
 
 " Neovim-gtk
 if exists('g:GtkGuiLoaded')
@@ -12,14 +14,14 @@ if exists('g:GtkGuiLoaded')
         " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term Regular 13')
         " call rpcnotify(1, 'Gui', 'Font', 'Source Code Pro 11')
         " call rpcnotify(1, 'Gui', 'Font', 'JetBrains Mono 11')
-        call rpcnotify(1, 'Gui', 'Font', 'Iosevka 12')
+        call rpcnotify(1, 'Gui', 'Font', 'Iosevka Mayukai Sonata 12')
         " call rpcnotify(1, 'Gui', 'Font', 'Fira Code 10')
     else
         " call rpcnotify(1, 'Gui', 'Font', 'monospace 10')
         " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term Regular 13')
         " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Extended 14')
         " call rpcnotify(1, 'Gui', 'Font', 'Cascadia Code Regular 12')
-        call rpcnotify(1, 'Gui', 'Font', 'Iosevka 12')
+        call rpcnotify(1, 'Gui', 'Font', 'Iosevka Mayukai Sonata 12')
         " call rpcnotify(1, 'Gui', 'Font', 'Fira Code 10')
         " call rpcnotify(1, 'Gui', 'Font', 'JetBrains Mono 11')
         " call rpcnotify(1, 'Gui', 'Font', 'Source Code Pro 11')

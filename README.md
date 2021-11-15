@@ -4,6 +4,7 @@ Mis archivos de configuración
 ## Dependencias
 
 - vim-plug: https://github.com/junegunn/vim-plug
+- https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#fonts
 - Devicons: https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf
 
 ```sh
