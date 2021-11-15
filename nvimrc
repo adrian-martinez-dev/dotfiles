@@ -602,6 +602,13 @@ require('lualine').setup {
     lualine_a = {
       {'mode', fmt = function(str) return str:sub(1,1) end}
     },
+    lualine_c = {
+        {
+        'filename',
+        file_status = true, -- displays file status (readonly status, modified status)
+        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+        }
+      },
   },
   tabline = {
     lualine_a = {'tabs'},
@@ -609,7 +616,7 @@ require('lualine').setup {
     lualine_z = {'buffers'},
   },
   inactive_sections = {
-    lualine_a = {function() return [[•]] end}
+    lualine_a = {function() return [[●]] end}
   }
 }
 require('indent_blankline').setup {
