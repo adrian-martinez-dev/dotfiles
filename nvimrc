@@ -267,6 +267,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link StatusLineNC Ignore
     autocmd ColorScheme * hi! link StatusLine TabLine
     autocmd ColorScheme * hi! link Beacon Cursor
+    autocmd ColorScheme * hi! link IndentBlanklineContextChar WarningMsg
 augroup END
 
 " Mappings
@@ -616,23 +617,43 @@ require('lualine').setup {
     lualine_z = {'buffers'},
   },
   inactive_sections = {
-    lualine_a = {function() return [[●]] end}
+    lualine_a = {function() return [[•]] end}
   }
 }
 require('indent_blankline').setup {
+  char = "▏",
   space_char_blankline = ' ',
   buftype_exclude = {'terminal'},
   filetype_exclude = {'help', "startify", 'fugitive', 'git'},
-  show_current_context = false,
-  show_current_context_start = true,
-  show_first_indent_level = false,
-  char_highlight_list = {
-      'Title',
-      'LineNr',
-      'MoreMsg',
-      'Directory',
-      'Question',
+  show_current_context = true,
+  show_current_context_start = false,
+  show_first_indent_level = true,
+  context_patterns = {
+    -- 'class',
+    -- 'method',
+    -- 'function',
+    -- '^if',
+    -- '^else',
+    -- '^for',
+    -- '^while',
+    -- '^try',
+    -- '^catch',
+    'jsx_element',
+    'jsx_self_closing_element',
+    'declaration',
+    'expression',
+    'pattern',
+    'primary_expression',
+    'statement',
+    'switch_body',
   },
+  --char_highlight_list = {
+  --    'Conditional',
+  --    'LineNr',
+  --    'Function',
+  --    'Number',
+  --    'Question',
+  --},
 }
 require('nvim-treesitter.configs').setup {
   highlight = {
