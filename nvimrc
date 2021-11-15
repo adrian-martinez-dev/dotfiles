@@ -26,6 +26,7 @@ endif
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
@@ -39,7 +40,7 @@ Plug 'phaazon/hop.nvim'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
-Plug 'gcmt/taboo.vim'
+" Plug 'gcmt/taboo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
@@ -250,14 +251,14 @@ function! InactiveStatus()
     return statusline
 endfunction
 
-augroup status
-    autocmd!
-    autocmd WinEnter * setlocal statusline=%!ActiveStatus()
-    autocmd WinLeave,QuickFixCmdPost * setlocal statusline=%!InactiveStatus()
-augroup END
+" augroup status
+"     autocmd!
+"     autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
+"     autocmd WinLeave,BufLeave,QuickFixCmdPost * setlocal statusline=%!InactiveStatus()
+" augroup END
 
 set laststatus=2
-set statusline=%!ActiveStatus()
+" set statusline=%!ActiveStatus()
 
 " Override color
 augroup OverrideColor
@@ -570,11 +571,11 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
-" taboo
-nnoremap <leader>en :TabooRename 
-let taboo_close_tabs_label = "X" 
-let taboo_tab_format = " %f%m "
-let taboo_renamed_tab_format = " [%l]%m "
+" " taboo
+" nnoremap <leader>en :TabooRename 
+" let taboo_close_tabs_label = "X" 
+" let taboo_tab_format = " %f%m "
+" let taboo_renamed_tab_format = " [%l]%m "
 
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
@@ -596,6 +597,21 @@ augroup END
   "     'LineNr',
   " },
 lua <<EOF
+require('lualine').setup {
+  sections = {
+    lualine_a = {
+      {'mode', fmt = function(str) return str:sub(1,1) end}
+    },
+  },
+  tabline = {
+    lualine_a = {'tabs'},
+    lualine_b = {'CWD'},
+    lualine_z = {'buffers'},
+  },
+  inactive_sections = {
+    lualine_a = {function() return [[•]] end}
+  }
+}
 require('indent_blankline').setup {
   space_char_blankline = ' ',
   buftype_exclude = {'terminal'},
