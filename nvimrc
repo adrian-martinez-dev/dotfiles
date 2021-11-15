@@ -267,6 +267,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link StatusLineNC Ignore
     autocmd ColorScheme * hi! link StatusLine TabLine
     autocmd ColorScheme * hi! link Beacon Cursor
+    autocmd ColorScheme * hi! IndentBlanklineChar ctermfg=240 guifg=#5b616e gui=nocombine
     autocmd ColorScheme * hi! link IndentBlanklineContextChar WarningMsg
 augroup END
 
@@ -629,17 +630,9 @@ require('indent_blankline').setup {
   show_current_context_start = false,
   show_first_indent_level = true,
   context_patterns = {
-    -- 'class',
-    -- 'method',
-    -- 'function',
-    -- '^if',
-    -- '^else',
-    -- '^for',
-    -- '^while',
-    -- '^try',
-    -- '^catch',
     'jsx_element',
     'jsx_self_closing_element',
+    'object',
     'declaration',
     'expression',
     'pattern',
