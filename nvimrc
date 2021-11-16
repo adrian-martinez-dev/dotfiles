@@ -485,7 +485,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <leader>D <Plug>(coc-codeaction)
+" nmap <leader>D <Plug>(coc-codeaction)
 xmap <leader>x <Plug>(coc-codeaction-selected)
 nmap <leader>x <Plug>(coc-codeaction-selected)
 
@@ -530,6 +530,7 @@ nnoremap <Leader>a :FzfLua grep<cr>
 nnoremap <leader>A :FzfLua grep_cword<cr>
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nnoremap <silent><leader>d :FzfLua commands<cr>
+nnoremap <silent><leader>D :FzfLua builtin<cr>
 nnoremap <silent><leader>r :FzfLua registers<cr>
 nnoremap <silent><leader>v :FzfLua buffers<cr>
 nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
@@ -628,7 +629,7 @@ require('indent_blankline').setup {
   filetype_exclude = {'help', "startify", 'fugitive', 'git'},
   show_current_context = true,
   show_current_context_start = false,
-  show_first_indent_level = true,
+  show_first_indent_level = false,
   context_patterns = {
     'jsx_element',
     'jsx_self_closing_element',
@@ -692,7 +693,7 @@ require('fzf-lua').setup {
     height           = 0.6,            -- window height
     width            = 0.8,            -- window width
     preview = {
-      vertical       = 'down:45%',      -- up|down:size
+      vertical       = 'down:60%',      -- up|down:size
       horizontal     = 'right:60%',     -- right|left:size
       layout         = 'flex',          -- horizontal|vertical|flex
       flip_columns   = 136,             -- #cols to switch to horizontal on flex
@@ -702,6 +703,9 @@ require('fzf-lua').setup {
     builtin = {
       delay          = 200,          -- delay(ms) displaying the preview 100
       syntax         = true,         -- preview syntax highlight?
+    },
+    git_diff = {
+      pager          = 'delta',
     },
   },
 }
