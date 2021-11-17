@@ -128,7 +128,7 @@ set termguicolors
 " Cursor line
 " set cursorline
 
-:set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175
 
@@ -273,7 +273,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link StatusLine TabLine
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! IndentBlanklineChar ctermfg=240 guifg=#5b616e gui=nocombine
-    autocmd ColorScheme * hi! link IndentBlanklineContextChar WarningMsg
+    autocmd ColorScheme * hi! link IndentBlanklineContextChar ModeMsg
 augroup END
 
 " Mappings
@@ -317,12 +317,12 @@ nnoremap <silent> <s-tab> gT
 nnoremap <space> za
 
 " Quick edit vimrc
-nnoremap <leader>ev :e ~/dotfiles/nvimrc<cr>
+nnoremap <leader>cv :e ~/dotfiles/nvimrc<cr>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sg :source ~/.config/nvim/ginit.vim<cr>
 
 if WINDOWS()
-  nnoremap <leader>ev :e ~\AppData\Local\nvim\init.vim<cr>
+  nnoremap <leader>cv :e ~\AppData\Local\nvim\init.vim<cr>
   nnoremap <leader>sv :source ~\AppData\Local\nvim\init.vim<cr>
   nnoremap <leader>sg :source ~\AppData\Local\nvim\ginit.vim<cr>
 endif
@@ -488,8 +488,8 @@ function! s:check_back_space() abort
 endfunction
 
 " Remap keys for gotos
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>E <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>E <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>e <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -650,13 +650,13 @@ require('indent_blankline').setup {
     'statement',
     'switch_body',
   },
-  --char_highlight_list = {
-  --    'Conditional',
-  --    'LineNr',
-  --    'Function',
-  --    'Number',
-  --    'Question',
-  --},
+  char_highlight_list = {
+      'Conditional',
+      'LineNr',
+      'Function',
+      'Number',
+      'Question',
+  },
 }
 require('nvim-treesitter.configs').setup {
   highlight = {
