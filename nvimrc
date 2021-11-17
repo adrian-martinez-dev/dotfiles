@@ -222,6 +222,11 @@ augroup DisableThingsFromWindows
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth
 augroup END
 
+augroup StartifyFix
+  autocmd!
+  autocmd User StartifyReady let &l:stl = ' Startify'
+augroup END
+
 " Fillchars
 set fillchars=vert:│,fold:-,diff:·,stlnc:─,eob:\ 
 set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
@@ -420,6 +425,10 @@ nnoremap <leader>S :SSave!<cr>
 nnoremap <leader>O :SLoad 
 
 " let g:startify_disable_at_vimenter = 1
+let g:startify_custom_indices = ['f', 'd', 's']
+let g:startify_session_number = 7
+let g:startify_files_number = 7 
+let g:startify_session_sort = 1
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': [   '   Sessions']       },
       \ { 'type': 'files',     'header': [   '   MRU']            },
