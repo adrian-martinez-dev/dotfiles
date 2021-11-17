@@ -500,10 +500,9 @@ nmap <leader>x <Plug>(coc-codeaction-selected)
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" fugitive
+" diff
 nnoremap <leader>ch :diffget //2<CR>
 nnoremap <leader>cl :diffget //3<CR>
-nnoremap <leader>G :vertical Git<CR>
 
 augroup init_quickfix
   autocmd!
@@ -545,7 +544,7 @@ nnoremap <silent><leader>v :FzfLua buffers<cr>
 nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
 nnoremap <silent><leader>F :FzfLua files<cr>
 nnoremap <silent><leader>f :FzfLua git_files<cr>
-nnoremap <silent><leader>r :FzfLua registers<cr>
+nnoremap <silent><leader>G :FzfLua git_status<cr>
 
 augroup fzfpopupter
   autocmd!
@@ -718,9 +717,6 @@ require('fzf-lua').setup {
     builtin = {
       delay          = 200,          -- delay(ms) displaying the preview 100
       syntax         = true,         -- preview syntax highlight?
-    },
-    git_diff = {
-      pager          = 'delta',
     },
   },
 }
