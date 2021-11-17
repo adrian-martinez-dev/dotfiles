@@ -273,7 +273,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link StatusLine TabLine
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! IndentBlanklineChar ctermfg=240 guifg=#5b616e gui=nocombine
-    autocmd ColorScheme * hi! link IndentBlanklineContextChar ModeMsg
+    autocmd ColorScheme * hi! link IndentBlanklineContextChar Label
 augroup END
 
 " Mappings
@@ -656,13 +656,13 @@ require('indent_blankline').setup {
     'statement',
     'switch_body',
   },
-  char_highlight_list = {
-      'Conditional',
-      'LineNr',
-      'Function',
-      'Number',
-      'Question',
-  },
+  -- char_highlight_list = {
+  --     'Conditional',
+  --     'LineNr',
+  --     'Function',
+  --     'Number',
+  --     'Question',
+  -- },
 }
 require('nvim-treesitter.configs').setup {
   highlight = {
