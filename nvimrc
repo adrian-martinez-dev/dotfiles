@@ -628,7 +628,13 @@ require('lualine').setup {
     lualine_z = {'buffers'},
   },
   inactive_sections = {
-    lualine_a = {function() return [[•]] end}
+    lualine_a = {function() return [[•]] end},
+    lualine_c = {
+        {
+        'filename',
+        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+        }
+      },
   }
 }
 require('indent_blankline').setup {
