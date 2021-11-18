@@ -9,7 +9,6 @@ set visualbell t_vb=
 if exists('g:GtkGuiLoaded')
     call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 1)
     call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
-    call rpcnotify(1, 'Gui', 'FontFeatures', 'PURS, cv17')
     if $HOSTNAME  == 't430'
         " call rpcnotify(1, 'Gui', 'Font', 'monospace 12')
         " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term Regular 13')

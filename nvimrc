@@ -36,7 +36,7 @@ Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
 Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-dirvish'
-Plug 'phaazon/hop.nvim'
+Plug 'ggandor/lightspeed.nvim'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
@@ -65,7 +65,7 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'SirVer/ultisnips'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'honza/vim-snippets'
-Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-autopairs'
 Plug 'alvan/vim-closetag'
 
 " Syntax highlighting
@@ -558,9 +558,6 @@ command! -nargs=* Test T docker-compose -f local.yml run --rm django pytest <arg
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! PushDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 
-" Hop
-nmap s :HopChar1<enter>
-
 " Web search
 nmap <silent> <Leader>kj <Plug>SearchNormal
 vmap <silent> <Leader>kj <Plug>SearchVisual
@@ -602,11 +599,6 @@ augroup AnyFold
   autocmd Filetype python AnyFoldActivate
 augroup END
 
-" let g:indent_blankline_char_highlight_list = ['Title', 'LineNr', 'MoreMsg', 'Directory', 'Question']
-  " char_highlight_list = {
-  "     'NonText',
-  "     'LineNr',
-  " },
 lua <<EOF
 require('lualine').setup {
   sections = {
@@ -677,7 +669,6 @@ require('nvim-treesitter.configs').setup {
     max_file_lines = nil,
   }
 }
-require('hop').setup()
 require('gitsigns').setup {
   signs = {
     add          = {hl = 'GitSignsAdd'   , text = '┃', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
@@ -721,4 +712,10 @@ require('fzf-lua').setup {
   },
 }
 require('nvim-web-devicons').setup()
+require('nvim-autopairs').setup{}
+require('lightspeed').setup {
+  safe_labels = {"s", "f", "n", "u", "t", "S", "F", "L", "N", "H", "G", "M", "U", "T", "Z"},
+  labels = {"s", "f", "n", "j", "k", "l", "o", "i", "w", "e", "h", "g", "u", "t", "m", "v", "c", "a", "z",
+     "S", "F", "L", "N", "H", "G", "M", "U", "T", "Z"}
+}
 EOF
