@@ -290,10 +290,8 @@ nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 " console.log
 nnoremap <Leader>L "ayiw<CR>iconsole.log('<C-R>a: ', <C-R>a);<CR><Esc>
 
-if !exists('g:vscode')
-    nnoremap <leader>M :top 11sp term://$SHELL<cr>
-    nnoremap <leader>m :below sp term://$SHELL<cr>
-endif
+nnoremap <leader>M :top 11sp term://$SHELL<cr>
+nnoremap <leader>m :below sp term://$SHELL<cr>
 
 " Insert source bin/activate
 tnoremap <leader>va source venv/bin/activate<cr>
@@ -301,12 +299,6 @@ tnoremap <leader>va source venv/bin/activate<cr>
 " Jump to tag
 nnoremap <leader>T <C-]>
 
-" Find files
-"nnoremap <leader>f :find *
-
-" Find buffer
-"nnoremap <leader>b :buffer *
-" nnoremap <leader>B :ls<CR>:b<Space>
 nnoremap <leader>tn :tabnew<CR>
 
 " Next/prev tab
