@@ -321,6 +321,7 @@ endif
 
 nnoremap <F1> <nop>
 nnoremap Q <nop>
+nnoremap q: <nop>
 
 " Resizing windows
 nnoremap <C-up> <C-W>-

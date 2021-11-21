@@ -7,6 +7,7 @@ set visualbell t_vb=
 
 " Neovim-gtk
 if exists('g:GtkGuiLoaded')
+    call rpcnotify(1, 'Gui', 'Option', 'Cmdline', 1)
     call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 1)
     call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
     if $HOSTNAME  == 't430'
