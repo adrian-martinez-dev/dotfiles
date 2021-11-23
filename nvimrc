@@ -49,9 +49,12 @@ Plug 'romainl/vim-cool'
 Plug 'AckslD/nvim-neoclip.lua'
 
 " Colorschemes
-Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'Shatur/neovim-ayu'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'EdenEast/nightfox.nvim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -507,21 +510,11 @@ augroup END
 let g:python_highlight_all = 1
 
 " Colorscheme
-" hard, medium, soft
-let g:gruvbox_material_background = 'hard'
-" material, mix, original
-" let g:gruvbox_material_palette = 'material'
-" colorscheme gruvbox-material
-
-" default, atlantis, andromeda, shusia, maia
 let g:sonokai_cursor = 'red'
-
-" 'default', 'aura', 'neon'
-" let g:edge_style = 'default'
 let g:edge_cursor = 'red'
 
 try
-  colorscheme edge
+  colorscheme tokyonight
 catch
   " echo 'Colorscheme not found'
 endtry
