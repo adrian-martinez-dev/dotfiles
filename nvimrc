@@ -689,6 +689,9 @@ require('fzf-lua').setup {
       layout         = 'flex',          -- horizontal|vertical|flex
       flip_columns   = 136,             -- #cols to switch to horizontal on flex
     },
+    hl = {
+      border         = 'FloatBorder',        -- border color (try 'FloatBorder')
+    },
   },
   previewers = {
     builtin = {
