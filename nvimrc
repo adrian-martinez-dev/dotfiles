@@ -51,9 +51,7 @@ Plug 'AckslD/nvim-neoclip.lua'
 " Colorschemes
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'Shatur/neovim-ayu'
-Plug 'bluz71/vim-moonfly-colors'
 Plug 'EdenEast/nightfox.nvim'
 
 " Git
@@ -101,14 +99,14 @@ set nofixendofline
 set number
 " set foldcolumn="auto:3"
 set mouse=a
-
+set noshowmode
 set nospell
 set hidden
 set foldlevel=99
 set scrolloff=5
 set signcolumn=yes
 set list
-set colorcolumn=120
+" set colorcolumn=120
 " let &colorcolumn = join(range(121,999), ',')
 
 set expandtab
@@ -271,12 +269,13 @@ set laststatus=2
 " Override color
 augroup OverrideColor
     autocmd!
-    autocmd ColorScheme * hi! link VertSplit Ignore
-    autocmd ColorScheme * hi! link StatusLineNC Ignore
-    autocmd ColorScheme * hi! link StatusLine TabLine
+    autocmd ColorScheme * hi! link VertSplit LineNr
+    " autocmd ColorScheme * hi! link StatusLineNC LineNr
+    " autocmd ColorScheme * hi! link StatusLine TabLine
     autocmd ColorScheme * hi! link Beacon Cursor
-    autocmd ColorScheme * hi! IndentBlanklineChar ctermfg=240 guifg=#5b616e gui=nocombine
-    autocmd ColorScheme * hi! link IndentBlanklineContextChar Label
+    autocmd ColorScheme * hi! link ColorColumn CursorLine
+    " autocmd ColorScheme * hi! IndentBlanklineChar ctermfg=240 guifg=#5b616e gui=nocombine
+    " autocmd ColorScheme * hi! link IndentBlanklineContextChar Label
 augroup END
 
 " Mappings
@@ -514,7 +513,7 @@ let g:sonokai_cursor = 'red'
 let g:edge_cursor = 'red'
 
 try
-  colorscheme tokyonight
+  colorscheme nightfox
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -560,6 +559,7 @@ augroup END
 let g:dirvish_mode = ':sort ,^.*[\/],'
 
 " emmet
+" c-y to expand
 let g:user_emmet_settings = {
 \  'javascript' : {
 \      'extends' : 'jsx',
