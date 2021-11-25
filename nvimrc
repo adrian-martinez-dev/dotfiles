@@ -26,7 +26,6 @@ endif
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
-Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
@@ -40,7 +39,7 @@ Plug 'ggandor/lightspeed.nvim'
 Plug 'voldikss/vim-browser-search'
 Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
-" Plug 'gcmt/taboo.vim'
+Plug 'gcmt/taboo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
@@ -254,25 +253,28 @@ endfunction
 
 function! InactiveStatus()
     let statusline=""
-    let statusline.="\ %t\ "
+    let statusline.="\• %t\ "
     return statusline
 endfunction
 
-" augroup status
-"     autocmd!
-"     autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
-"     autocmd WinLeave,BufLeave,QuickFixCmdPost * setlocal statusline=%!InactiveStatus()
-" augroup END
+augroup status
+    autocmd!
+    autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
+    autocmd WinLeave,BufLeave,QuickFixCmdPost * setlocal statusline=%!InactiveStatus()
+augroup END
 
 set laststatus=2
-" set statusline=%!ActiveStatus()
+set statusline=%!ActiveStatus()
 
 " Override color
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit LineNr
-    " autocmd ColorScheme * hi! link StatusLineNC LineNr
-    " autocmd ColorScheme * hi! link StatusLine TabLine
+    autocmd ColorScheme * hi! link StatusLineNC LineNr
+    autocmd ColorScheme * hi! link StatusLine PMenu
+    autocmd ColorScheme * hi! link TabLine PMenu
+    autocmd ColorScheme * hi! link TabLineSel PMenuSel
+    autocmd ColorScheme * hi! link TabLineFill PMenu
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! link ColorColumn CursorLine
     autocmd ColorScheme * hi! link String Question
@@ -571,11 +573,12 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
-" " taboo
-" nnoremap <leader>en :TabooRename 
-" let taboo_close_tabs_label = "X" 
-" let taboo_tab_format = " %f%m "
-" let taboo_renamed_tab_format = " [%l]%m "
+
+" taboo
+nnoremap <leader>en :TabooRename 
+let taboo_close_tabs_label = "X" 
+let taboo_tab_format = " %f%m "
+let taboo_renamed_tab_format = " [%l]%m "
 
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
@@ -592,37 +595,6 @@ augroup AnyFold
 augroup END
 
 lua <<EOF
-require('lualine').setup {
-  sections = {
-    lualine_a = {
-      {'mode', fmt = function(str) return str:sub(1,1) end}
-    },
-    lualine_c = {
-        {
-        'filename',
-        file_status = true, -- displays file status (readonly status, modified status)
-        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
-        }
-      },
-  },
-  tabline = {
-    lualine_a = {'tabs'},
-    lualine_b = {'CWD'},
-    lualine_z = {'buffers'},
-  },
-  inactive_sections = {
-    lualine_a = {function() return [[•]] end},
-    lualine_c = {
-        {
-        'filename',
-        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
-        }
-      },
-  },
-  options = {
-    theme = 'calvera-nvim'
-  }
-}
 require('indent_blankline').setup {
   char = "▏",
   space_char_blankline = ' ',
