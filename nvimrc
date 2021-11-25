@@ -53,6 +53,7 @@ Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
 Plug 'Shatur/neovim-ayu'
 Plug 'EdenEast/nightfox.nvim'
+Plug 'yashguptaz/calvera-dark.nvim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -106,7 +107,7 @@ set foldlevel=99
 set scrolloff=5
 set signcolumn=yes
 set list
-" set colorcolumn=120
+set colorcolumn=120
 " let &colorcolumn = join(range(121,999), ',')
 
 set expandtab
@@ -274,6 +275,7 @@ augroup OverrideColor
     " autocmd ColorScheme * hi! link StatusLine TabLine
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! link ColorColumn CursorLine
+    autocmd ColorScheme * hi! link String Question
     " autocmd ColorScheme * hi! IndentBlanklineChar ctermfg=240 guifg=#5b616e gui=nocombine
     " autocmd ColorScheme * hi! link IndentBlanklineContextChar Label
 augroup END
@@ -512,8 +514,12 @@ let g:python_highlight_all = 1
 let g:sonokai_cursor = 'red'
 let g:edge_cursor = 'red'
 
+let g:calvera_italic_comments = 0
+let g:calvera_italic_keywords = 0
+let g:calvera_italic_functions = 0
+
 try
-  colorscheme nightfox
+  colorscheme calvera
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -612,6 +618,9 @@ require('lualine').setup {
         path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
         }
       },
+  },
+  options = {
+    theme = 'calvera-nvim'
   }
 }
 require('indent_blankline').setup {
@@ -698,6 +707,21 @@ require('fzf-lua').setup {
       delay          = 200,          -- delay(ms) displaying the preview 100
       syntax         = true,         -- preview syntax highlight?
     },
+  },
+  fzf_colors = {
+    ["fg"] = { "fg", "CursorLine" },
+    ["bg"] = { "bg", "Normal" },
+    ["hl"] = { "fg", "Comment" },
+    ["fg+"] = { "fg", "Normal" },
+    ["bg+"] = { "bg", "CursorLine" },
+    ["hl+"] = { "fg", "Statement" },
+    ["info"] = { "fg", "PreProc" },
+    ["prompt"] = { "fg", "Conditional" },
+    ["pointer"] = { "fg", "Exception" },
+    ["marker"] = { "fg", "Keyword" },
+    ["spinner"] = { "fg", "Label" },
+    ["header"] = { "fg", "Comment" },
+    ["gutter"] = { "bg", "Normal" },
   },
 }
 require('nvim-web-devicons').setup()
