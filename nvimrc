@@ -253,7 +253,7 @@ endfunction
 
 function! InactiveStatus()
     let statusline=""
-    let statusline.="\• %t\ "
+    let statusline.="\ • %t\ "
     return statusline
 endfunction
 
@@ -272,14 +272,9 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link VertSplit LineNr
     autocmd ColorScheme * hi! link StatusLineNC LineNr
     autocmd ColorScheme * hi! link StatusLine PMenu
-    autocmd ColorScheme * hi! link TabLine PMenu
-    autocmd ColorScheme * hi! link TabLineSel PMenuSel
-    autocmd ColorScheme * hi! link TabLineFill PMenu
+    autocmd ColorScheme * hi! link TabLineSel PMenuThumb
     autocmd ColorScheme * hi! link Beacon Cursor
-    autocmd ColorScheme * hi! link ColorColumn CursorLine
     autocmd ColorScheme * hi! link String Question
-    " autocmd ColorScheme * hi! IndentBlanklineChar ctermfg=240 guifg=#5b616e gui=nocombine
-    " autocmd ColorScheme * hi! link IndentBlanklineContextChar Label
 augroup END
 
 " Mappings
