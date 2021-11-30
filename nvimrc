@@ -50,9 +50,6 @@ Plug 'AckslD/nvim-neoclip.lua'
 " Colorschemes
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
-Plug 'Shatur/neovim-ayu'
-Plug 'EdenEast/nightfox.nvim'
-Plug 'yashguptaz/calvera-dark.nvim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -94,12 +91,13 @@ set smartcase
 set inccommand=split
 set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 set autoindent
+set noshowmode
+set noruler
 set noshowcmd
 set nofixendofline
 set number
 " set foldcolumn="auto:3"
 set mouse=a
-set noshowmode
 set nospell
 set hidden
 set foldlevel=99
@@ -229,52 +227,18 @@ augroup StartifyFix
 augroup END
 
 " Fillchars
-set fillchars=vert:│,fold:-,diff:·,stlnc:─,eob:\ 
+set fillchars=vert:│,fold:-,diff:·,stl:─,stlnc:─,eob:\ 
 set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
 
-function! CWD()
-    let l:path = fnamemodify(getcwd(),":t")
-    return l:path
-endfunction
-
-function! ActiveStatus()
-    let statusline=""
-    let statusline.="\⚡ %t"
-    let statusline.="  « "."%{CWD()}"." »"
-    let statusline.="%{fugitive#head()!=''?'\ \ '.fugitive#head().'\ ':''}"
-    let statusline.="%{&modified?'\ +\ ':''}"
-    let statusline.="%{&readonly?'\ \ ':''}"
-    let statusline.="\ %=%-20.(%l/%L,%c%)\ %{&filetype}\ "
-    let statusline.="\ "
-    let statusline.="%{coc#status()}\ "
-    " let statusline.="%{SleuthIndicator()}\ "
-    return statusline
-endfunction
-
-function! InactiveStatus()
-    let statusline=""
-    let statusline.="\ • %t\ "
-    return statusline
-endfunction
-
-augroup status
-    autocmd!
-    autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveStatus()
-    autocmd WinLeave,BufLeave,QuickFixCmdPost * setlocal statusline=%!InactiveStatus()
-augroup END
-
-set laststatus=2
-set statusline=%!ActiveStatus()
+set statusline=%f
 
 " Override color
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit LineNr
     autocmd ColorScheme * hi! link StatusLineNC LineNr
-    autocmd ColorScheme * hi! link StatusLine PMenu
-    autocmd ColorScheme * hi! link TabLineSel PMenuThumb
+    autocmd ColorScheme * hi! link StatusLine LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
-    autocmd ColorScheme * hi! link String Question
 augroup END
 
 " Mappings
@@ -516,7 +480,7 @@ let g:calvera_italic_keywords = 0
 let g:calvera_italic_functions = 0
 
 try
-  colorscheme calvera
+  colorscheme sonokai
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -573,7 +537,7 @@ let g:user_emmet_settings = {
 nnoremap <leader>en :TabooRename 
 let taboo_close_tabs_label = "X" 
 let taboo_tab_format = " %f%m "
-let taboo_renamed_tab_format = " [%l]%m "
+let taboo_renamed_tab_format = "  %l%m  "
 
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
@@ -671,8 +635,7 @@ require('fzf-lua').setup {
   },
   previewers = {
     builtin = {
-      delay          = 200,          -- delay(ms) displaying the preview 100
-      syntax         = true,         -- preview syntax highlight?
+      syntax         = false,         -- preview syntax highlight?
     },
   },
   fzf_colors = {
