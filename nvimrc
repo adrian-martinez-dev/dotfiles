@@ -96,16 +96,13 @@ set noruler
 set noshowcmd
 set nofixendofline
 set number
-" set foldcolumn="auto:3"
 set mouse=a
 set nospell
-set hidden
 set foldlevel=99
 set scrolloff=5
 set signcolumn=yes
 set list
 set colorcolumn=120
-" let &colorcolumn = join(range(121,999), ',')
 
 set expandtab
 set splitright
@@ -472,12 +469,10 @@ augroup END
 let g:python_highlight_all = 1
 
 " Colorscheme
+" 'default', 'atlantis', 'andromeda', 'shusia', 'maia', 'espresso'
+let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'red'
 let g:edge_cursor = 'red'
-
-let g:calvera_italic_comments = 0
-let g:calvera_italic_keywords = 0
-let g:calvera_italic_functions = 0
 
 try
   colorscheme sonokai
