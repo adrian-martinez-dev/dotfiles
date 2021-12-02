@@ -63,7 +63,6 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'SirVer/ultisnips'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'honza/vim-snippets'
-Plug 'windwp/nvim-autopairs'
 Plug 'alvan/vim-closetag'
 
 " Syntax highlighting
@@ -110,6 +109,7 @@ set splitbelow
 set sessionoptions-=folds
 set sessionoptions+=tabpages,globals
 set shortmess+=c
+set updatetime=300
 
 set clipboard=unnamedplus
 if WINDOWS()
@@ -291,6 +291,18 @@ nnoremap <C-down> <C-W>+
 nnoremap <C-right> 5<C-W><
 nnoremap <C-left> 5<C-W>>
 
+" Autoclose
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
+inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
+inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
+
 " Substitute
 nnoremap <leader>s :%s///gI<left><left><left><left>
 vnoremap <leader>s :s///gI<left><left><left><left>
@@ -421,26 +433,18 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Remap keys for gotos
 nmap <silent> <leader>E <Plug>(coc-diagnostic-prev)
@@ -529,7 +533,6 @@ let g:user_emmet_settings = {
 \}
 
 " taboo
-nnoremap <leader>en :TabooRename 
 let taboo_close_tabs_label = "X" 
 let taboo_tab_format = " %f%m "
 let taboo_renamed_tab_format = "  %l%m  "
@@ -650,7 +653,6 @@ require('fzf-lua').setup {
   },
 }
 require('nvim-web-devicons').setup()
-require('nvim-autopairs').setup{}
 require('lightspeed').setup {
   safe_labels = {"s", "f", "n", "u", "t", "S", "F", "L", "N", "H", "G", "M", "U", "T", "Z"},
   labels = {"s", "f", "n", "j", "k", "l", "o", "i", "w", "e", "h", "g", "u", "t", "m", "v", "c", "a", "z",
