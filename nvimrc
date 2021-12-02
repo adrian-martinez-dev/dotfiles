@@ -30,14 +30,12 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
 Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-dirvish'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'voldikss/vim-browser-search'
-Plug 'rhysd/git-messenger.vim'
 Plug 'mattn/emmet-vim'
 Plug 'gcmt/taboo.vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -45,7 +43,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
-Plug 'AckslD/nvim-neoclip.lua'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
@@ -616,7 +613,6 @@ require('gitsigns').setup {
     ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
   },
 }
-require('neoclip').setup()
 require('fzf-lua').setup {
   winopts = {
     height           = 0.6,            -- window height
