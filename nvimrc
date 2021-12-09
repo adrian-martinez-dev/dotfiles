@@ -186,10 +186,10 @@ augroup TermCmd
 augroup END
 
 " Quickfix below everything
-" augroup QfBl
-"     autocmd!
-"     autocmd FileType qf wincmd J
-" augroup END
+augroup QfBl
+    autocmd!
+    autocmd FileType qf wincmd J
+augroup END
 
 " Move cursor to last position on file
 " Instead of reverting the cursor to the last position in the buffer, we
@@ -224,7 +224,7 @@ augroup END
 set fillchars=vert:│,fold:-,diff:·,stl:─,stlnc:─,eob:\ 
 set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
 
-set statusline=%f
+set statusline=%f%m
 
 " Override color
 augroup OverrideColor
@@ -531,7 +531,7 @@ let g:user_emmet_settings = {
 
 " taboo
 let taboo_close_tabs_label = "X" 
-let taboo_tab_format = " %f%m "
+let taboo_tab_format = " %r%m "
 let taboo_renamed_tab_format = "  %l%m  "
 
 " autoclose
