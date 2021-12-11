@@ -26,6 +26,7 @@ endif
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
@@ -43,6 +44,9 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
+Plug 'lukas-reineke/virt-column.nvim'
+Plug 'voldikss/vim-floaterm'
+Plug 'sQVe/sort.nvim'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
@@ -212,7 +216,7 @@ augroup DisableThingsFromWindows
     autocmd VimEnter,WinEnter,BufWinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
     autocmd FileType qf,help,fugitive setlocal signcolumn=no nonumber colorcolumn= nolist
     autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
-    autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth
+    autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth colorcolumn=
 augroup END
 
 augroup StartifyFix
@@ -233,6 +237,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link StatusLineNC LineNr
     autocmd ColorScheme * hi! link StatusLine LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
+    autocmd ColorScheme * hi! link FloatermBorder FloatBorder
 augroup END
 
 " Mappings
@@ -250,7 +255,7 @@ nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 nnoremap <Leader>L "ayiw<CR>iconsole.log('<C-R>a: ', <C-R>a);<CR><Esc>
 
 nnoremap <leader>M :top 11sp term://$SHELL<cr>
-nnoremap <leader>m :below sp term://$SHELL<cr>
+" nnoremap <leader>m :below sp term://$SHELL<cr>
 
 " Insert source bin/activate
 tnoremap <leader>va source venv/bin/activate<cr>
@@ -548,7 +553,43 @@ augroup AnyFold
   autocmd Filetype python AnyFoldActivate
 augroup END
 
+" floaterm
+let g:floaterm_keymap_new    = '<F6>'
+let g:floaterm_keymap_prev   = '<F7>'
+let g:floaterm_keymap_next   = '<F8>'
+let g:floaterm_keymap_toggle = '<leader>m'
+let g:floaterm_height        = 0.4
+let g:floaterm_width         = 0.7
+
 lua <<EOF
+require('lualine').setup {
+  sections = {
+    lualine_a = {
+      {'mode', fmt = function(str) return str:sub(1,1) end}
+    },
+    lualine_c = {
+        {
+        'filename',
+        file_status = true, -- displays file status (readonly status, modified status)
+        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+        }
+      },
+  },
+  tabline = {
+    lualine_a = {'tabs'},
+    lualine_b = {'CWD'},
+    lualine_z = {'buffers'},
+  },
+  inactive_sections = {
+    lualine_a = {function() return [[•]] end},
+    lualine_c = {
+        {
+        'filename',
+        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+        }
+      },
+  },
+}
 require('indent_blankline').setup {
   char = "▏",
   space_char_blankline = ' ',
@@ -654,4 +695,5 @@ require('lightspeed').setup {
   labels = {"s", "f", "n", "j", "k", "l", "o", "i", "w", "e", "h", "g", "u", "t", "m", "v", "c", "a", "z",
      "S", "F", "L", "N", "H", "G", "M", "U", "T", "Z"}
 }
+require("virt-column").setup { char = "▏" }
 EOF
