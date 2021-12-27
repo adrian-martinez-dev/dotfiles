@@ -23,12 +23,12 @@ if WINDOWS()
 endif
 
 " General
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'justinmk/vim-gtfo'
@@ -429,25 +429,6 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-emmet',
                               \ 'coc-ultisnips' ]
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 " Remap keys for gotos
 nmap <silent> <leader>E <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>e <Plug>(coc-diagnostic-next)
@@ -458,12 +439,6 @@ nmap <silent> gr <Plug>(coc-references)
 " nmap <leader>D <Plug>(coc-codeaction)
 xmap <leader>x <Plug>(coc-codeaction-selected)
 nmap <leader>x <Plug>(coc-codeaction-selected)
-
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" diff
-nnoremap <leader>ch :diffget //2<CR>
-nnoremap <leader>cl :diffget //3<CR>
 
 augroup init_quickfix
   autocmd!
@@ -562,6 +537,27 @@ let g:floaterm_width         = 0.7
 let g:floaterm_title         = '($1/$2)'
 
 lua <<EOF
+local lsp_installer = require "nvim-lsp-installer"
+
+-- Include the servers you want to have installed by default below
+local servers = {
+  "tsserver",
+  "pyright",
+  "vuels",
+  "eslint",
+  "tailwindcss",
+  "emmet_ls",
+}
+
+for _, name in pairs(servers) do
+  local server_is_found, server = lsp_installer.get_server(name)
+  if server_is_found then
+    if not server:is_installed() then
+      print("Installing " .. name)
+      server:install()
+    end
+  end
+end
 require('lualine').setup {
   sections = {
     lualine_a = {
