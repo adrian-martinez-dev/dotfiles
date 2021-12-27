@@ -225,7 +225,7 @@ augroup StartifyFix
 augroup END
 
 " Fillchars
-set fillchars=vert:│,fold:-,diff:·,stl:─,stlnc:─,eob:\ 
+set fillchars=vert:│,fold:-,diff:·,stl:─,eob:\ 
 set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
 
 set statusline=%f%m
@@ -557,7 +557,7 @@ augroup END
 let g:floaterm_keymap_prev   = '<C-TAB>'
 let g:floaterm_keymap_next   = '<C-S-TAB>'
 let g:floaterm_keymap_toggle = '<leader>m'
-let g:floaterm_height        = 0.4
+let g:floaterm_height        = 0.6
 let g:floaterm_width         = 0.7
 let g:floaterm_title         = '($1/$2)'
 
