@@ -44,7 +44,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
-Plug 'lukas-reineke/virt-column.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'sQVe/sort.nvim'
 
@@ -488,7 +487,8 @@ endtry
 
 " fzf
 nnoremap <Leader>a :FzfLua grep<cr>
-nnoremap <leader>A :FzfLua grep_cword<cr>
+nnoremap <Leader>W :FzfLua grep_cword<cr>
+nnoremap <leader>A :FzfLua grep_visual<cr>
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nnoremap <silent><leader>d :FzfLua commands<cr>
 nnoremap <silent><leader>D :FzfLua builtin<cr>
@@ -695,5 +695,4 @@ require('lightspeed').setup {
   labels = {"s", "f", "n", "j", "k", "l", "o", "i", "w", "e", "h", "g", "u", "t", "m", "v", "c", "a", "z",
      "S", "F", "L", "N", "H", "G", "M", "U", "T", "Z"}
 }
-require("virt-column").setup { char = "▏" }
 EOF
