@@ -44,7 +44,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
-Plug 'voldikss/vim-floaterm'
 Plug 'sQVe/sort.nvim'
 
 " Colorschemes
@@ -254,7 +253,8 @@ nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 nnoremap <Leader>L "ayiw<CR>iconsole.log('<C-R>a: ', <C-R>a);<CR><Esc>
 
 nnoremap <leader>M :top 11sp term://$SHELL<cr>
-" nnoremap <leader>m :below sp term://$SHELL<cr>
+nnoremap <leader>m :below sp term://$SHELL<cr>
+nnoremap <leader>G :vertical Git<CR>
 
 " Insert source bin/activate
 tnoremap <leader>va source venv/bin/activate<cr>
@@ -552,14 +552,6 @@ augroup AnyFold
   autocmd Filetype javascript AnyFoldActivate
   autocmd Filetype python AnyFoldActivate
 augroup END
-
-" floaterm
-let g:floaterm_keymap_prev   = '<C-TAB>'
-let g:floaterm_keymap_next   = '<C-S-TAB>'
-let g:floaterm_keymap_toggle = '<leader>m'
-let g:floaterm_height        = 0.4
-let g:floaterm_width         = 0.7
-let g:floaterm_title         = '($1/$2)'
 
 lua <<EOF
 require('lualine').setup {
