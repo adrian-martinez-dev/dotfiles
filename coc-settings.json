@@ -2,7 +2,7 @@
   "coc.preferences.extensionUpdateCheck": "daily",
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.enableMessage": "always",
-  "diagnostic.messageTarget": "echo",
+  "diagnostic.messageTarget": "float",
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.enableSign": true,
   "diagnostic.errorSign": "E",
@@ -24,5 +24,6 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.arrowParens": "avoid",
-  "prettier.trailingComma": "none"
+  "prettier.trailingComma": "none",
+  "tailwindCSS.headwind.runOnSave": false
 }

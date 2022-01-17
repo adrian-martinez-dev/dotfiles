@@ -1,0 +1,37 @@
+""" Editing and Reloading the Config
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+let mapleader=","
+
+""" Load config
+nnoremap <leader>cv :e ~/.ideavimrc<CR>
+nnoremap <leader>sv :action IdeaVim.ReloadVimRc.reload<CR>
+
+""" Terminal
+nnoremap <leader>m :action ActivateTerminalToolWindow<CR>
+
+""" Navigation
+sethandler <c-j> a:vim
+sethandler <c-k> a:vim
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+
+nnoremap <TAB> :action NextTab<CR>
+nnoremap <s-TAB> :action PreviousTab<CR>
+
+vnoremap < <gv
+vnoremap > >gv
+
+nnoremap <leader>e :action GotoNextError<CR>
+nnoremap <leader>E :action GotoPreviousError<CR>
+
+set incsearch
+set commentary
+
+nnoremap <leader>gn :action VcsShowNextChangeMarker<CR>
+nnoremap <leader>gp :action VcsShowPrevChangeMarker<CR>
+nnoremap <leader>gd :action Compare.LastVersion<cr>
+nnoremap <Leader>gr :action Vcs.RollbackChangedLines<CR>

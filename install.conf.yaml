@@ -10,6 +10,7 @@
     ~/.i3: i3/
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
+    ~/.ideavimrc: ideavimrc
     ~/.gvimrc: gvimrc
     ~/.bashrc: bashrc
     ~/.pdbrc.py: pdbrc

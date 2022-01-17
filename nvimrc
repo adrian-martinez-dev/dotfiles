@@ -24,6 +24,7 @@ endif
 
 " General
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-lualine/lualine.nvim'
@@ -419,7 +420,6 @@ augroup END
 let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-eslint',
                               \ 'coc-prettier',
-                              \ 'coc-tailwindcss',
                               \ 'coc-react-refactor',
                               \ 'coc-css',
                               \ 'coc-json',
@@ -497,7 +497,6 @@ nnoremap <silent><leader>v :FzfLua buffers<cr>
 nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
 nnoremap <silent><leader>F :FzfLua files<cr>
 nnoremap <silent><leader>f :FzfLua git_files<cr>
-nnoremap <silent><leader>G :FzfLua git_status<cr>
 
 augroup fzfpopupter
   autocmd!
