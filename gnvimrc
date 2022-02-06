@@ -27,7 +27,7 @@ if exists('g:GtkGuiLoaded')
         " call rpcnotify(1, 'Gui', 'Font', 'JetBrains Mono 11')
         " call rpcnotify(1, 'Gui', 'Font', 'Source Code Pro 11')
     endif
-    call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', 'on')
+    " call rpcnotify(1, 'Gui', 'Command', 'PreferDarkTheme', 'on')
     nnoremap <silent> <C-E> :NGToggleSidebar<cr>
 endif
 

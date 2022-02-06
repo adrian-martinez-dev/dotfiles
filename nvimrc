@@ -87,7 +87,7 @@ set hlsearch
 set showmatch
 set ignorecase
 set smartcase
-set inccommand=split
+set inccommand=nosplit
 set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 set autoindent
 set noshowmode
@@ -224,7 +224,7 @@ augroup StartifyFix
 augroup END
 
 " Fillchars
-set fillchars=vert:│,fold:-,diff:·,stl:─,stlnc:─,eob:\ 
+set fillchars=vert:│,fold:-,diff:·,eob:\ 
 set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
 
 set statusline=%f%m

@@ -1,9 +1,9 @@
 {
   "coc.preferences.extensionUpdateCheck": "daily",
   "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.enableMessage": "always",
-  "diagnostic.messageTarget": "float",
-  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.enableMessage": "never",
+  "diagnostic.messageTarget": "echo",
+  "diagnostic.virtualTextCurrentLineOnly": true,
   "diagnostic.enableSign": true,
   "diagnostic.errorSign": "E",
   "diagnostic.warningSign": "W",
