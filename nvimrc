@@ -50,6 +50,8 @@ Plug 'sQVe/sort.nvim'
 " Colorschemes
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
+Plug 'mcchrish/zenbones.nvim'
+Plug 'rktjmp/lush.nvim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -482,7 +484,7 @@ let g:sonokai_cursor = 'red'
 let g:edge_cursor = 'red'
 
 try
-  colorscheme sonokai
+  colorscheme zenbones
 catch
   " echo 'Colorscheme not found'
 endtry
