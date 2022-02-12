@@ -236,9 +236,9 @@ set showtabline=0
 " Override color
 augroup OverrideColor
     autocmd!
-    autocmd ColorScheme * hi! link VertSplit Normal
-    autocmd ColorScheme * hi! link StatusLineNC Normal
-    autocmd ColorScheme * hi! link StatusLine Normal
+    autocmd ColorScheme * hi! link VertSplit FloatBorder
+    autocmd ColorScheme * hi! link StatusLineNC FloatBorder
+    autocmd ColorScheme * hi! link StatusLine FloatBorder
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! link ColorColumn CursorColumn
     " autocmd ColorScheme * hi! link FloatermBorder FloatBorder
