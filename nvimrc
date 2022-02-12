@@ -482,6 +482,7 @@ let g:python_highlight_all = 1
 let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'red'
 let g:edge_cursor = 'red'
+let g:zenbones_italic_comments = v:false
 
 try
   colorscheme zenbones
