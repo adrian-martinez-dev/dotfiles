@@ -236,11 +236,11 @@ set showtabline=0
 " Override color
 augroup OverrideColor
     autocmd!
-    autocmd ColorScheme * hi! link VertSplit LineNr
-    autocmd ColorScheme * hi! link StatusLineNC LineNr
-    autocmd ColorScheme * hi! link StatusLine LineNr
+    autocmd ColorScheme * hi! link VertSplit Normal
+    autocmd ColorScheme * hi! link StatusLineNC Normal
+    autocmd ColorScheme * hi! link StatusLine Normal
     autocmd ColorScheme * hi! link Beacon Cursor
-    autocmd ColorScheme * hi! link FloatermBorder FloatBorder
+    " autocmd ColorScheme * hi! link FloatermBorder FloatBorder
 augroup END
 
 " Mappings
@@ -483,6 +483,7 @@ let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'red'
 let g:edge_cursor = 'red'
 let g:zenbones_italic_comments = v:false
+let g:zenbones_lightness = 'bright'
 
 try
   colorscheme zenbones
