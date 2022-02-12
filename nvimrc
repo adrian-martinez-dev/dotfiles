@@ -483,7 +483,7 @@ let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'red'
 let g:edge_cursor = 'red'
 let g:zenbones_italic_comments = v:false
-" let g:zenbones_lightness = 'bright'
+let g:zenbones_lightness = 'bright'
 
 try
   colorscheme zenbones
