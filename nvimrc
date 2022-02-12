@@ -240,6 +240,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link StatusLineNC Normal
     autocmd ColorScheme * hi! link StatusLine Normal
     autocmd ColorScheme * hi! link Beacon Cursor
+    autocmd ColorScheme * hi! link ColorColumn CursorColumn
     " autocmd ColorScheme * hi! link FloatermBorder FloatBorder
 augroup END
 
