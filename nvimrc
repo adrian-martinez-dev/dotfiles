@@ -27,7 +27,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
-" Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'antoinemadec/coc-fzf'
 Plug 'tpope/vim-commentary'
@@ -39,7 +39,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'voldikss/vim-browser-search'
 Plug 'mattn/emmet-vim'
-" Plug 'gcmt/taboo.vim'
+Plug 'gcmt/taboo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
@@ -96,7 +96,7 @@ set noshowmode
 set noruler
 set noshowcmd
 set nofixendofline
-set nonumber
+set number
 set mouse=a
 set nospell
 set foldlevel=99
@@ -104,7 +104,6 @@ set scrolloff=5
 set signcolumn=yes
 set list
 set colorcolumn=120
-set cmdheight=2
 
 set expandtab
 set splitright
@@ -227,11 +226,10 @@ augroup StartifyFix
 augroup END
 
 " Fillchars
-set fillchars=vert:│,fold:-,stl:⎯,stlnc:─,diff:·,eob:\ 
+set fillchars=vert:│,fold:-,diff:·,eob:\ 
 set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
 
-" set statusline=%{fugitive#statusline()}\ %f%m
-set showtabline=0
+set statusline=%f%m
 
 " Override color
 augroup OverrideColor
@@ -428,7 +426,7 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-react-refactor',
                               \ 'coc-css',
                               \ 'coc-json',
-                              \ 'coc-jedi',
+                              \ 'coc-pyright',
                               \ 'coc-highlight',
                               \ 'coc-emmet',
                               \ 'coc-ultisnips' ]
@@ -562,6 +560,34 @@ augroup AnyFold
 augroup END
 
 lua <<EOF
+require('lualine').setup {
+  sections = {
+    lualine_a = {
+      {'mode', fmt = function(str) return str:sub(1,1) end}
+    },
+    lualine_c = {
+        {
+        'filename',
+        file_status = true, -- displays file status (readonly status, modified status)
+        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+        }
+      },
+  },
+  tabline = {
+    lualine_a = {'tabs'},
+    lualine_b = {'CWD'},
+    lualine_z = {'buffers'},
+  },
+  inactive_sections = {
+    lualine_a = {function() return [[•]] end},
+    lualine_c = {
+        {
+        'filename',
+        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+        }
+      },
+  },
+}
 require('indent_blankline').setup {
   char = "▏",
   space_char_blankline = ' ',
