@@ -426,7 +426,7 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-react-refactor',
                               \ 'coc-css',
                               \ 'coc-json',
-                              \ 'coc-pyright',
+                              \ 'coc-jedi',
                               \ 'coc-highlight',
                               \ 'coc-emmet',
                               \ 'coc-ultisnips' ]
@@ -576,7 +576,7 @@ require('lualine').setup {
   tabline = {
     lualine_a = {'tabs'},
     lualine_b = {'CWD'},
-    lualine_z = {'buffers'},
+    lualine_y = {'buffers'},
   },
   inactive_sections = {
     lualine_a = {function() return [[•]] end},
