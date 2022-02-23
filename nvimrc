@@ -225,6 +225,11 @@ augroup StartifyFix
   autocmd User StartifyReady let &l:stl = ' Startify'
 augroup END
 
+function! CWD()
+    let l:path = fnamemodify(getcwd(),":t")
+    return l:path
+endfunction
+
 " Fillchars
 set fillchars=vert:│,fold:-,diff:·,eob:\ 
 set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
@@ -575,7 +580,7 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = {'tabs'},
-    lualine_b = {function() return vim.fn.fnamemodify(vim.fn.getcwd(), ":t") end},
+    lualine_b = {'CWD'},
     lualine_y = {'buffers'},
   },
   inactive_sections = {
