@@ -575,7 +575,7 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = {'tabs'},
-    lualine_b = {'CWD'},
+    lualine_b = {function() return vim.fn.fnamemodify(vim.fn.getcwd(), ":t") end},
     lualine_y = {'buffers'},
   },
   inactive_sections = {
