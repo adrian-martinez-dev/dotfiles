@@ -627,6 +627,17 @@ require('nvim-treesitter.configs').setup {
     enable = true,
     extended_mode = true,
     max_file_lines = nil,
+  },
+  ensure_installed = {
+    "typescript",
+    "javascript",
+    "python",
+    "tsx",
+    "json",
+    "html",
+    "scss",
+    "vim",
+    "vue",
   }
 }
 require('gitsigns').setup {
