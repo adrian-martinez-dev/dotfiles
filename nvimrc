@@ -96,7 +96,7 @@ set noshowmode
 set noruler
 set noshowcmd
 set nofixendofline
-set number
+" set number
 set mouse=a
 set nospell
 set foldlevel=99
@@ -104,6 +104,7 @@ set scrolloff=5
 set signcolumn=yes
 set list
 set colorcolumn=120
+set foldcolumn=2
 
 set expandtab
 set splitright
@@ -232,7 +233,9 @@ endfunction
 
 " Fillchars
 set fillchars=vert:│,fold:-,diff:·,eob:\ 
-set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
+" set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
+set fillchars+=foldopen:•,foldsep:│,foldclose:•
+
 
 set statusline=%f%m
 
@@ -561,7 +564,14 @@ let g:coc_fzf_opts = []
 " anyfold
 augroup AnyFold
   autocmd Filetype javascript AnyFoldActivate
+  autocmd Filetype typescriptreact AnyFoldActivate
+  autocmd Filetype typescript AnyFoldActivate
   autocmd Filetype python AnyFoldActivate
+  autocmd Filetype vim AnyFoldActivate
+  " autocmd Filetype vue AnyFoldActivate
+  " autocmd Filetype html AnyFoldActivate
+  autocmd Filetype css AnyFoldActivate
+  autocmd Filetype scss AnyFoldActivate
 augroup END
 
 lua <<EOF
