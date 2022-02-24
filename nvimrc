@@ -568,8 +568,8 @@ augroup AnyFold
   autocmd Filetype typescript AnyFoldActivate
   autocmd Filetype python AnyFoldActivate
   autocmd Filetype vim AnyFoldActivate
-  " autocmd Filetype vue AnyFoldActivate
-  " autocmd Filetype html AnyFoldActivate
+  autocmd Filetype vue AnyFoldActivate
+  autocmd Filetype html AnyFoldActivate
   autocmd Filetype css AnyFoldActivate
   autocmd Filetype scss AnyFoldActivate
 augroup END
