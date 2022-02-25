@@ -46,6 +46,7 @@ Plug 'pseewald/vim-anyfold'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
+Plug 'kazhala/close-buffers.nvim'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
@@ -96,7 +97,7 @@ set noshowmode
 set noruler
 set noshowcmd
 set nofixendofline
-" set number
+set number
 set mouse=a
 set nospell
 set foldlevel=99
@@ -104,7 +105,9 @@ set scrolloff=5
 set signcolumn=yes
 set list
 set colorcolumn=120
-set foldcolumn=2
+" https://github.com/neovim/neovim/pull/17446
+" feat(folds): add 'foldcolumndigits' option
+" set foldcolumn=2
 
 set expandtab
 set splitright
@@ -262,7 +265,7 @@ command! -nargs=* VT vsplit | terminal <args>
 " Search word under cursor and show results in quickfix without moving it
 nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 " console.log
-nnoremap <Leader>L "ayiw<CR>iconsole.log('<C-R>a: ', <C-R>a);<CR><Esc>
+nnoremap <Leader>L "ayiw<CR>iconsole.log('<C-R>a: ', <C-R>a)<CR><Esc>
 
 nnoremap <leader>M :top 11sp term://$SHELL<cr>
 nnoremap <leader>m :below sp term://$SHELL<cr>
@@ -639,7 +642,7 @@ require('nvim-treesitter.configs').setup {
     enable = true
   },
   rainbow = {
-    enable = true,
+    enable = false,
     extended_mode = true,
     max_file_lines = nil,
   },
