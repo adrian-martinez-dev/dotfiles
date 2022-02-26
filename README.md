@@ -9,7 +9,7 @@ Mis archivos de configuración
 
 ```sh
 $ sudo dnf copr enable agriffis/neovim-nightly
-$ sudo dnf install rubygems fzf tmux xclip neovim python3-neovim nodejs ripgrep
+$ sudo dnf install rubygems fzf tmux xclip neovim python3-neovim nodejs ripgrep gcc-c++
 $ gem install tmuxinator
 
 ```
