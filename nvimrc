@@ -105,6 +105,7 @@ set scrolloff=5
 set signcolumn=yes
 set list
 set colorcolumn=120
+set cmdheight=2
 " https://github.com/neovim/neovim/pull/17446
 " feat(folds): add 'foldcolumndigits' option
 " set foldcolumn=2
@@ -506,7 +507,7 @@ endtry
 nnoremap <Leader>a :FzfLua grep<cr>
 nnoremap <Leader>W :FzfLua grep_cword<cr>
 nnoremap <leader>A :FzfLua grep_visual<cr>
-tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+" tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nnoremap <silent><leader>d :FzfLua commands<cr>
 nnoremap <silent><leader>D :FzfLua builtin<cr>
 nnoremap <silent><leader>r :FzfLua registers<cr>
