@@ -247,7 +247,6 @@ set statusline=%f%m
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit LineNr
-    autocmd ColorScheme * hi! link StatusLineNC LineNr
     autocmd ColorScheme * hi! link StatusLine LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! link ColorColumn CursorColumn
@@ -498,7 +497,7 @@ let g:zenbones_lightness = 'bright'
 let g:zenbones_darkness = 'stark'
 
 try
-  colorscheme neobones
+  colorscheme zenbones
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -513,8 +512,8 @@ nnoremap <silent><leader>D :FzfLua builtin<cr>
 nnoremap <silent><leader>r :FzfLua registers<cr>
 nnoremap <silent><leader>v :FzfLua buffers<cr>
 nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
-nnoremap <silent><leader>f :FzfLua files<cr>
-nnoremap <silent><leader>F :FzfLua git_files<cr>
+nnoremap <silent><leader>F :FzfLua files<cr>
+nnoremap <silent><leader>f :FzfLua git_files<cr>
 nnoremap <silent><leader>G :FzfLua git_status<cr>
 
 augroup fzfpopupter
