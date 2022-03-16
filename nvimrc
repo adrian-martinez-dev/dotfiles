@@ -39,7 +39,6 @@ Plug 'justinmk/vim-dirvish'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'voldikss/vim-browser-search'
 Plug 'mattn/emmet-vim'
-Plug 'gcmt/taboo.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
@@ -407,7 +406,7 @@ nmap <silent><Leader>gb :GBrowse<cr>
 nnoremap <leader>S :SSave!<cr>
 nnoremap <leader>O :SLoad 
 
-" let g:startify_disable_at_vimenter = 1
+let g:startify_disable_at_vimenter = 1
 let g:startify_custom_indices = ['f', 'd', 's']
 let g:startify_session_number = 7
 let g:startify_files_number = 7 
@@ -550,11 +549,6 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
-
-" taboo
-let taboo_close_tabs_label = "X" 
-let taboo_tab_format = " %r%m "
-let taboo_renamed_tab_format = "  %l%m  "
 
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
