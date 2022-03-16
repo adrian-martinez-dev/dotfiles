@@ -5,6 +5,7 @@
   "diagnostic.messageTarget": "echo",
   "diagnostic.virtualTextCurrentLineOnly": true,
   "diagnostic.enableSign": true,
+  "diagnostic.enableHighlightLineNumber": false,
   "diagnostic.errorSign": "E",
   "diagnostic.warningSign": "W",
   "diagnostic.virtualText": false,

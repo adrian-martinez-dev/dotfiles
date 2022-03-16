@@ -1,0 +1,22 @@
+# /home/adrian/.config/tmuxinator/flux.yml
+
+name: flux
+root: ~/
+
+startup_window: editor
+# startup_pane: 1
+
+windows:
+  - backend:
+      layout: even-vertical
+      panes:
+        - ngrok http 8000
+        # - cd ~/Workspace/proxied/permnet-server; ./run.sh
+        - lt --port 3000
+        - cd ~/Workspace/flux/; docker-compose -f local.yml up --build
+        - cd ~/Workspace/flux-ovms-server/; node index.js
+  - editor:
+      # layout: main-horizontal
+      panes:
+        - nvim -S ~/.local/share/nvim/session/flux
+        # - cd ~/Workspace/node-proxy; npm start

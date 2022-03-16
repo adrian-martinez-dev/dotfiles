@@ -225,10 +225,10 @@ augroup DisableThingsFromWindows
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth colorcolumn=
 augroup END
 
-augroup StartifyFix
-  autocmd!
-  autocmd User StartifyReady let &l:stl = ' Startify'
-augroup END
+" augroup StartifyFix
+"   autocmd!
+"   autocmd User StartifyReady let &l:stl = ' Startify'
+" augroup END
 
 function! CWD()
     let l:path = fnamemodify(getcwd(),":t")
@@ -427,7 +427,7 @@ augroup StartifyAu
     autocmd!
     autocmd User Startified setlocal cursorline
     " https://github.com/neovim/neovim/issues/11330
-    autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+    " autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 augroup END
 
 " coc-vim
@@ -666,6 +666,8 @@ require('gitsigns').setup {
     topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
   },
+  signcolumn = false,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = true,
   keymaps = {
     ['n <leader>gn'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
     ['n <leader>gp'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
