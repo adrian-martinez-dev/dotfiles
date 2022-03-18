@@ -249,6 +249,8 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link StatusLine LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! link ColorColumn CursorColumn
+    autocmd ColorScheme * hi! link Constant Type
+    " autocmd ColorScheme * hi! WinSeparator guibg=None
     " autocmd ColorScheme * hi! link FloatermBorder FloatBorder
 augroup END
 
@@ -574,6 +576,7 @@ augroup END
 
 lua <<EOF
 require('lualine').setup {
+  globalstatus = true,
   sections = {
     lualine_a = {
       {'mode', fmt = function(str) return str:sub(1,1) end}
