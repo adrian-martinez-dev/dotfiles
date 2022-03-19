@@ -239,7 +239,6 @@ set fillchars=vert:│,fold:-,diff:·,eob:\
 " set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
 set fillchars+=foldopen:•,foldsep:│,foldclose:•
 
-
 set statusline=%f%m
 
 " Override color
@@ -723,3 +722,4 @@ require('lightspeed').setup {
      "S", "F", "L", "N", "H", "G", "M", "U", "T", "Z"}
 }
 EOF
+set laststatus=3
