@@ -235,7 +235,7 @@ function! CWD()
 endfunction
 
 " Fillchars
-set fillchars=vert:│,fold:-,diff:·,eob:\ 
+set fillchars=fold:-,diff:·,eob:\ 
 " set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
 set fillchars+=foldopen:•,foldsep:│,foldclose:•
 
@@ -306,18 +306,6 @@ nnoremap <C-up> <C-W>-
 nnoremap <C-down> <C-W>+
 nnoremap <C-right> 5<C-W><
 nnoremap <C-left> 5<C-W>>
-
-" Autoclose
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
-inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
-inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
-inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
-inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
-inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
 
 " Substitute
 nnoremap <leader>s :%s///gI<left><left><left><left>
