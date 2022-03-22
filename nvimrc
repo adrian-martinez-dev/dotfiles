@@ -92,6 +92,7 @@ set smartcase
 set inccommand=nosplit
 set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 set autoindent
+set smartindent
 set noshowmode
 set noruler
 set noshowcmd
