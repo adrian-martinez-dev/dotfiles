@@ -14,7 +14,7 @@ windows:
         # - cd ~/Workspace/proxied/permnet-server; ./run.sh
         - lt --port 3000
         - cd ~/Workspace/flux/; docker-compose -f local.yml up --build
-        - cd ~/Workspace/flux-ovms-server/; node index.js
+        - cd ~/Workspace/flux-ovms-server/; npm run dev
   - editor:
       # layout: main-horizontal
       panes:

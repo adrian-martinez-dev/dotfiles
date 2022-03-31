@@ -92,7 +92,6 @@ set smartcase
 set inccommand=nosplit
 set listchars=tab:▸\ ,eol:¬,extends:»,precedes:«,trail:•
 set autoindent
-set smartindent
 set noshowmode
 set noruler
 set noshowcmd
@@ -258,7 +257,7 @@ augroup END
 let g:mapleader = ','
 
 " Backtick
-inoremap '' `
+" inoremap '' `
 
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
@@ -429,6 +428,7 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-jedi',
                               \ 'coc-highlight',
                               \ 'coc-emmet',
+                              \ 'coc-pairs',
                               \ 'coc-ultisnips' ]
 
 inoremap <silent><expr> <TAB>
@@ -625,7 +625,7 @@ require('nvim-treesitter.configs').setup {
     additional_vim_regex_highlighting = false,
   },
   indent = {
-    enable = true
+    enable = false
   },
   rainbow = {
     enable = true,
@@ -652,8 +652,8 @@ require('gitsigns').setup {
     topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
   },
-  signcolumn = false,  -- Toggle with `:Gitsigns toggle_signs`
-  numhl      = true,
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false,
   keymaps = {
     ['n <leader>gn'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
     ['n <leader>gp'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
