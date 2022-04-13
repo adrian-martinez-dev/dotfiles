@@ -429,6 +429,8 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-highlight',
                               \ 'coc-emmet',
                               \ 'coc-pairs',
+                              \ 'coc-markdown-preview-enhanced',
+                              \ 'coc-webview',
                               \ 'coc-ultisnips' ]
 
 inoremap <silent><expr> <TAB>
@@ -561,6 +563,9 @@ augroup AnyFold
   autocmd Filetype css AnyFoldActivate
   autocmd Filetype scss AnyFoldActivate
 augroup END
+
+" markdown-preview
+command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPreview
 
 lua <<EOF
 require('lualine').setup {
