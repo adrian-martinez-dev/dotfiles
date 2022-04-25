@@ -116,6 +116,7 @@ set sessionoptions-=folds
 set sessionoptions+=tabpages,globals
 set shortmess+=c
 set updatetime=300
+set laststatus=3
 
 set clipboard=unnamedplus
 if WINDOWS()
@@ -569,7 +570,9 @@ command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPrev
 
 lua <<EOF
 require('lualine').setup {
-  globalstatus = true,
+  options = {
+    globalstatus = true,
+  },
   sections = {
     lualine_a = {
       {'mode', fmt = function(str) return str:sub(1,1) end}
@@ -716,4 +719,3 @@ require('lightspeed').setup {
      "S", "F", "L", "N", "H", "G", "M", "U", "T", "Z"}
 }
 EOF
-set laststatus=3
