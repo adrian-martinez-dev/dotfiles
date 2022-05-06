@@ -59,7 +59,8 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-#plugins=(git python tmux tmuxinator virtualenvwrapper)
+# plugins=(git python tmux tmuxinator virtualenvwrapper)
+plugins=(git python tmux tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,12 +84,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias mux=tmuxinator
-alias v="mux dev"
-alias win7="sudo /usr/win7"
-alias win10="sudo /usr/win10"
-alias fed="sudo /usr/fed"
 
 # So as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
