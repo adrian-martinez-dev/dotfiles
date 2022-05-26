@@ -35,3 +35,8 @@ nnoremap <leader>gn :action VcsShowNextChangeMarker<CR>
 nnoremap <leader>gp :action VcsShowPrevChangeMarker<CR>
 nnoremap <leader>gd :action Compare.LastVersion<cr>
 nnoremap <Leader>gr :action Vcs.RollbackChangedLines<CR>
+
+" Press `s` to activate AceJump
+map s :action AceAction<CR>
+" Press `S` to activate Target Mode
+map S :action AceTargetAction<CR>

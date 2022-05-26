@@ -40,7 +40,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'voldikss/vim-browser-search'
 Plug 'mattn/emmet-vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'lukas-reineke/indent-blankline.nvim'
+" Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'pseewald/vim-anyfold'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
@@ -599,33 +599,33 @@ require('lualine').setup {
       },
   },
 }
-require('indent_blankline').setup {
-  char = "▏",
-  space_char_blankline = ' ',
-  buftype_exclude = {'terminal'},
-  filetype_exclude = {'help', "startify", 'fugitive', 'git'},
-  show_current_context = true,
-  show_current_context_start = false,
-  show_first_indent_level = false,
-  context_patterns = {
-    'jsx_element',
-    'jsx_self_closing_element',
-    'object',
-    'declaration',
-    'expression',
-    'pattern',
-    'primary_expression',
-    'statement',
-    'switch_body',
-  },
-  -- char_highlight_list = {
-  --     'Conditional',
-  --     'LineNr',
-  --     'Function',
-  --     'Number',
-  --     'Question',
-  -- },
-}
+-- require('indent_blankline').setup {
+--   char = --▏--,
+--   space_char_blankline = ' ',
+--   buftype_exclude = {'terminal'},
+--   filetype_exclude = {'help', --startify--, 'fugitive', 'git'},
+--   show_current_context = true,
+--   show_current_context_start = false,
+--   show_first_indent_level = false,
+--   context_patterns = {
+--     'jsx_element',
+--     'jsx_self_closing_element',
+--     'object',
+--     'declaration',
+--     'expression',
+--     'pattern',
+--     'primary_expression',
+--     'statement',
+--     'switch_body',
+--   },
+--   -- char_highlight_list = {
+--   --     'Conditional',
+--   --     'LineNr',
+--   --     'Function',
+--   --     'Number',
+--   --     'Question',
+--   -- },
+-- }
 require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,
