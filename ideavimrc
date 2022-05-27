@@ -2,6 +2,8 @@
 set clipboard+=unnamed
 set clipboard+=ideaput
 
+set NERDTree
+
 let mapleader=","
 
 """ Load config
@@ -30,6 +32,8 @@ nnoremap <leader>E :action GotoPreviousError<CR>
 
 set incsearch
 set commentary
+set visualbell
+set noerrorbells
 
 nnoremap <leader>gn :action VcsShowNextChangeMarker<CR>
 nnoremap <leader>gp :action VcsShowPrevChangeMarker<CR>
@@ -40,3 +44,9 @@ nnoremap <Leader>gr :action Vcs.RollbackChangedLines<CR>
 map s :action AceAction<CR>
 " Press `S` to activate Target Mode
 map S :action AceTargetAction<CR>
+
+nnoremap <leader>a :action FindInPath<CR>
+
+""" NERDTree
+
+nnoremap <c-e> :NERDTreeToggle<CR>
