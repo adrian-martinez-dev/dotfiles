@@ -118,10 +118,8 @@ set shortmess+=c
 set updatetime=300
 set laststatus=3
 
+" https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
 set clipboard=unnamedplus
-if WINDOWS()
-    set clipboard=unnamed
-endif
 
 set shiftwidth=2
 
@@ -571,6 +569,9 @@ lua <<EOF
 require('lualine').setup {
   options = {
     globalstatus = true,
+    icons_enabled = false,
+    section_separators = '',
+    component_separators = '',
   },
   sections = {
     lualine_a = {
