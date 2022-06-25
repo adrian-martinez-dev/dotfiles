@@ -567,12 +567,6 @@ command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPrev
 
 lua <<EOF
 require('lualine').setup {
-  options = {
-    globalstatus = true,
-    icons_enabled = false,
-    section_separators = '',
-    component_separators = '',
-  },
   sections = {
     lualine_a = {
       {'mode', fmt = function(str) return str:sub(1,1) end}
