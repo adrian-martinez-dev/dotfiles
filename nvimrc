@@ -567,6 +567,10 @@ command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPrev
 
 lua <<EOF
 require('lualine').setup {
+  options = {
+    globalstatus = true,
+    icons_enabled = false,
+  },
   sections = {
     lualine_a = {
       {'mode', fmt = function(str) return str:sub(1,1) end}
@@ -672,6 +676,8 @@ require('gitsigns').setup {
   },
 }
 require('fzf-lua').setup {
+  global_git_icons = false,
+  global_file_icons = false,
   winopts = {
     height           = 0.6,            -- window height
     width            = 0.8,            -- window width
