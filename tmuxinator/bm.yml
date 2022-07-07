@@ -10,10 +10,11 @@ windows:
   - services:
       layout: even-vertical
       panes:
-        - ./ngrok http 5004
+        - ngrok http 5004
         - cd ~/Workspace/services.brief.vet; docker-compose -f local.linux.yml up
         - cd ~/Workspace/CORE_Drupal8
   - editor:
       # layout: main-horizontal
       panes:
-        - nvim -S ~/.local/share/nvim/session/bm
+        # - nvim -S ~/.local/share/nvim/session/bm
+        - cd ~/Workspace/services.brief.vet/; nvim .

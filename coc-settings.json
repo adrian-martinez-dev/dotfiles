@@ -11,9 +11,6 @@
   "diagnostic.virtualText": false,
   "diagnostic.virtualTextPrefix": " >> ",
   "javascript.validate.enable": false,
-  "python.linting.pylintEnabled": false,
-  "python.linting.flake8Enabled": true,
-  "python.linting.flake8Args": ["--ignore=E501"],
   "python.linting.pylintArgs": ["--load-plugins pylint_django"],
   "react-refactor.produceClass": false,
   "emmet.includeLanguages": {

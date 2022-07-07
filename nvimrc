@@ -266,9 +266,9 @@ nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 " console.log
 nnoremap <Leader>L "ayiw<CR>iconsole.log('<C-R>a: ', <C-R>a)<CR><Esc>
 
-nnoremap <leader>M :top 11sp term://$SHELL<cr>
+nnoremap <leader>M :top 18sp term://$SHELL<cr>
 nnoremap <leader>m :below sp term://$SHELL<cr>
-" nnoremap <leader>G :vertical Git<CR>
+nnoremap <leader>G :vertical Git<CR>
 
 " Insert source bin/activate
 tnoremap <leader>va source venv/bin/activate<cr>
@@ -424,7 +424,7 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-react-refactor',
                               \ 'coc-css',
                               \ 'coc-json',
-                              \ 'coc-jedi',
+                              \ 'coc-pyright',
                               \ 'coc-emmet',
                               \ 'coc-pairs',
                               \ 'coc-markdown-preview-enhanced',
@@ -504,7 +504,7 @@ nnoremap <silent><leader>v :FzfLua buffers<cr>
 nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
 nnoremap <silent><leader>F :FzfLua files<cr>
 nnoremap <silent><leader>f :FzfLua git_files<cr>
-nnoremap <silent><leader>G :FzfLua git_status<cr>
+" nnoremap <silent><leader>G :FzfLua git_status<cr>
 
 augroup fzfpopupter
   autocmd!

@@ -6,6 +6,9 @@ set NERDTree
 
 let mapleader=","
 
+""" List of available actions
+""" :actionlist
+
 """ Load config
 nnoremap <leader>cv :e ~/.ideavimrc<CR>
 nnoremap <leader>sv :action IdeaVim.ReloadVimRc.reload<CR>
@@ -35,18 +38,24 @@ set commentary
 set visualbell
 set noerrorbells
 
+""" Git
 nnoremap <leader>gn :action VcsShowNextChangeMarker<CR>
 nnoremap <leader>gp :action VcsShowPrevChangeMarker<CR>
-nnoremap <leader>gd :action Compare.LastVersion<cr>
+nnoremap <leader>gd :action Compare.LastVersion<CR>
 nnoremap <Leader>gr :action Vcs.RollbackChangedLines<CR>
+nnoremap <leader>gB :action Annotate<CR>
 
+""" Ace jump
 " Press `s` to activate AceJump
 map s :action AceAction<CR>
 " Press `S` to activate Target Mode
 map S :action AceTargetAction<CR>
 
+""" Find
 nnoremap <leader>a :action FindInPath<CR>
+nnoremap <leader>W :action FindUsages<CR>
 
 """ NERDTree
-
 nnoremap <c-e> :NERDTreeToggle<CR>
+
+nnoremap <leader>gb :action Github.Open.In.Browser<CR>
