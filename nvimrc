@@ -46,12 +46,14 @@ Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
 Plug 'kazhala/close-buffers.nvim'
+Plug 'phaazon/hop.nvim'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
 Plug 'mcchrish/zenbones.nvim'
 Plug 'rktjmp/lush.nvim'
+Plug 'xiyaowong/nvim-transparent'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -488,9 +490,10 @@ let g:zenbones_italic_comments = v:false
 let g:neobones_italic_comments = v:false
 let g:zenbones_lightness = 'bright'
 let g:zenbones_darkness = 'stark'
+let g:transparent_enabled = v:true
 
 try
-  colorscheme sonokai
+  colorscheme neobones
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -567,6 +570,9 @@ augroup END
 
 " markdown-preview
 command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPreview
+
+" hop
+nnoremap s :HopWord<CR>
 
 lua <<EOF
 require('lualine').setup {
@@ -716,6 +722,7 @@ require('fzf-lua').setup {
   },
 }
 require('nvim-web-devicons').setup()
+require'hop'.setup()
 --require('lightspeed').setup {
 --  safe_labels = {"s", "f", "n", "u", "t", "S", "F", "L", "N", "H", "G", "M", "U", "T", "Z"},
 --  labels = {"s", "f", "n", "j", "k", "l", "o", "i", "w", "e", "h", "g", "u", "t", "m", "v", "c", "a", "z",
