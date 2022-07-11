@@ -245,6 +245,7 @@ augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit LineNr
     autocmd ColorScheme * hi! link StatusLine LineNr
+    autocmd ColorScheme * hi! link FloatBorder LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! link ColorColumn CursorColumn
     autocmd ColorScheme * hi! link Constant Type
@@ -480,14 +481,16 @@ let g:python_highlight_all = 1
 " 'default', 'atlantis', 'andromeda', 'shusia', 'maia', 'espresso'
 let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'red'
+let g:sonokai_transparent_background = 1
 let g:edge_cursor = 'red'
+let g:edge_transparent_background = 1
 let g:zenbones_italic_comments = v:false
 let g:neobones_italic_comments = v:false
 let g:zenbones_lightness = 'bright'
 let g:zenbones_darkness = 'stark'
 
 try
-  colorscheme neobones
+  colorscheme sonokai
 catch
   " echo 'Colorscheme not found'
 endtry
