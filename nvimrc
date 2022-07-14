@@ -36,8 +36,7 @@ Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
 Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-dirvish'
-" Plug 'ggandor/lightspeed.nvim'
-Plug 'voldikss/vim-browser-search'
+Plug 'adrian-martinez-dev/vim-browser-search'
 Plug 'mattn/emmet-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -723,9 +722,4 @@ require('fzf-lua').setup {
 }
 require('nvim-web-devicons').setup()
 require'hop'.setup()
---require('lightspeed').setup {
---  safe_labels = {"s", "f", "n", "u", "t", "S", "F", "L", "N", "H", "G", "M", "U", "T", "Z"},
---  labels = {"s", "f", "n", "j", "k", "l", "o", "i", "w", "e", "h", "g", "u", "t", "m", "v", "c", "a", "z",
---     "S", "F", "L", "N", "H", "G", "M", "U", "T", "Z"}
---}
 EOF
