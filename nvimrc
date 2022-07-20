@@ -36,7 +36,7 @@ Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
 Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-dirvish'
-Plug 'adrian-martinez-dev/vim-browser-search'
+Plug 'voldikss/vim-browser-search'
 Plug 'mattn/emmet-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -268,7 +268,7 @@ nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 " console.log
 nnoremap <Leader>L "ayiw<CR>iconsole.log('<C-R>a: ', <C-R>a)<CR><Esc>
 
-nnoremap <leader>M :top 18sp term://$SHELL<cr>
+nnoremap <leader>M :top 15sp term://$SHELL<cr>
 nnoremap <leader>m :below sp term://$SHELL<cr>
 nnoremap <leader>G :vertical Git<CR>
 
