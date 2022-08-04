@@ -63,7 +63,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Snippets & AutoComplete
-Plug 'SirVer/ultisnips'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'honza/vim-snippets'
 Plug 'alvan/vim-closetag'
@@ -375,14 +374,6 @@ let g:netrw_altfile = 1
 let g:netrw_banner = 0
 let g:netrw_fastbrowse = 0
 
-" UltiSnips
-let g:UltiSnipsExpandTrigger='<c-e>'
-let g:UltiSnipsListSnippets='<c-l>'
-let g:UltiSnipsJumpForwardTrigger='<c-j>'
-let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-inoremap <c-x><c-k> <c-x><c-k>
-let g:UltiSnipsSnippetDirectories = ['UltiSnips']
-
 " Git
 nmap <Leader>gc :T git checkout 
 nmap <Leader>gP :T git push<cr>
@@ -431,25 +422,26 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-pairs',
                               \ 'coc-markdown-preview-enhanced',
                               \ 'coc-webview',
-                              \ 'coc-ultisnips' ]
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+                              \ 'coc-snippets']
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Insert <tab> when previous text is space, refresh completion if not.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Remap keys for gotos

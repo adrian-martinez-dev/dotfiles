@@ -23,5 +23,6 @@
   "prettier.singleQuote": true,
   "prettier.arrowParens": "avoid",
   "prettier.trailingComma": "none",
-  "tailwindCSS.headwind.runOnSave": false
+  "tailwindCSS.headwind.runOnSave": false,
+  "snippets.snipmate.enable": false
 }
