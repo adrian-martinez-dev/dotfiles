@@ -251,6 +251,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! link ColorColumn Whitespace
     autocmd ColorScheme * hi! link FoldColumn Whitespace
+    autocmd ColorScheme * hi! link LineNr Whitespace
     " autocmd ColorScheme * hi! link Constant Type
     " autocmd ColorScheme * hi! WinSeparator guibg=None
     " autocmd ColorScheme * hi! link FloatermBorder FloatBorder
