@@ -49,10 +49,12 @@ Plug 'phaazon/hop.nvim'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
+Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/edge'
 Plug 'mcchrish/zenbones.nvim'
 Plug 'rktjmp/lush.nvim'
-Plug 'xiyaowong/nvim-transparent'
+" Plug 'xiyaowong/nvim-transparent'
+Plug 'projekt0n/github-nvim-theme'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -96,7 +98,7 @@ set noshowmode
 set noruler
 set noshowcmd
 set nofixendofline
-set number
+" set number
 set mouse=a
 set nospell
 set foldlevel=99
@@ -243,12 +245,13 @@ set statusline=%f%m
 " Override color
 augroup OverrideColor
     autocmd!
-    autocmd ColorScheme * hi! link VertSplit LineNr
-    autocmd ColorScheme * hi! link StatusLine LineNr
-    autocmd ColorScheme * hi! link FloatBorder LineNr
+    autocmd ColorScheme * hi! link VertSplit Whitespace
+    " autocmd ColorScheme * hi! link StatusLine LineNr
+    autocmd ColorScheme * hi! link FloatBorder Whitespace
     autocmd ColorScheme * hi! link Beacon Cursor
-    autocmd ColorScheme * hi! link ColorColumn CursorColumn
-    autocmd ColorScheme * hi! link Constant Type
+    autocmd ColorScheme * hi! link ColorColumn Whitespace
+    autocmd ColorScheme * hi! link FoldColumn Whitespace
+    " autocmd ColorScheme * hi! link Constant Type
     " autocmd ColorScheme * hi! WinSeparator guibg=None
     " autocmd ColorScheme * hi! link FloatermBorder FloatBorder
 augroup END
@@ -472,8 +475,14 @@ let g:python_highlight_all = 1
 
 " Colorscheme
 " 'default', 'atlantis', 'andromeda', 'shusia', 'maia', 'espresso'
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_disable_italic_comment = 1
+let g:gruvbox_material_enable_italic = 0
+let g:gruvbox_material_transparent_background = 1
 let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'red'
+let g:sonokai_disable_italic_comment = 1
+let g:sonokai_enable_italic = 0
 let g:sonokai_transparent_background = 1
 let g:edge_cursor = 'red'
 let g:edge_transparent_background = 1
@@ -481,10 +490,13 @@ let g:zenbones_italic_comments = v:false
 let g:neobones_italic_comments = v:false
 let g:zenbones_lightness = 'bright'
 let g:zenbones_darkness = 'stark'
-let g:transparent_enabled = v:true
+" let g:transparent_enabled = v:true
+let g:github_transparent = 1
+let g:github_comment_style = 'NONE'
+let g:github_keyword_style = 'NONE'
 
 try
-  colorscheme neobones
+  colorscheme github_dark
 catch
   " echo 'Colorscheme not found'
 endtry
