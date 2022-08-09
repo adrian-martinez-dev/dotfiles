@@ -246,7 +246,7 @@ set statusline=%f%m
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit Whitespace
-    " autocmd ColorScheme * hi! link StatusLine LineNr
+    autocmd ColorScheme * hi! link StatusLine Whitespace
     autocmd ColorScheme * hi! link FloatBorder Whitespace
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! link ColorColumn Whitespace
