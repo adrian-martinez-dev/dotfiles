@@ -54,7 +54,7 @@ Plug 'sainnhe/edge'
 Plug 'mcchrish/zenbones.nvim'
 Plug 'rktjmp/lush.nvim'
 " Plug 'xiyaowong/nvim-transparent'
-Plug 'projekt0n/github-nvim-theme'
+" Plug 'projekt0n/github-nvim-theme'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -98,7 +98,7 @@ set noshowmode
 set noruler
 set noshowcmd
 set nofixendofline
-" set number
+set number
 set mouse=a
 set nospell
 set foldlevel=99
@@ -245,16 +245,8 @@ set statusline=%f%m
 " Override color
 augroup OverrideColor
     autocmd!
-    autocmd ColorScheme * hi! link VertSplit Whitespace
-    autocmd ColorScheme * hi! link StatusLine Whitespace
-    autocmd ColorScheme * hi! link FloatBorder Whitespace
+    autocmd ColorScheme * hi! link VertSplit LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
-    autocmd ColorScheme * hi! link ColorColumn Whitespace
-    autocmd ColorScheme * hi! link FoldColumn Whitespace
-    autocmd ColorScheme * hi! link LineNr Whitespace
-    " autocmd ColorScheme * hi! link Constant Type
-    " autocmd ColorScheme * hi! WinSeparator guibg=None
-    " autocmd ColorScheme * hi! link FloatermBorder FloatBorder
 augroup END
 
 " Mappings
@@ -497,7 +489,7 @@ let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
 
 try
-  colorscheme github_dark
+  colorscheme zenbones
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -612,7 +604,6 @@ require('lualine').setup {
   },
 }
 require('indent_blankline').setup {
-  char = '▏',
   space_char_blankline = ' ',
   buftype_exclude = {'terminal'},
   filetype_exclude = {'help', 'startify', 'fugitive', 'git'},
