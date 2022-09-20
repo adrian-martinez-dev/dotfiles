@@ -25,11 +25,9 @@ endif
 " General
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
-Plug 'vijaymarupudi/nvim-fzf'
-Plug 'ibhagwan/fzf-lua'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'antoinemadec/coc-fzf'
+" Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'justinmk/vim-gtfo'
@@ -495,24 +493,35 @@ catch
 endtry
 
 " fzf
-nnoremap <Leader>a :FzfLua grep<cr>
-nnoremap <Leader>W :FzfLua grep_cword<cr>
-nnoremap <leader>A :FzfLua grep_visual<cr>
+" nnoremap <Leader>a :FzfLua grep<cr>
+" nnoremap <Leader>W :FzfLua grep_cword<cr>
+" nnoremap <leader>A :FzfLua grep_visual<cr>
 " tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-nnoremap <silent><leader>d :FzfLua commands<cr>
-nnoremap <silent><leader>D :FzfLua builtin<cr>
-nnoremap <silent><leader>r :FzfLua registers<cr>
-nnoremap <silent><leader>v :FzfLua buffers<cr>
-nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
-nnoremap <silent><leader>F :FzfLua files<cr>
-nnoremap <silent><leader>f :FzfLua git_files<cr>
+" nnoremap <silent><leader>d :FzfLua commands<cr>
+" nnoremap <silent><leader>D :FzfLua builtin<cr>
+" nnoremap <silent><leader>r :FzfLua registers<cr>
+" nnoremap <silent><leader>v :FzfLua buffers<cr>
+" nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
+" nnoremap <silent><leader>F :FzfLua files<cr>
+" nnoremap <silent><leader>f :FzfLua git_files<cr>
 " nnoremap <silent><leader>G :FzfLua git_status<cr>
 
-augroup fzfpopupter
-  autocmd!
-  autocmd FileType fzf exe 'tnoremap <buffer><nowait> <C-j> <Down>'
-        \ | tnoremap <buffer><nowait> <C-k> <Up>
-augroup END
+" augroup fzfpopupter
+"   autocmd!
+"   autocmd FileType fzf exe 'tnoremap <buffer><nowait> <C-j> <Down>'
+"         \ | tnoremap <buffer><nowait> <C-k> <Up>
+" augroup END
+
+" telescope
+nnoremap <Leader>a <cmd>Telescope live_grep<cr>
+nnoremap <Leader>W <cmd>Telescope grep_string<cr>
+vnoremap <leader>A "zy:Telescope grep_string default_text=<C-r>z<cr>
+nnoremap <leader>d <cmd>Telescope commands<cr>
+nnoremap <leader>r <cmd>Telescope registers<cr>
+nnoremap <leader>v <cmd>Telescope buffers<cr>
+nnoremap <leader>l <cmd>Telescope current_buffer_fuzzy_find<cr>
+nnoremap <leader>F <cmd>Telescope find_files<cr>
+nnoremap <leader>f <cmd>Telescope git_files<cr>
 
 " Commands
 command! -nargs=* Manage T docker-compose -f local.yml run --rm django python manage.py <args>
@@ -679,43 +688,41 @@ require('gitsigns').setup {
     ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
   },
 }
-require('fzf-lua').setup {
-  global_git_icons = false,
-  global_file_icons = false,
-  winopts = {
-    height           = 0.6,            -- window height
-    width            = 0.8,            -- window width
-    preview = {
-      vertical       = 'down:60%',      -- up|down:size
-      horizontal     = 'right:60%',     -- right|left:size
-      layout         = 'flex',          -- horizontal|vertical|flex
-      flip_columns   = 136,             -- #cols to switch to horizontal on flex
+-- require('nvim-web-devicons').setup()
+local actions = require('telescope.actions')
+require('telescope').setup {
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      },
     },
-    hl = {
-      border         = 'FloatBorder',        -- border color (try 'FloatBorder')
+    sorting_strategy = "ascending",
+    layout_strategy = "flex",
+    layout_config = {
+      flex = {
+        prompt_position = "top",
+        flip_columns = 160
+      },
+      horizontal = {
+        prompt_position = "top",
+      },
+      vertical = {
+        prompt_position = "top",
+        mirror = true
+      },
+      width = 0.85,
+      height = 0.65,
     },
   },
-  previewers = {
-    builtin = {
-      syntax         = false,         -- preview syntax highlight?
-    },
-  },
-  fzf_colors = {
-    ["fg"] = { "fg", "CursorLine" },
-    ["bg"] = { "bg", "Normal" },
-    ["hl"] = { "fg", "Comment" },
-    ["fg+"] = { "fg", "Normal" },
-    ["bg+"] = { "bg", "CursorLine" },
-    ["hl+"] = { "fg", "Statement" },
-    ["info"] = { "fg", "PreProc" },
-    ["prompt"] = { "fg", "Conditional" },
-    ["pointer"] = { "fg", "Exception" },
-    ["marker"] = { "fg", "Keyword" },
-    ["spinner"] = { "fg", "Label" },
-    ["header"] = { "fg", "Comment" },
-    ["gutter"] = { "bg", "Normal" },
-  },
+  pickers = {
+    buffers = {
+      sort_lastused = true
+    }
+  }
 }
-require('nvim-web-devicons').setup()
+-- require('nvim-web-devicons').setup()
 require'hop'.setup()
 EOF
