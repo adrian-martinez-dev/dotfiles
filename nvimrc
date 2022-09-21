@@ -720,6 +720,9 @@ require('telescope').setup {
   pickers = {
     buffers = {
       sort_lastused = true
+    },
+    git_files = {
+      show_untracked = true
     }
   }
 }
