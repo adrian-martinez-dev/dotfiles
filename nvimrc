@@ -556,10 +556,6 @@ let g:user_emmet_settings = {
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
 let g:closetag_filetypes = 'javascript'
 
-" coc-fzf
-let g:coc_fzf_preview = ''
-let g:coc_fzf_opts = []
-
 " anyfold
 augroup AnyFold
   autocmd Filetype javascript AnyFoldActivate
@@ -697,6 +693,7 @@ require('telescope').setup {
         ["<esc>"] = actions.close,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
+        ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
       },
     },
     sorting_strategy = "ascending",
