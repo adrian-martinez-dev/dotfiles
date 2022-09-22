@@ -263,7 +263,7 @@ nnoremap <Leader>L "ayiw<CR>iconsole.log('<C-R>a: ', <C-R>a)<CR><Esc>
 
 nnoremap <leader>M :top 15sp term://$SHELL<cr>
 nnoremap <leader>m :below sp term://$SHELL<cr>
-nnoremap <leader>G :vertical Git<CR>
+" nnoremap <leader>G :vertical Git<CR>
 
 " Insert source bin/activate
 tnoremap <leader>va source venv/bin/activate<cr>
@@ -503,6 +503,7 @@ nnoremap <leader>v <cmd>Telescope buffers<cr>
 nnoremap <leader>l <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>F <cmd>Telescope find_files<cr>
 nnoremap <leader>f <cmd>Telescope git_files<cr>
+nnoremap <leader>G <cmd>Telescope git_status<cr>
 
 " Commands
 command! -nargs=* Manage T docker-compose -f local.yml run --rm django python manage.py <args>
