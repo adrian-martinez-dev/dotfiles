@@ -697,7 +697,7 @@ require('fzf-lua').setup {
   },
   git = {
     files = {
-      cmd           = 'git ls-files --modified --others',
+      cmd           = 'git ls-files --exclude-standard --cached --others',
     },
   }
 }
