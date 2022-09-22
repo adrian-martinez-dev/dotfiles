@@ -495,9 +495,9 @@ catch
 endtry
 
 " fzf-lua
-nnoremap <Leader>a :FzfLua live_grep<cr>
+nnoremap <Leader>a :FzfLua grep_project<cr>
 nnoremap <Leader>W :FzfLua grep_cword<cr>
-nnoremap <leader>A :FzfLua grep_visual<cr>
+nnoremap <leader>A :FzfLua resume<cr>
 nnoremap <silent><leader>d :FzfLua commands<cr>
 nnoremap <silent><leader>D :FzfLua builtin<cr>
 nnoremap <silent><leader>r :FzfLua registers<cr>
