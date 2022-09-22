@@ -481,6 +481,7 @@ let g:zenbones_italic_comments = v:false
 let g:neobones_italic_comments = v:false
 let g:zenbones_lightness = 'bright'
 let g:zenbones_darkness = 'stark'
+let g:zenbones_transparent_background = v:true
 " let g:transparent_enabled = v:true
 let g:github_transparent = 1
 let g:github_comment_style = 'NONE'
@@ -491,26 +492,6 @@ try
 catch
   " echo 'Colorscheme not found'
 endtry
-
-" fzf
-" nnoremap <Leader>a :FzfLua grep<cr>
-" nnoremap <Leader>W :FzfLua grep_cword<cr>
-" nnoremap <leader>A :FzfLua grep_visual<cr>
-" tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-" nnoremap <silent><leader>d :FzfLua commands<cr>
-" nnoremap <silent><leader>D :FzfLua builtin<cr>
-" nnoremap <silent><leader>r :FzfLua registers<cr>
-" nnoremap <silent><leader>v :FzfLua buffers<cr>
-" nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
-" nnoremap <silent><leader>F :FzfLua files<cr>
-" nnoremap <silent><leader>f :FzfLua git_files<cr>
-" nnoremap <silent><leader>G :FzfLua git_status<cr>
-
-" augroup fzfpopupter
-"   autocmd!
-"   autocmd FileType fzf exe 'tnoremap <buffer><nowait> <C-j> <Down>'
-"         \ | tnoremap <buffer><nowait> <C-k> <Up>
-" augroup END
 
 " telescope
 nnoremap <Leader>a <cmd>Telescope live_grep<cr>
