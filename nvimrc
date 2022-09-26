@@ -503,8 +503,8 @@ nnoremap <silent><leader>D :FzfLua builtin<cr>
 nnoremap <silent><leader>r :FzfLua registers<cr>
 nnoremap <silent><leader>v :FzfLua buffers<cr>
 nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
-nnoremap <silent><leader>f :FzfLua files<cr>
-" nnoremap <silent><leader>f :FzfLua git_files<cr>
+" nnoremap <silent><leader>f :FzfLua files<cr>
+nnoremap <silent><leader>f :FzfLua git_files<cr>
 nnoremap <silent><leader>G :FzfLua git_status<cr>
 
 augroup fzfpopupter
