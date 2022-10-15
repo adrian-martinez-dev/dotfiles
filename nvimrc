@@ -39,7 +39,6 @@ Plug 'voldikss/vim-browser-search'
 Plug 'mattn/emmet-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'pseewald/vim-anyfold'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
@@ -101,6 +100,8 @@ set number
 set mouse=a
 set nospell
 set foldlevel=99
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 set scrolloff=5
 set signcolumn=yes
 set list
@@ -545,19 +546,6 @@ let g:user_emmet_settings = {
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
 let g:closetag_filetypes = 'javascript'
-
-" anyfold
-augroup AnyFold
-  autocmd Filetype javascript AnyFoldActivate
-  autocmd Filetype typescriptreact AnyFoldActivate
-  autocmd Filetype typescript AnyFoldActivate
-  autocmd Filetype python AnyFoldActivate
-  autocmd Filetype vim AnyFoldActivate
-  autocmd Filetype vue AnyFoldActivate
-  autocmd Filetype html AnyFoldActivate
-  autocmd Filetype css AnyFoldActivate
-  autocmd Filetype scss AnyFoldActivate
-augroup END
 
 " markdown-preview
 command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPreview
