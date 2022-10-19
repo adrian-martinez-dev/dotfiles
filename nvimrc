@@ -96,7 +96,7 @@ set noshowmode
 set noruler
 set noshowcmd
 set nofixendofline
-set number
+" set number
 set mouse=a
 set nospell
 set foldlevel=99
