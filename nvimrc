@@ -489,7 +489,7 @@ let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
 
 try
-  colorscheme zenbones
+  colorscheme gruvbox-material
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -674,7 +674,7 @@ require('fzf-lua').setup {
       flip_columns   = 160,             -- #cols to switch to horizontal on flex
     },
     hl = {
-      border         = 'FloatBorder',        -- border color (try 'FloatBorder')
+      border         = 'VertSplit',        -- border color (try 'FloatBorder')
     },
   },
   previewers = {
