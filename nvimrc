@@ -273,7 +273,10 @@ tnoremap <leader>va source venv/bin/activate<cr>
 " Jump to tag
 nnoremap <leader>T <C-]>
 
+" New tab
 nnoremap <leader>tn :tabnew<CR>
+" Set tab working directory
+nnoremap <leader>td :tc %:p:h<CR>
 
 " Next/prev tab
 nnoremap <silent> <tab> gt
@@ -359,10 +362,6 @@ tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
-
-" Set working directory to current file
-command! FileDir cd %:p:h
-command! TabDir tc %:p:h
 
 " Plugins settings
 " netrw
@@ -504,7 +503,7 @@ nnoremap <silent><leader>D :FzfLua builtin<cr>
 nnoremap <silent><leader>r :FzfLua registers<cr>
 nnoremap <silent><leader>v :FzfLua buffers<cr>
 nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
-" nnoremap <silent><leader>f :FzfLua files<cr>
+nnoremap <silent><leader>F :FzfLua files<cr>
 nnoremap <silent><leader>f :FzfLua git_files<cr>
 nnoremap <silent><leader>G :FzfLua git_status<cr>
 
