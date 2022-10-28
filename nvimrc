@@ -96,7 +96,7 @@ set noshowmode
 set noruler
 set noshowcmd
 set nofixendofline
-" set number
+set number
 set mouse=a
 set nospell
 set foldlevel=99
@@ -417,6 +417,7 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-pairs',
                               \ 'coc-markdown-preview-enhanced',
                               \ 'coc-webview',
+                              \ 'coc-vetur',
                               \ 'coc-snippets']
 
 function! s:check_back_space() abort
@@ -518,6 +519,7 @@ command! -nargs=* Manage T docker-compose -f local.yml run --rm django python ma
 command! -nargs=* Test T docker-compose -f local.yml run --rm django pytest <args>
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! PushDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
+command! TrailingWhitespaceRemove :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " Web search
 nmap <silent> <Leader>kj <Plug>SearchNormal
