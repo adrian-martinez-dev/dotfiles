@@ -44,6 +44,7 @@ Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
 Plug 'kazhala/close-buffers.nvim'
 Plug 'phaazon/hop.nvim'
+Plug 'petertriho/nvim-scrollbar'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
@@ -96,14 +97,15 @@ set noshowmode
 set noruler
 set noshowcmd
 set nofixendofline
-set number
+" set number
 set mouse=a
 set nospell
 set foldlevel=99
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set scrolloff=5
-set signcolumn=yes
+" set signcolumn=yes
+set signcolumn=no
 set list
 set colorcolumn=120
 set cmdheight=2
@@ -277,6 +279,8 @@ nnoremap <leader>T <C-]>
 nnoremap <leader>tn :tabnew<CR>
 " Set tab working directory
 nnoremap <leader>td :tc %:p:h<CR>
+" Zoom to tab
+nnoremap <leader>to :tab sp<CR>
 
 " Next/prev tab
 nnoremap <silent> <tab> gt
@@ -490,7 +494,7 @@ let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
 
 try
-  colorscheme gruvbox-material
+  colorscheme sonokai
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -692,4 +696,6 @@ require('fzf-lua').setup {
 }
 -- require('nvim-web-devicons').setup()
 require'hop'.setup()
+require("scrollbar").setup()
+require("scrollbar.handlers.gitsigns").setup()
 EOF
