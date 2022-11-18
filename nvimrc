@@ -486,21 +486,21 @@ let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'red'
 let g:sonokai_disable_italic_comment = 1
 let g:sonokai_enable_italic = 0
-let g:sonokai_transparent_background = 1
+let g:sonokai_transparent_background = 0
 let g:edge_cursor = 'red'
 let g:edge_transparent_background = 1
 let g:zenbones_italic_comments = v:false
 let g:neobones_italic_comments = v:false
 let g:zenbones_lightness = 'bright'
 let g:zenbones_darkness = 'stark'
-let g:zenbones_transparent_background = v:true
+let g:zenbones_transparent_background = v:false
 " let g:transparent_enabled = v:true
 let g:github_transparent = 1
 let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
 
 try
-  colorscheme sonokai
+  colorscheme zenbones
 catch
   " echo 'Colorscheme not found'
 endtry
