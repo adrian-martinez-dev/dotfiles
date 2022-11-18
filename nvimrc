@@ -45,6 +45,7 @@ Plug 'sQVe/sort.nvim'
 Plug 'kazhala/close-buffers.nvim'
 Plug 'phaazon/hop.nvim'
 Plug 'petertriho/nvim-scrollbar'
+Plug 'lukas-reineke/virt-column.nvim'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
@@ -97,17 +98,16 @@ set noshowmode
 set noruler
 set noshowcmd
 set nofixendofline
-" set number
+set number
 set mouse=a
 set nospell
 set foldlevel=99
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set scrolloff=5
-" set signcolumn=yes
-set signcolumn=no
+set signcolumn=yes
 set list
-set colorcolumn=120
+set colorcolumn=
 set cmdheight=2
 " https://github.com/neovim/neovim/pull/17446
 " feat(folds): add 'foldcolumndigits' option
@@ -133,10 +133,16 @@ set termguicolors
 " Cursor line
 " set cursorline
 
-set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-  \,sm:block-blinkwait175-blinkoff150-blinkon175
+set guicursor=
 
+augroup resCur
+    autocmd!
+    autocmd OptionSet guicursor noautocmd set guicursor=
+    autocmd VimEnter,VimResume * set guicursor=
+    autocmd VimLeave,VimSuspend * set guicursor=
+augroup END
+
+"
 " Backup and undo
 set noswapfile
 set backup
@@ -698,4 +704,8 @@ require('fzf-lua').setup {
 require'hop'.setup()
 require("scrollbar").setup()
 require("scrollbar.handlers.gitsigns").setup()
+require("virt-column").setup {
+  virtcolumn = "120",
+  char = "│"
+}
 EOF
