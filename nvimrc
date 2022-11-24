@@ -372,6 +372,7 @@ let g:netrw_fastbrowse = 0
 " Git
 nmap <Leader>gc :T git checkout 
 nmap <Leader>gP :T git push<cr>
+nmap <leader>gT :tab Git<CR>
 " nmap <silent><Leader>gd :-1tabedit %<CR>:Gdiff<cr>
 nmap <silent><Leader>gd :Gvdiffsplit<cr>
 nmap <silent><Leader>gD :Ghdiffsplit<cr>
