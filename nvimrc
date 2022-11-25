@@ -24,7 +24,7 @@ endif
 
 " General
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
+" Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-lualine/lualine.nvim'
@@ -221,6 +221,12 @@ augroup DisableThingsFromWindows
     autocmd FileType qf,help,fugitive setlocal signcolumn=no nonumber colorcolumn= nolist
     autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth colorcolumn=
+augroup END
+
+" Mix filetypes
+augroup CursorLineOnlyInActiveWindow
+    autocmd!
+    autocmd BufNewFile,BufRead *.vue set filetype=html.vue
 augroup END
 
 " augroup StartifyFix
