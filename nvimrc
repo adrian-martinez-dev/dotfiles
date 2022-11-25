@@ -224,7 +224,7 @@ augroup DisableThingsFromWindows
 augroup END
 
 " Mix filetypes
-augroup CursorLineOnlyInActiveWindow
+augroup FileTypes
     autocmd!
     autocmd BufNewFile,BufRead *.vue set filetype=html.vue
 augroup END
