@@ -68,6 +68,7 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'mlaursen/vim-react-snippets'
 Plug 'honza/vim-snippets'
 Plug 'alvan/vim-closetag'
+Plug 'github/copilot.vim'
 
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -427,17 +428,30 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-vetur',
                               \ 'coc-snippets']
 
-function! s:check_back_space() abort
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Insert <tab> when previous text is space, refresh completion if not.
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#pum#next(1):
+"       \ <SID>check_back_space() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+let g:copilot_no_tab_map = v:true
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
-      \ <SID>check_back_space() ? "\<Tab>" :
+      \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <S-TAB>
+      \ coc#pum#visible() ? coc#pum#prev(1):
+      \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -459,6 +473,10 @@ xmap <leader>x <Plug>(coc-codeaction-selected)
 nmap <leader>x <Plug>(coc-codeaction-selected)
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" copilot
+imap <silent> <C-j> <Plug>(copilot-next)
+imap <silent> <C-k> <Plug>(copilot-previous)
 
 " diff
 nnoremap <leader>ch :diffget //2<CR>
@@ -497,7 +515,7 @@ let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
 
 try
-  colorscheme neobones
+  colorscheme zenbones
 catch
   " echo 'Colorscheme not found'
 endtry
