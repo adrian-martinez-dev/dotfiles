@@ -286,8 +286,10 @@ nnoremap <leader>td :tc %:p:h<CR>
 nnoremap <leader>to :tab sp<CR>
 
 " Next/prev tab
-nnoremap <silent> <tab> gt
-nnoremap <silent> <s-tab> gT
+" nnoremap <silent> <tab> gt
+" nnoremap <silent> <s-tab> gT
+nnoremap <silent> <tab> :bnext<CR>
+nnoremap <silent> <s-tab> :bprevious<CR>
 
 " Space to fold
 nnoremap <space> za
@@ -591,25 +593,25 @@ require('lualine').setup {
     },
     lualine_c = {
         {
-        'filename',
-        file_status = true, -- displays file status (readonly status, modified status)
-        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+          'filename',
+          file_status = true, -- displays file status (readonly status, modified status)
+          path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
         }
       },
   },
-  tabline = {
-    lualine_a = {'tabs'},
-    lualine_b = {'CWD'},
-    lualine_y = {'buffers'},
+   tabline = {
+     lualine_a = {'buffers'},
+     lualine_y = {'CWD'},
+     lualine_z = {'tabs'},
   },
   inactive_sections = {
     lualine_a = {function() return [[•]] end},
     lualine_c = {
-        {
+      {
         'filename',
         path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
-        }
-      },
+      }
+    },
   },
 }
 require('indent_blankline').setup {
