@@ -185,7 +185,7 @@ endfunction
 
 augroup resCur
     autocmd!
-    autocmd BufWinEnter * call ResCur()
+    autocmd BufWinEnter, BufEnter * call ResCur()
 augroup END
 
 " Term start in insert mode
@@ -286,8 +286,8 @@ nnoremap <leader>td :tc %:p:h<CR>
 nnoremap <leader>to :tab sp<CR>
 
 " Next/prev tab
-" nnoremap <silent> <tab> gt
-" nnoremap <silent> <s-tab> gT
+nnoremap <silent> <s-right> gt
+nnoremap <silent> <s-left> gT
 nnoremap <silent> <tab> :bnext<CR>
 nnoremap <silent> <s-tab> :bprevious<CR>
 
