@@ -600,7 +600,12 @@ require('lualine').setup {
       },
   },
    tabline = {
-     lualine_a = {'buffers'},
+     lualine_a = {
+        {
+          'buffers',
+          max_length = vim.o.columns - 20,
+        }
+      },
      lualine_y = {'CWD'},
      lualine_z = {'tabs'},
   },
