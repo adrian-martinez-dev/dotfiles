@@ -252,6 +252,15 @@ augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
+    autocmd ColorScheme * hi! Boolean gui=NONE cterm=NONE
+    autocmd ColorScheme * hi! Comment gui=NONE cterm=NONE
+    autocmd ColorScheme * hi! Constant gui=NONE cterm=NONE
+    autocmd ColorScheme * hi! Number gui=NONE cterm=NONE
+    autocmd ColorScheme * hi! SpecialKey gui=NONE cterm=NONE
+    autocmd ColorScheme * hi! TroubleSource gui=NONE cterm=NONE
+    autocmd ColorScheme * hi! WhichKeyValue gui=NONE cterm=NONE
+    autocmd ColorScheme * hi! diffNewFile gui=NONE cterm=NONE
+    autocmd ColorScheme * hi! diffOldFile gui=NONE cterm=NONE
 augroup END
 
 " Mappings
@@ -259,6 +268,9 @@ let g:mapleader = ','
 
 " Backtick
 " inoremap '' `
+
+" Repeat last macro
+nnoremap , @@
 
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
@@ -498,14 +510,14 @@ let g:python_highlight_all = 1
 let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_disable_italic_comment = 1
 let g:gruvbox_material_enable_italic = 0
-let g:gruvbox_material_transparent_background = 1
+let g:gruvbox_material_transparent_background = 0
 let g:sonokai_style = 'default'
 let g:sonokai_cursor = 'red'
 let g:sonokai_disable_italic_comment = 1
 let g:sonokai_enable_italic = 0
 let g:sonokai_transparent_background = 0
 let g:edge_cursor = 'red'
-let g:edge_transparent_background = 1
+let g:edge_transparent_background = 0
 let g:zenbones_italic_comments = v:false
 let g:neobones_italic_comments = v:false
 let g:zenbones_lightness = 'bright'
@@ -517,7 +529,7 @@ let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
 
 try
-  colorscheme zenbones
+  colorscheme edge
 catch
   " echo 'Colorscheme not found'
 endtry
