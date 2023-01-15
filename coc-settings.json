@@ -25,4 +25,5 @@
   "prettier.trailingComma": "none",
   "snippets.snipmate.enable": false,
   "suggest.autoTrigger": "none",
+  "snippets.ultisnips.pythonPrompt": false,
 }

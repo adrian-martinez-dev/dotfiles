@@ -46,6 +46,7 @@ Plug 'kazhala/close-buffers.nvim'
 Plug 'phaazon/hop.nvim'
 Plug 'petertriho/nvim-scrollbar'
 " Plug 'lukas-reineke/virt-column.nvim'
+Plug 'luukvbaal/statuscol.nvim'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
@@ -737,4 +738,8 @@ require("scrollbar.handlers.gitsigns").setup()
 --   virtcolumn = "120",
 --   char = "│"
 -- }
+require("statuscol").setup {
+  setopt = true,
+  separator = " │  ",
+}
 EOF
