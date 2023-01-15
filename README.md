@@ -26,7 +26,7 @@ xclip -selection clipboard < ~/.ssh/id_ed25519.pub
 # Pegarla en ssh y gpg keys de github https://github.com/settings/keys
 
 # Clonar repositorio
-git clone git@github.com:nbicalcarata/dotfiles.git && cd ~/dotfiles && ./install
+git clone git@github.com:adrian-martinez-dev/dotfiles.git && cd ~/dotfiles && ./install
 
 # Instalar plugins de forma no interactiva
 $ nvim --headless +PlugInstall +qall
