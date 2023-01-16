@@ -532,7 +532,7 @@ let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
 
 try
-  colorscheme zenbones
+  colorscheme neobones
 catch
   " echo 'Colorscheme not found'
 endtry
