@@ -300,10 +300,10 @@ nnoremap <leader>td :tc %:p:h<CR>
 nnoremap <leader>to :tab sp<CR>
 
 " Next/prev tab
-nnoremap <silent> <s-right> gt
-nnoremap <silent> <s-left> gT
-nnoremap <silent> <tab> :bnext<CR>
-nnoremap <silent> <s-tab> :bprevious<CR>
+nnoremap <silent> <tab> gt
+nnoremap <silent> <s-tab> gT
+nnoremap <silent> <s-right> :bnext<CR>
+nnoremap <silent> <s-left> :bprevious<CR>
 
 " Space to fold
 nnoremap <space> za
@@ -444,10 +444,10 @@ let g:coc_global_extensions = [ 'coc-tsserver',
                               \ 'coc-vetur',
                               \ 'coc-snippets']
 
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! CheckBackspace() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
 " Insert <tab> when previous text is space, refresh completion if not.
 " inoremap <silent><expr> <TAB>
@@ -456,26 +456,26 @@ endfunction
 "       \ coc#refresh()
 " inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-let g:copilot_no_tab_map = v:true
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <silent><expr> <S-TAB>
-      \ coc#pum#visible() ? coc#pum#prev(1):
-      \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
+" let g:copilot_no_tab_map = v:true
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#pum#next(1):
+"       \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
+"       \ CheckBackspace() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <silent><expr> <S-TAB>
+"       \ coc#pum#visible() ? coc#pum#prev(1):
+"       \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
+"       \ CheckBackspace() ? "\<Tab>" :
+"       \ coc#refresh()
 
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" inoremap <silent><expr> <c-space> coc#refresh()
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+                              " \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Remap keys for gotos
 nmap <silent> <leader>E <Plug>(coc-diagnostic-prev)
