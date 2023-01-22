@@ -43,10 +43,10 @@ Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
 Plug 'kazhala/close-buffers.nvim'
-Plug 'phaazon/hop.nvim'
 Plug 'petertriho/nvim-scrollbar'
 " Plug 'lukas-reineke/virt-column.nvim'
 Plug 'luukvbaal/statuscol.nvim'
+Plug 'ggandor/leap.nvim'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
@@ -594,7 +594,7 @@ let g:closetag_filetypes = 'javascript'
 command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPreview
 
 " hop
-nnoremap s :HopWord<CR>
+" nnoremap s :HopWord<CR>
 
 lua <<EOF
 require('lualine').setup {
@@ -731,7 +731,7 @@ require('fzf-lua').setup {
   }
 }
 -- require('nvim-web-devicons').setup()
-require'hop'.setup()
+-- require'hop'.setup()
 require("scrollbar").setup()
 require("scrollbar.handlers.gitsigns").setup()
 -- require("virt-column").setup {
@@ -742,4 +742,7 @@ require("statuscol").setup {
   setopt = true,
   separator = " │  ",
 }
+require('leap').add_default_mappings()
+vim.keymap.del({'x', 'o'}, 'x')
+vim.keymap.del({'x', 'o'}, 'X')
 EOF
