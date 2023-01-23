@@ -562,6 +562,8 @@ command! -nargs=* Test T docker-compose -f local.yml run --rm django pytest <arg
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! PushDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 command! TrailingWhitespaceRemove :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+" Fix commit to the wrong branch
+command! GitResetSoft T git reset --soft HEAD^
 
 " Web search
 nmap <silent> <Leader>kj <Plug>SearchNormal
@@ -615,14 +617,9 @@ require('lualine').setup {
       },
   },
    tabline = {
-     lualine_a = {
-        {
-          'buffers',
-          max_length = vim.o.columns - 20,
-        }
-      },
-     lualine_y = {'CWD'},
-     lualine_z = {'tabs'},
+     lualine_a = {'tabs'},
+     lualine_b = {'CWD'},
+     lualine_y = {'buffers'},
   },
   inactive_sections = {
     lualine_a = {function() return [[•]] end},
