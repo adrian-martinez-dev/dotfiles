@@ -23,8 +23,26 @@ if WINDOWS()
 endif
 
 " General
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
+" LSP
+Plug 'neovim/nvim-lspconfig'             " Required
+Plug 'williamboman/mason.nvim'           " Optional
+Plug 'williamboman/mason-lspconfig.nvim' " Optional
+
+" Autocompletion Engine
+Plug 'hrsh7th/nvim-cmp'         " Required
+Plug 'hrsh7th/cmp-nvim-lsp'     " Required
+Plug 'hrsh7th/cmp-buffer'       " Optional
+Plug 'hrsh7th/cmp-path'         " Optional
+Plug 'saadparwaiz1/cmp_luasnip' " Optional
+Plug 'hrsh7th/cmp-nvim-lua'     " Optional
+
+" Snippets
+Plug 'L3MON4D3/LuaSnip'             " Required
+Plug 'rafamadriz/friendly-snippets' " Optional
+
+" LSP Setup
+Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v1.x'}
+
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-lualine/lualine.nvim'
@@ -66,8 +84,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Snippets & AutoComplete
-Plug 'mlaursen/vim-react-snippets'
-Plug 'honza/vim-snippets'
 Plug 'alvan/vim-closetag'
 Plug 'github/copilot.vim'
 
@@ -226,10 +242,10 @@ augroup DisableThingsFromWindows
 augroup END
 
 " Mix filetypes
-augroup FileTypes
-    autocmd!
-    autocmd BufNewFile,BufRead *.vue set filetype=html.vue
-augroup END
+" augroup FileTypes
+"     autocmd!
+"     autocmd BufNewFile,BufRead *.vue set filetype=html.vue
+" augroup END
 
 " augroup StartifyFix
 "   autocmd!
@@ -429,68 +445,9 @@ augroup StartifyAu
     " autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 augroup END
 
-" coc-vim
-let g:coc_global_extensions = [ 'coc-tsserver',
-                              \ 'coc-eslint',
-                              \ 'coc-prettier',
-                              \ 'coc-react-refactor',
-                              \ 'coc-css',
-                              \ 'coc-json',
-                              \ 'coc-pyright',
-                              \ 'coc-emmet',
-                              \ 'coc-pairs',
-                              \ 'coc-markdown-preview-enhanced',
-                              \ 'coc-webview',
-                              \ 'coc-vetur',
-                              \ 'coc-snippets']
-
-" function! CheckBackspace() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-
-" Insert <tab> when previous text is space, refresh completion if not.
-" inoremap <silent><expr> <TAB>
-"       \ coc#pum#visible() ? coc#pum#next(1):
-"       \ <SID>check_back_space() ? "\<Tab>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" let g:copilot_no_tab_map = v:true
-" inoremap <silent><expr> <TAB>
-"       \ coc#pum#visible() ? coc#pum#next(1):
-"       \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
-"       \ CheckBackspace() ? "\<Tab>" :
-"       \ coc#refresh()
-" inoremap <silent><expr> <S-TAB>
-"       \ coc#pum#visible() ? coc#pum#prev(1):
-"       \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
-"       \ CheckBackspace() ? "\<Tab>" :
-"       \ coc#refresh()
-
-
-" Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
-                              " \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Remap keys for gotos
-nmap <silent> <leader>E <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>e <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" nmap <leader>D <Plug>(coc-codeaction)
-xmap <leader>x <Plug>(coc-codeaction-selected)
-nmap <leader>x <Plug>(coc-codeaction-selected)
-
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" copilot
+" Copilot
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <C-L> copilot#Accept()
 imap <silent> <C-j> <Plug>(copilot-next)
 imap <silent> <C-k> <Plug>(copilot-previous)
 
@@ -532,7 +489,7 @@ let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
 
 try
-  colorscheme neobones
+  colorscheme edge
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -742,4 +699,42 @@ require("statuscol").setup {
 require('leap').add_default_mappings()
 vim.keymap.del({'x', 'o'}, 'x')
 vim.keymap.del({'x', 'o'}, 'X')
+
+-- lsp zero
+local lsp = require('lsp-zero')
+lsp.preset('recommended')
+
+-- "See :help lsp-zero-preferences
+lsp.set_preferences({
+  set_lsp_keymaps = false, -- "set to false if you want to configure your own keybindings
+  manage_nvim_cmp = true, -- "set to false if you want to configure nvim-cmp on your own
+})
+
+lsp.setup()
+vim.diagnostic.config({
+  virtual_text = true,
+})
+lsp.on_attach(function(client, bufnr)
+  local map = function(mode, lhs, rhs)
+    local opts = {remap = false, buffer = bufnr}
+    vim.keymap.set(mode, lhs, rhs, opts)
+  end
+
+  -- LSP actions
+  map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+  map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+  map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+  map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
+  map('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
+  map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+  -- map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+  map('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
+  map('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+  map('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
+
+  -- Diagnostics
+  map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+  map('n', '<leader>E', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+  map('n', '<leader>e', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+end)
 EOF
