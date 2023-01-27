@@ -24,21 +24,21 @@ endif
 
 " General
 " LSP
-Plug 'neovim/nvim-lspconfig'             " Required
-Plug 'williamboman/mason.nvim'           " Optional
-Plug 'williamboman/mason-lspconfig.nvim' " Optional
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 
 " Autocompletion Engine
-Plug 'hrsh7th/nvim-cmp'         " Required
-Plug 'hrsh7th/cmp-nvim-lsp'     " Required
-Plug 'hrsh7th/cmp-buffer'       " Optional
-Plug 'hrsh7th/cmp-path'         " Optional
-Plug 'saadparwaiz1/cmp_luasnip' " Optional
-Plug 'hrsh7th/cmp-nvim-lua'     " Optional
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/cmp-nvim-lua'
 
 " Snippets
-Plug 'L3MON4D3/LuaSnip'             " Required
-Plug 'rafamadriz/friendly-snippets' " Optional
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
 
 " LSP Setup
 Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v1.x'}
@@ -62,7 +62,6 @@ Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
 Plug 'kazhala/close-buffers.nvim'
 Plug 'petertriho/nvim-scrollbar'
-" Plug 'lukas-reineke/virt-column.nvim'
 Plug 'luukvbaal/statuscol.nvim'
 Plug 'ggandor/leap.nvim'
 
@@ -72,8 +71,6 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/edge'
 Plug 'mcchrish/zenbones.nvim'
 Plug 'rktjmp/lush.nvim'
-" Plug 'xiyaowong/nvim-transparent'
-" Plug 'projekt0n/github-nvim-theme'
 
 " Git
 Plug 'tpope/vim-fugitive'
