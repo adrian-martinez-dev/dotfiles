@@ -126,7 +126,7 @@ set list
 set cmdheight=2
 " https://github.com/neovim/neovim/pull/17446
 " feat(folds): add 'foldcolumndigits' option
-" set foldcolumn=2
+set foldcolumn=2
 
 set expandtab
 set splitright
@@ -690,8 +690,10 @@ require("scrollbar.handlers.gitsigns").setup()
 --   char = "│"
 -- }
 require("statuscol").setup {
+  foldfunc = "builtin",
   setopt = true,
   separator = " │  ",
+  order = "SNsF",        -- order of the fold, sign, line number and separator segments
 }
 require('leap').add_default_mappings()
 vim.keymap.del({'x', 'o'}, 'x')
@@ -706,6 +708,10 @@ lsp.set_preferences({
   set_lsp_keymaps = false, -- "set to false if you want to configure your own keybindings
   manage_nvim_cmp = true, -- "set to false if you want to configure nvim-cmp on your own
 })
+
+-- +lsp.set_preferences({
+-- +  set_lsp_keymaps = {omit = {'<F2>', 'gl'}}
+-- +})
 
 lsp.setup()
 vim.diagnostic.config({
