@@ -120,7 +120,7 @@ set foldlevel=99
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set scrolloff=5
-set signcolumn=yes
+set signcolumn=yes:1
 set list
 " set colorcolumn=120
 set cmdheight=2
@@ -233,7 +233,7 @@ augroup END
 augroup DisableThingsFromWindows
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
-    autocmd FileType qf,help,fugitive setlocal signcolumn=no nonumber colorcolumn= nolist
+    autocmd FileType qf,help,fugitive setlocal foldcolumn=0 signcolumn=no colorcolumn= nolist
     autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth colorcolumn=
 augroup END
@@ -256,8 +256,7 @@ endfunction
 
 " Fillchars
 set fillchars=fold:-,diff:·,eob:\ 
-" set fillchars+=foldopen:▾,foldsep:│,foldclose:▸
-set fillchars+=foldopen:•,foldsep:│,foldclose:•
+set fillchars+=foldopen:•,foldclose:•
 
 set statusline=%f%m
 
@@ -267,6 +266,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link VertSplit LineNr
     autocmd ColorScheme * hi! link CocInlayHint LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
+    autocmd ColorScheme * hi! link IndentBlankLineChar NonText
     autocmd ColorScheme * hi! Boolean gui=NONE cterm=NONE
     autocmd ColorScheme * hi! Comment gui=NONE cterm=NONE
     autocmd ColorScheme * hi! Constant gui=NONE cterm=NONE
@@ -637,8 +637,8 @@ require('gitsigns').setup {
     topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
   },
-  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-  numhl      = false,
+  signcolumn = false,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = true,
   keymaps = {
     ['n <leader>gn'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
     ['n <leader>gp'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
@@ -692,8 +692,8 @@ require("scrollbar.handlers.gitsigns").setup()
 require("statuscol").setup {
   foldfunc = "builtin",
   setopt = true,
-  separator = " │  ",
-  order = "SNsF",        -- order of the fold, sign, line number and separator segments
+  separator = "  ",
+  -- order = "SNsF",        -- "FSNs order of the fold, sign, line number and separator segments
 }
 require('leap').add_default_mappings()
 vim.keymap.del({'x', 'o'}, 'x')
