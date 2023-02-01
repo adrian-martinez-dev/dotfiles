@@ -62,7 +62,7 @@ Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
 Plug 'kazhala/close-buffers.nvim'
 Plug 'petertriho/nvim-scrollbar'
-Plug 'luukvbaal/statuscol.nvim'
+" Plug 'luukvbaal/statuscol.nvim'
 Plug 'ggandor/leap.nvim'
 
 " Colorschemes
@@ -126,7 +126,7 @@ set list
 set cmdheight=2
 " https://github.com/neovim/neovim/pull/17446
 " feat(folds): add 'foldcolumndigits' option
-set foldcolumn=2
+" set foldcolumn=2
 
 set expandtab
 set splitright
@@ -233,7 +233,7 @@ augroup END
 augroup DisableThingsFromWindows
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * if &previewwindow | setlocal nolist | setlocal colorcolumn= | endif
-    autocmd FileType qf,help,fugitive setlocal foldcolumn=0 signcolumn=no colorcolumn= nolist
+    autocmd FileType qf,help,fugitive setlocal foldcolumn=0 signcolumn=no nonumber colorcolumn= nolist
     autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth colorcolumn=
 augroup END
@@ -266,7 +266,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link VertSplit LineNr
     autocmd ColorScheme * hi! link CocInlayHint LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
-    autocmd ColorScheme * hi! link IndentBlankLineChar NonText
+    " autocmd ColorScheme * hi! link IndentBlankLineChar NonText
     autocmd ColorScheme * hi! Boolean gui=NONE cterm=NONE
     autocmd ColorScheme * hi! Comment gui=NONE cterm=NONE
     autocmd ColorScheme * hi! Constant gui=NONE cterm=NONE
@@ -637,8 +637,8 @@ require('gitsigns').setup {
     topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
   },
-  signcolumn = false,  -- Toggle with `:Gitsigns toggle_signs`
-  numhl      = true,
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false,
   keymaps = {
     ['n <leader>gn'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
     ['n <leader>gp'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
@@ -683,18 +683,12 @@ require('fzf-lua').setup {
 }
 -- require('nvim-web-devicons').setup()
 -- require'hop'.setup()
-require("scrollbar").setup()
-require("scrollbar.handlers.gitsigns").setup()
--- require("virt-column").setup {
---   virtcolumn = "120",
---   char = "│"
--- }
-require("statuscol").setup {
-  foldfunc = "builtin",
-  setopt = true,
-  separator = "  ",
-  -- order = "SNsF",        -- "FSNs order of the fold, sign, line number and separator segments
-}
+-- require("statuscol").setup {
+--  foldfunc = "builtin",
+--  setopt = true,
+--  separator = "   ",
+--  -- order = "SNsF",        -- "FSNs order of the fold, sign, line number and separator segments
+--}
 require('leap').add_default_mappings()
 vim.keymap.del({'x', 'o'}, 'x')
 vim.keymap.del({'x', 'o'}, 'X')
@@ -740,4 +734,37 @@ lsp.on_attach(function(client, bufnr)
   map('n', '<leader>E', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
   map('n', '<leader>e', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 end)
+require("scrollbar").setup()
+require("scrollbar.handlers.gitsigns").setup()
+local M = {}
+_G.Status = M
+
+---@return {name:string, text:string, texthl:string}[]
+function M.get_signs()
+  local buf = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
+  return vim.tbl_map(function(sign)
+    return vim.fn.sign_getdefined(sign.name)[1]
+  end, vim.fn.sign_getplaced(buf, { group = "*", lnum = vim.v.lnum })[1].signs)
+end
+
+function M.column()
+  local sign, git_sign
+  for _, s in ipairs(M.get_signs()) do
+    if s.name:find("GitSign") then
+      git_sign = s
+    else
+      sign = s
+    end
+  end
+  local components = {
+    sign and ("%#" .. sign.texthl .. "#" .. sign.text .. "%*") or " ",
+    [[%=]],
+    [[%{&nu?(&rnu&&v:relnum?v:relnum:v:lnum):''} ]],
+    git_sign and ("%#" .. git_sign.texthl .. "#" .. git_sign.text .. "%*") or "  ",
+  }
+  return table.concat(components, "")
+end
+
+vim.opt.statuscolumn = [[%!v:lua.Status.column()]]
+return M
 EOF
