@@ -43,6 +43,9 @@ Plug 'rafamadriz/friendly-snippets'
 " LSP Setup
 Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v1.x'}
 
+" Formatter
+Plug 'sbdchd/neoformat'
+
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-lualine/lualine.nvim'
@@ -264,9 +267,8 @@ set statusline=%f%m
 augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit LineNr
-    autocmd ColorScheme * hi! link CocInlayHint LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
-    " autocmd ColorScheme * hi! link IndentBlankLineChar NonText
+    autocmd ColorScheme * hi! link IndentBlankLineChar NonText
     autocmd ColorScheme * hi! Boolean gui=NONE cterm=NONE
     autocmd ColorScheme * hi! Comment gui=NONE cterm=NONE
     autocmd ColorScheme * hi! Constant gui=NONE cterm=NONE
@@ -484,9 +486,10 @@ let g:neobones_transparent_background = v:true
 let g:github_transparent = 1
 let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
+set background=light
 
 try
-  colorscheme edge
+  colorscheme neobones
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -679,7 +682,22 @@ require('fzf-lua').setup {
     files = {
       cmd           = 'git ls-files --exclude-standard --cached --others',
     },
-  }
+  },
+  fzf_colors = {
+      ["fg"]          = { "fg", "CursorLine" },
+      ["bg"]          = { "bg", "Normal" },
+      ["hl"]          = { "fg", "Comment" },
+      ["fg+"]         = { "fg", "Normal" },
+      ["bg+"]         = { "bg", "CursorLine" },
+      ["hl+"]         = { "fg", "Statement" },
+      ["info"]        = { "fg", "PreProc" },
+      ["prompt"]      = { "fg", "Conditional" },
+      ["pointer"]     = { "fg", "Exception" },
+      ["marker"]      = { "fg", "Keyword" },
+      ["spinner"]     = { "fg", "Label" },
+      ["header"]      = { "fg", "Comment" },
+      ["gutter"]      = { "bg", "Normal" },
+  },
 }
 -- require('nvim-web-devicons').setup()
 -- require'hop'.setup()
