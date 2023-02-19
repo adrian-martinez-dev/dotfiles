@@ -85,7 +85,7 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Snippets & AutoComplete
 Plug 'alvan/vim-closetag'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -445,10 +445,10 @@ augroup StartifyAu
 augroup END
 
 " Copilot
-let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <C-L> copilot#Accept()
-imap <silent> <C-j> <Plug>(copilot-next)
-imap <silent> <C-k> <Plug>(copilot-previous)
+" let g:copilot_no_tab_map = v:true
+" imap <silent><script><expr> <C-L> copilot#Accept()
+" imap <silent> <C-j> <Plug>(copilot-next)
+" imap <silent> <C-k> <Plug>(copilot-previous)
 
 " diff
 nnoremap <leader>ch :diffget //2<CR>
@@ -511,6 +511,7 @@ augroup fzfpopupter
   autocmd!
   autocmd FileType fzf exe 'tnoremap <buffer><nowait> <C-j> <Down>'
         \ | tnoremap <buffer><nowait> <C-k> <Up>
+  autocmd FileType fzf tnoremap <buffer> <esc> <c-c>
 augroup END
 
 " Commands
