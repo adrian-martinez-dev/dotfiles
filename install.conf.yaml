@@ -16,6 +16,7 @@
     ~/.pdbrc.py: pdbrc
     ~/.eslintrc: eslintrc
     ~/.zshrc: zshrc
+    ~/.zshenv: zshenv
     ~/.zprofile: zprofile
     ~/.ctags.d/typescript.ctags: ctags
     ~/.bash_profile: bash_profile

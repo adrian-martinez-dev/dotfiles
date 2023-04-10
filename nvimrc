@@ -90,6 +90,8 @@ Plug 'alvan/vim-closetag'
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'p00f/nvim-ts-rainbow'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 call plug#end()
 
@@ -269,6 +271,7 @@ augroup OverrideColor
     autocmd ColorScheme * hi! link VertSplit LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
     autocmd ColorScheme * hi! link IndentBlankLineChar NonText
+    autocmd ColorScheme * hi! link TreesitterContext DiffAdd
     autocmd ColorScheme * hi! Boolean gui=NONE cterm=NONE
     autocmd ColorScheme * hi! Comment gui=NONE cterm=NONE
     autocmd ColorScheme * hi! Constant gui=NONE cterm=NONE
@@ -557,6 +560,7 @@ command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPrev
 " nnoremap s :HopWord<CR>
 
 lua <<EOF
+require('treesitter-context').setup()
 require('lualine').setup {
   options = {
     globalstatus = true,
@@ -755,35 +759,4 @@ lsp.on_attach(function(client, bufnr)
 end)
 require("scrollbar").setup()
 require("scrollbar.handlers.gitsigns").setup()
-local M = {}
-_G.Status = M
-
----@return {name:string, text:string, texthl:string}[]
-function M.get_signs()
-  local buf = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
-  return vim.tbl_map(function(sign)
-    return vim.fn.sign_getdefined(sign.name)[1]
-  end, vim.fn.sign_getplaced(buf, { group = "*", lnum = vim.v.lnum })[1].signs)
-end
-
-function M.column()
-  local sign, git_sign
-  for _, s in ipairs(M.get_signs()) do
-    if s.name:find("GitSign") then
-      git_sign = s
-    else
-      sign = s
-    end
-  end
-  local components = {
-    sign and ("%#" .. sign.texthl .. "#" .. sign.text .. "%*") or " ",
-    [[%=]],
-    [[%{&nu?(&rnu&&v:relnum?v:relnum:v:lnum):''} ]],
-    git_sign and ("%#" .. git_sign.texthl .. "#" .. git_sign.text .. "%*") or "  ",
-  }
-  return table.concat(components, "")
-end
-
-vim.opt.statuscolumn = [[%!v:lua.Status.column()]]
-return M
 EOF
