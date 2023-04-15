@@ -139,6 +139,7 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export REACT_EDITOR=gedit
 export REACT_TERMINAL=gnome-terminal
+export HOSTNAME=$(hostname)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

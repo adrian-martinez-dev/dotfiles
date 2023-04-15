@@ -489,7 +489,12 @@ let g:neobones_transparent_background = v:true
 let g:github_transparent = 1
 let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
-set background=light
+
+if $HOSTNAME == 'ADRIAN-PC'
+  set background=dark
+else
+  set background=light
+endif
 
 try
   colorscheme neobones
