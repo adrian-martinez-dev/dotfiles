@@ -46,6 +46,11 @@ Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v1.x'}
 " Formatter
 Plug 'sbdchd/neoformat'
 
+" ChatGPT
+Plug 'nvim-lua/plenary.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'dpayne/CodeGPT.nvim'
+
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-lualine/lualine.nvim'
@@ -89,7 +94,6 @@ Plug 'alvan/vim-closetag'
 
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'p00f/nvim-ts-rainbow'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 
@@ -489,15 +493,15 @@ let g:neobones_transparent_background = v:true
 let g:github_transparent = 1
 let g:github_comment_style = 'NONE'
 let g:github_keyword_style = 'NONE'
-
-if $HOSTNAME == 'ADRIAN-PC'
-  set background=dark
-else
-  set background=light
-endif
+" if $HOSTNAME == 'ADRIAN-PC'
+"   set background=dark
+" else
+"   set background=light
+" endif
+set background=dark
 
 try
-  colorscheme neobones
+  colorscheme edge
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -625,11 +629,6 @@ require('nvim-treesitter.configs').setup {
   indent = {
     enable = false
   },
-  rainbow = {
-    enable = true,
-    extended_mode = true,
-    max_file_lines = nil,
-  },
   ensure_installed = {
     "typescript",
     "javascript",
@@ -652,20 +651,45 @@ require('gitsigns').setup {
   },
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
   numhl      = false,
-  keymaps = {
-    ['n <leader>gn'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-    ['n <leader>gp'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
-    ['n <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ['v <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    ['n <leader>gu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ['n <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    ['v <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    ['n <leader>gR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-    ['n <leader>ge'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n <leader>gB'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-    ['n <leader>gS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
-    ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
-  },
+
+  -- Keymaps
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', '<leader>gn', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '<leader>gp', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    -- Actions
+    map('n', '<leader>gs', gs.stage_hunk)
+    map('v', '<leader>gs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('n', '<leader>gu', gs.undo_stage_hunk)
+    map('n', '<leader>gr', gs.reset_hunk)
+    map('v', '<leader>gr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('n', '<leader>gR', gs.reset_buffer)
+    map('n', '<leader>ge', gs.preview_hunk)
+    map('n', '<leader>gB', function() gs.blame_line{full=true} end)
+    map('n', '<leader>gS', gs.stage_buffer)
+    -- map('n', '<leader>tb', gs.toggle_current_line_blame)
+    -- map('n', '<leader>hd', gs.diffthis)
+    -- map('n', '<leader>hD', function() gs.diffthis('~') end)
+    -- map('n', '<leader>td', gs.toggle_deleted)
+  end
 }
 require('fzf-lua').setup {
   global_git_icons = false,
@@ -719,7 +743,6 @@ require('fzf-lua').setup {
 --}
 require('leap').add_default_mappings()
 vim.keymap.del({'x', 'o'}, 'x')
-vim.keymap.del({'x', 'o'}, 'X')
 
 -- lsp zero
 local lsp = require('lsp-zero')
