@@ -56,6 +56,7 @@ Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-lualine/lualine.nvim'
 " Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-commentary'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'tpope/vim-eunuch'
 Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
@@ -93,9 +94,9 @@ Plug 'alvan/vim-closetag'
 " Plug 'github/copilot.vim'
 
 " Syntax highlighting
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'HiPhish/nvim-ts-rainbow2'
 
 call plug#end()
 
@@ -629,6 +630,15 @@ require('nvim-treesitter.configs').setup {
   indent = {
     enable = false
   },
+  rainbow = {
+    enable = true,
+    -- list of languages you want to disable the plugin for
+    -- disable = { 'jsx', 'cpp' },
+    -- Which query to use for finding delimiters
+    query = 'rainbow-parens',
+    -- Highlight the entire buffer all at once
+    strategy = require('ts-rainbow').strategy.global,
+  },
   ensure_installed = {
     "typescript",
     "javascript",
@@ -639,7 +649,10 @@ require('nvim-treesitter.configs').setup {
     "scss",
     "vim",
     "vue",
-  }
+  },
+  context_commentstring = {
+    enable = true,
+  },
 }
 require('gitsigns').setup {
   signs = {
