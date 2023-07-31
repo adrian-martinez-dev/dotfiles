@@ -491,9 +491,6 @@ let g:zenbones_lightness = 'bright'
 let g:zenbones_darkness = 'stark'
 let g:zenbones_transparent_background = v:true
 let g:neobones_transparent_background = v:true
-let g:github_transparent = 1
-let g:github_comment_style = 'NONE'
-let g:github_keyword_style = 'NONE'
 " if $HOSTNAME == 'ADRIAN-PC'
 "   set background=dark
 " else

@@ -7,6 +7,12 @@ set visualbell t_vb=
 
 " Neovim-gtk
 if exists('g:GtkGuiLoaded')
+    let g:zenbones_transparent_background = v:false
+    let g:neobones_transparent_background = v:false
+    let g:gruvbox_material_transparent_background = v:false 
+    let g:sonokai_transparent_background = v:false
+    let g:edge_transparent_background = v:false
+
     " call rpcnotify(1, 'Gui', 'Option', 'Cmdline', 1)
     call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
     call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
@@ -15,7 +21,7 @@ if exists('g:GtkGuiLoaded')
         " call rpcnotify(1, 'Gui', 'Font', 'Iosevka Term Regular 13')
         " call rpcnotify(1, 'Gui', 'Font', 'Source Code Pro 11')
         " call rpcnotify(1, 'Gui', 'Font', 'JetBrains Mono 11')
-        call rpcnotify(1, 'Gui', 'Font', 'Iosevka Mayukai Codepro 12')
+        call rpcnotify(1, 'Gui', 'Font', 'Iosevka 12')
         " call rpcnotify(1, 'Gui', 'Font', 'Fira Code 10')
     else
         " call rpcnotify(1, 'Gui', 'Font', 'monospace 10')
