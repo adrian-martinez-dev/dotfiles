@@ -23,3 +23,4 @@ export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 [ -f $HOME/.zshenv.local ] && . $HOME/.zshenv.local
+. "$HOME/.cargo/env"
