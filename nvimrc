@@ -83,7 +83,7 @@ Plug 'rktjmp/lush.nvim'
 
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
+Plug 'rbong/vim-flog'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-rhubarb'
