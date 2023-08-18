@@ -727,6 +727,11 @@ require('fzf-lua').setup {
       cmd           = 'git ls-files --exclude-standard --cached --others',
     },
   },
+  buffers = {
+    fzf_opts = {
+      ["--delimiter"]="' '",["--with-nth"]="-1.."
+    }
+  },
   fzf_colors = {
       ["fg"]          = { "fg", "CursorLine" },
       ["bg"]          = { "bg", "Normal" },
