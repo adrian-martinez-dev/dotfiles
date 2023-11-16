@@ -28,6 +28,9 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 
+" Symbols
+" Plug 'simrat39/symbols-outline.nvim'
+
 " Autocompletion Engine
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -70,8 +73,6 @@ Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
 Plug 'kazhala/close-buffers.nvim'
-Plug 'petertriho/nvim-scrollbar'
-" Plug 'luukvbaal/statuscol.nvim'
 Plug 'ggandor/leap.nvim'
 
 " Colorschemes
@@ -91,12 +92,11 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Snippets & AutoComplete
 Plug 'alvan/vim-closetag'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'HiPhish/nvim-ts-rainbow2'
+" Plug 'nvim-treesitter/nvim-treesitter-context'
 
 call plug#end()
 
@@ -133,7 +133,7 @@ set scrolloff=5
 set signcolumn=yes:1
 set list
 " set colorcolumn=120
-set cmdheight=2
+" set cmdheight=2
 " https://github.com/neovim/neovim/pull/17446
 " feat(folds): add 'foldcolumndigits' option
 " set foldcolumn=2
@@ -499,7 +499,7 @@ let g:neobones_transparent_background = v:true
 set background=dark
 
 try
-  colorscheme edge
+  colorscheme sonokai
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -568,7 +568,8 @@ command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPrev
 
 lua <<EOF
 local CodeGPTModule = require("codegpt")
-require('treesitter-context').setup()
+-- require('symbols-outline').setup()
+-- require('treesitter-context').setup()
 require('lualine').setup {
   options = {
     globalstatus = true,
@@ -602,25 +603,7 @@ require('lualine').setup {
     },
   },
 }
-require('indent_blankline').setup {
-  space_char_blankline = ' ',
-  buftype_exclude = {'terminal'},
-  filetype_exclude = {'help', 'startify', 'fugitive', 'git'},
-  show_current_context = true,
-  show_current_context_start = false,
-  show_first_indent_level = false,
-  context_patterns = {
-    'jsx_element',
-    'jsx_self_closing_element',
-    'object',
-    'declaration',
-    'expression',
-    'pattern',
-    'primary_expression',
-    'statement',
-    'switch_body',
-  }
-}
+require('ibl').setup {}
 require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,
@@ -629,15 +612,6 @@ require('nvim-treesitter.configs').setup {
   },
   indent = {
     enable = false
-  },
-  rainbow = {
-    enable = true,
-    -- list of languages you want to disable the plugin for
-    -- disable = { 'jsx', 'cpp' },
-    -- Which query to use for finding delimiters
-    query = 'rainbow-parens',
-    -- Highlight the entire buffer all at once
-    strategy = require('ts-rainbow').strategy.global,
   },
   ensure_installed = {
     "typescript",
@@ -803,6 +777,4 @@ lsp.on_attach(function(client, bufnr)
   map('n', '<leader>E', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
   map('n', '<leader>e', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 end)
-require("scrollbar").setup()
-require("scrollbar.handlers.gitsigns").setup()
 EOF
