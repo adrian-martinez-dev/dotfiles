@@ -96,7 +96,7 @@ Plug 'alvan/vim-closetag'
 
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter'
-" Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 call plug#end()
 
@@ -295,7 +295,7 @@ let g:mapleader = ','
 " inoremap '' `
 
 " Repeat last macro
-nnoremap , @@
+" nnoremap , @@
 
 command! -nargs=* T split | terminal <args>
 command! -nargs=* VT vsplit | terminal <args>
@@ -569,7 +569,7 @@ command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPrev
 lua <<EOF
 local CodeGPTModule = require("codegpt")
 -- require('symbols-outline').setup()
--- require('treesitter-context').setup()
+require('treesitter-context').setup()
 require('lualine').setup {
   options = {
     globalstatus = true,
