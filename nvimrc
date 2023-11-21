@@ -624,9 +624,6 @@ require('nvim-treesitter.configs').setup {
     "vim",
     "vue",
   },
-  context_commentstring = {
-    enable = true,
-  },
 }
 require('gitsigns').setup {
   signs = {
