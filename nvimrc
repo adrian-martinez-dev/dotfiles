@@ -92,7 +92,7 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Snippets & AutoComplete
 Plug 'alvan/vim-closetag'
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter'
