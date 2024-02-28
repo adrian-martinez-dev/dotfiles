@@ -60,7 +60,7 @@ DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git python tmux tmuxinator virtualenvwrapper)
-plugins=(git python tmux tmuxinator)
+plugins=(git python docker tmux tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
