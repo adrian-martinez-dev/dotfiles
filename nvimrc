@@ -74,6 +74,7 @@ Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
 Plug 'kazhala/close-buffers.nvim'
 Plug 'ggandor/leap.nvim'
+Plug 'hiphish/rainbow-delimiters.nvim'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
@@ -499,7 +500,7 @@ let g:neobones_transparent_background = v:true
 set background=dark
 
 try
-  colorscheme sonokai
+  colorscheme zenwritten
 catch
   " echo 'Colorscheme not found'
 endtry
