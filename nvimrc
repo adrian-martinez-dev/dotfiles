@@ -74,7 +74,7 @@ Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
 Plug 'kazhala/close-buffers.nvim'
 Plug 'ggandor/leap.nvim'
-Plug 'hiphish/rainbow-delimiters.nvim'
+" Plug 'hiphish/rainbow-delimiters.nvim'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
@@ -500,7 +500,7 @@ let g:neobones_transparent_background = v:true
 set background=dark
 
 try
-  colorscheme zenwritten
+  colorscheme sonokai
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -605,6 +605,7 @@ require('lualine').setup {
   },
 }
 require('ibl').setup {}
+-- require('rainbow-delimiters').setup {}
 require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,
