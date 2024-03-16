@@ -74,7 +74,7 @@ Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
 Plug 'kazhala/close-buffers.nvim'
 Plug 'ggandor/leap.nvim'
-" Plug 'hiphish/rainbow-delimiters.nvim'
+Plug 'hiphish/rainbow-delimiters.nvim'
 
 " Colorschemes
 Plug 'sainnhe/sonokai'
@@ -500,7 +500,7 @@ let g:neobones_transparent_background = v:true
 set background=dark
 
 try
-  colorscheme sonokai
+  colorscheme zenbones
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -566,6 +566,9 @@ command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPrev
 
 " hop
 " nnoremap s :HopWord<CR>
+let g:rainbow_delimiters = {
+    \ 'blacklist': ['markdown'],
+\ }
 
 lua <<EOF
 local CodeGPTModule = require("codegpt")
