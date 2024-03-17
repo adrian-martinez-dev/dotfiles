@@ -500,7 +500,7 @@ let g:neobones_transparent_background = v:true
 set background=dark
 
 try
-  colorscheme zenbones
+  colorscheme neobones
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -781,4 +781,7 @@ lsp.on_attach(function(client, bufnr)
   map('n', '<leader>E', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
   map('n', '<leader>e', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 end)
+require("mason-lspconfig").setup {
+    ensure_installed = { "pyright", "tsserver" },
+}
 EOF
