@@ -618,7 +618,7 @@ require('nvim-treesitter.configs').setup {
     disable = { "markdown", "sh", "bash" },
   },
   indent = {
-    enable = false
+    enable = true
   },
   ensure_installed = {
     "typescript",
