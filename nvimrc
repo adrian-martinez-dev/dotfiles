@@ -96,7 +96,7 @@ Plug 'alvan/vim-closetag'
 Plug 'github/copilot.vim'
 
 " Syntax highlighting
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-context'
 
 call plug#end()
@@ -149,7 +149,8 @@ set updatetime=300
 set laststatus=3
 
 " https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
-set clipboard=unnamedplus
+" Pasting from clipboard in WSL hangs with high cpu usage
+" set clipboard=unnamedplus
 
 set shiftwidth=2
 
@@ -567,7 +568,7 @@ command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPrev
 " hop
 " nnoremap s :HopWord<CR>
 let g:rainbow_delimiters = {
-    \ 'blacklist': ['markdown'],
+    \ 'blacklist': ['markdown', 'comment'],
 \ }
 
 lua <<EOF
