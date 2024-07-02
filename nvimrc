@@ -527,8 +527,8 @@ augroup fzfpopupter
 augroup END
 
 " Commands
-command! -nargs=* Manage T docker-compose -f local.yml run --rm django python manage.py <args>
-command! -nargs=* Test T docker-compose -f local.yml run --rm django pytest <args>
+command! -nargs=* Manage T docker compose -f local.yml run --rm django python manage.py <args>
+command! -nargs=* Test T docker compose -f local.yml run --rm django pytest <args>
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! PushDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 command! TrailingWhitespaceRemove :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
@@ -634,13 +634,6 @@ require('nvim-treesitter.configs').setup {
   },
 }
 require('gitsigns').setup {
-  signs = {
-    add          = {hl = 'GitSignsAdd'   , text = '┃', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl = 'GitSignsChange', text = '┃', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-  },
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
   numhl      = false,
 
