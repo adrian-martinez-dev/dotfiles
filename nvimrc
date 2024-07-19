@@ -501,7 +501,7 @@ let g:neobones_transparent_background = v:true
 set background=dark
 
 try
-  colorscheme neobones
+  colorscheme sonokai
 catch
   " echo 'Colorscheme not found'
 endtry
