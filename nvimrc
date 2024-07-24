@@ -77,11 +77,10 @@ Plug 'ggandor/leap.nvim'
 Plug 'hiphish/rainbow-delimiters.nvim'
 
 " Colorschemes
-Plug 'sainnhe/sonokai'
-Plug 'sainnhe/gruvbox-material'
-Plug 'sainnhe/edge'
 Plug 'mcchrish/zenbones.nvim'
 Plug 'rktjmp/lush.nvim'
+Plug 'RRethy/base16-nvim'
+
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -277,17 +276,17 @@ augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
-    autocmd ColorScheme * hi! link IndentBlankLineChar NonText
-    autocmd ColorScheme * hi! link TreesitterContext DiffAdd
-    autocmd ColorScheme * hi! Boolean gui=NONE cterm=NONE
-    autocmd ColorScheme * hi! Comment gui=NONE cterm=NONE
-    autocmd ColorScheme * hi! Constant gui=NONE cterm=NONE
-    autocmd ColorScheme * hi! Number gui=NONE cterm=NONE
-    autocmd ColorScheme * hi! SpecialKey gui=NONE cterm=NONE
-    autocmd ColorScheme * hi! TroubleSource gui=NONE cterm=NONE
-    autocmd ColorScheme * hi! WhichKeyValue gui=NONE cterm=NONE
-    autocmd ColorScheme * hi! diffNewFile gui=NONE cterm=NONE
-    autocmd ColorScheme * hi! diffOldFile gui=NONE cterm=NONE
+    " autocmd ColorScheme * hi! link IndentBlankLineChar NonText
+    " autocmd ColorScheme * hi! link TreesitterContext DiffAdd
+    " autocmd ColorScheme * hi! Boolean gui=NONE cterm=NONE
+    " autocmd ColorScheme * hi! Comment gui=NONE cterm=NONE
+    " autocmd ColorScheme * hi! Constant gui=NONE cterm=NONE
+    " autocmd ColorScheme * hi! Number gui=NONE cterm=NONE
+    " autocmd ColorScheme * hi! SpecialKey gui=NONE cterm=NONE
+    " autocmd ColorScheme * hi! TroubleSource gui=NONE cterm=NONE
+    " autocmd ColorScheme * hi! WhichKeyValue gui=NONE cterm=NONE
+    " autocmd ColorScheme * hi! diffNewFile gui=NONE cterm=NONE
+    " autocmd ColorScheme * hi! diffOldFile gui=NONE cterm=NONE
 augroup END
 
 " Mappings
@@ -501,7 +500,7 @@ let g:neobones_transparent_background = v:true
 set background=dark
 
 try
-  colorscheme sonokai
+  colorscheme base16-darkmoss
 catch
   " echo 'Colorscheme not found'
 endtry
