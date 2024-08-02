@@ -149,7 +149,7 @@ set laststatus=3
 
 " https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
 " Pasting from clipboard in WSL hangs with high cpu usage
-" set clipboard=unnamedplus
+set clipboard=unnamedplus
 
 set shiftwidth=2
 
@@ -571,6 +571,18 @@ let g:rainbow_delimiters = {
 \ }
 
 lua <<EOF
+-- Remove terminal backgroung border
+vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
+  callback = function()
+    local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+    if not normal.bg then return end
+    io.write(string.format("\027]11;#%06x\027\\", normal.bg))
+  end,
+})
+
+vim.api.nvim_create_autocmd("UILeave", {
+  callback = function() io.write("\027]111\027\\") end,
+})
 local CodeGPTModule = require("codegpt")
 -- require('symbols-outline').setup()
 require('treesitter-context').setup()
