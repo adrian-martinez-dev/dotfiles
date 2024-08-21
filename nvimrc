@@ -509,8 +509,8 @@ endtry
 nnoremap <Leader>a :FzfLua grep_project<cr>
 nnoremap <Leader>W :FzfLua grep_cword<cr>
 nnoremap <leader>A :FzfLua resume<cr>
-nnoremap <silent><leader>d :FzfLua commands<cr>
-nnoremap <silent><leader>D :FzfLua builtin<cr>
+nnoremap <silent><leader>D :FzfLua commands<cr>
+nnoremap <silent><leader>d :FzfLua builtin<cr>
 nnoremap <silent><leader>r :FzfLua registers<cr>
 nnoremap <silent><leader>v :FzfLua buffers<cr>
 nnoremap <silent><leader>l :FzfLua blines file_icons=false<cr>
