@@ -80,6 +80,7 @@ Plug 'hiphish/rainbow-delimiters.nvim'
 Plug 'mcchrish/zenbones.nvim'
 Plug 'rktjmp/lush.nvim'
 Plug 'RRethy/base16-nvim'
+Plug 'lcroberts/persistent-colorscheme.nvim'
 
 
 " Git
@@ -789,4 +790,5 @@ end)
 require("mason-lspconfig").setup {
     ensure_installed = { "pylsp", "tsserver" },
 }
+require("persistent-colorscheme").setup()
 EOF
