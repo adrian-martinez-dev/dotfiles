@@ -150,7 +150,7 @@ set laststatus=3
 
 " https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
 " Pasting from clipboard in WSL hangs with high cpu usage
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 set shiftwidth=2
 
