@@ -788,7 +788,7 @@ lsp.on_attach(function(client, bufnr)
   map('n', '<leader>e', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 end)
 require("mason-lspconfig").setup {
-    ensure_installed = { "pylsp", "tsserver" },
+    ensure_installed = { "pylsp", "vtsls" },
 }
 require("persistent-colorscheme").setup()
 EOF
