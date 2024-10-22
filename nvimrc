@@ -532,6 +532,7 @@ command! -nargs=* Test T docker compose -f local.yml run --rm django pytest <arg
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! PushDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 command! TrailingWhitespaceRemove :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+command! CarriageReturnRemove :%s///g
 " Fix commit to the wrong branch
 command! GitResetSoft T git reset --soft HEAD^
 
