@@ -49,10 +49,9 @@ Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v1.x'}
 " Formatter
 Plug 'sbdchd/neoformat'
 
-" ChatGPT
+" CodeGPT
 Plug 'nvim-lua/plenary.nvim'
-Plug 'MunifTanjim/nui.nvim'
-Plug 'dpayne/CodeGPT.nvim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
 
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
@@ -532,7 +531,7 @@ command! -nargs=* Test T docker compose -f local.yml run --rm django pytest <arg
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! PushDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 command! TrailingWhitespaceRemove :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-command! CarriageReturnRemove :%s///g
+command! CarriageReturnRemove :%s///g
 " Fix commit to the wrong branch
 command! GitResetSoft T git reset --soft HEAD^
 
@@ -585,7 +584,6 @@ vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
 vim.api.nvim_create_autocmd("UILeave", {
   callback = function() io.write("\027]111\027\\") end,
 })
-local CodeGPTModule = require("codegpt")
 -- require('symbols-outline').setup()
 require('treesitter-context').setup()
 require('lualine').setup {
@@ -606,7 +604,7 @@ require('lualine').setup {
         path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
       }
     },
-    lualine_x = { CodeGPTModule.get_status, "encoding", "fileformat" },
+    lualine_x = { "encoding", "fileformat" },
   },
    tabline = {
      lualine_a = {'tabs'},
@@ -792,4 +790,87 @@ require("mason-lspconfig").setup {
     ensure_installed = { "pylsp", "vtsls" },
 }
 require("persistent-colorscheme").setup()
+require("CopilotChat").setup {
+  model = 'gpt-4o', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
+  agent = 'copilot', -- Default agent to use, see ':CopilotChatAgents' for available agents (can be specified manually in prompt via @).
+  -- default window options
+  window = {
+    layout = 'horizontal', -- 'vertical', 'horizontal', 'float', 'replace'
+    width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
+    height = 0.4, -- fractional height of parent, or absolute height in rows when > 1
+    -- Options below only apply to floating windows
+    relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
+    border = 'single', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+    row = nil, -- row position of the window, default is centered
+    col = nil, -- column position of the window, default is centered
+    title = 'Copilot Chat', -- title of chat window
+    footer = nil, -- footer of chat window
+    zindex = 1, -- determines if window is on top or below other floating windows
+  },
+
+  show_help = true, -- Shows help message as virtual lines when waiting for user input
+  show_folds = true, -- Shows folds for sections in chat
+  highlight_selection = true, -- Highlight selection
+  highlight_headers = true, -- Highlight headers in chat, disable if using markdown renderers (like render-markdown.nvim)
+  auto_follow_cursor = true, -- Auto-follow cursor in chat
+  auto_insert_mode = false, -- Automatically enter insert mode when opening window and on new prompt
+  insert_at_end = false, -- Move cursor to end of buffer when inserting text
+  clear_chat_on_new_prompt = false, -- Clears chat on every new prompt
+  -- Static config starts here (can be configured only via setup function)
+
+  debug = false, -- Enable debug logging (same as 'log_level = 'debug')
+  log_level = 'info', -- Log level to use, 'trace', 'debug', 'info', 'warn', 'error', 'fatal'
+  proxy = nil, -- [protocol://]host[:port] Use this proxy
+  allow_insecure = false, -- Allow insecure server connections
+  chat_autocomplete = true, -- Enable chat autocompletion (when disabled, requires manual `mappings.complete` trigger)
+
+  -- default mappings
+  mappings = {
+    complete = {
+      insert = '<Tab>',
+    },
+    close = {
+      normal = 'q',
+      insert = '<C-c>',
+    },
+    reset = {
+      normal = '<C-l>',
+      insert = '<C-l>',
+    },
+    submit_prompt = {
+      normal = '<CR>',
+      insert = '<C-s>',
+    },
+    toggle_sticky = {
+      detail = 'Makes line under cursor sticky or deletes sticky line.',
+      normal = 'gr',
+    },
+    accept_diff = {
+      normal = '<C-y>',
+      insert = '<C-y>',
+    },
+    jump_to_diff = {
+      normal = 'gj',
+    },
+    quickfix_diffs = {
+      normal = 'gq',
+    },
+    yank_diff = {
+      normal = 'gy',
+      register = '"',
+    },
+    show_diff = {
+      normal = 'gd',
+    },
+    show_info = {
+      normal = 'gi',
+    },
+    show_context = {
+      normal = 'gc',
+    },
+    show_help = {
+      normal = 'gh',
+    },
+  },
+}
 EOF
