@@ -249,6 +249,11 @@ augroup DisableThingsFromWindows
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth colorcolumn=
 augroup END
 
+augroup PythonIndent
+    autocmd!
+    autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+augroup END
+
 " Mix filetypes
 " augroup FileTypes
 "     autocmd!
@@ -500,7 +505,7 @@ let g:neobones_transparent_background = v:true
 set background=dark
 
 try
-  colorscheme base16-darkmoss
+  colorscheme base16-equilibrium-dark
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -834,8 +839,8 @@ require("CopilotChat").setup {
       insert = '<C-c>',
     },
     reset = {
-      normal = '<C-l>',
-      insert = '<C-l>',
+      normal = '',
+      insert = '',
     },
     submit_prompt = {
       normal = '<CR>',
