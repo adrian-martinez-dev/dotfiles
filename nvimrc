@@ -415,6 +415,9 @@ tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
 
+" Copilot chat
+nnoremap <leader>cc :CopilotChatToggle<CR>
+
 " Plugins settings
 " netrw
 let g:netrw_altfile = 1
@@ -878,4 +881,5 @@ require("CopilotChat").setup {
     },
   },
 }
+vim.cmd([[cab cc CopilotChat]])
 EOF
