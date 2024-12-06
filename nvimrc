@@ -51,7 +51,7 @@ Plug 'sbdchd/neoformat'
 
 " CodeGPT
 Plug 'nvim-lua/plenary.nvim'
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
 
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
