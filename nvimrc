@@ -650,6 +650,7 @@ require('nvim-treesitter.configs').setup {
     "scss",
     "vim",
     "vue",
+    "diff",
   },
 }
 require('gitsigns').setup {
@@ -707,9 +708,6 @@ require('fzf-lua').setup {
       layout         = 'flex',          -- horizontal|vertical|flex
       flip_columns   = 160,             -- #cols to switch to horizontal on flex
     },
-    hl = {
-      border         = 'VertSplit',        -- border color (try 'FloatBorder')
-    },
   },
   previewers = {
     builtin = {
@@ -720,11 +718,6 @@ require('fzf-lua').setup {
     files = {
       cmd           = 'git ls-files --exclude-standard --cached --others',
     },
-  },
-  buffers = {
-    fzf_opts = {
-      ["--delimiter"]="' '",["--with-nth"]="-1.."
-    }
   },
   fzf_colors = {
       ["fg"]          = { "fg", "CursorLine" },
@@ -803,8 +796,8 @@ require("CopilotChat").setup {
   agent = 'copilot', -- Default agent to use, see ':CopilotChatAgents' for available agents (can be specified manually in prompt via @).
   -- default window options
   window = {
-    layout = 'horizontal', -- 'vertical', 'horizontal', 'float', 'replace'
-    width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
+    layout = 'float', -- 'vertical', 'horizontal', 'float', 'replace'
+    width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
     height = 0.4, -- fractional height of parent, or absolute height in rows when > 1
     -- Options below only apply to floating windows
     relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
@@ -838,7 +831,7 @@ require("CopilotChat").setup {
       insert = '<Tab>',
     },
     close = {
-      normal = 'q',
+      normal = '<Esc>',
       insert = '<C-c>',
     },
     reset = {
