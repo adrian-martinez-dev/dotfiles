@@ -570,9 +570,6 @@ let g:user_emmet_settings = {
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
 let g:closetag_filetypes = 'javascript'
 
-" markdown-preview
-command! -nargs=0 MarkdownPreview :CocCommand markdown-preview-enhanced.openPreview
-
 " hop
 " nnoremap s :HopWord<CR>
 let g:rainbow_delimiters = {
@@ -636,6 +633,7 @@ require('nvim-treesitter.configs').setup {
     enable = true,
     additional_vim_regex_highlighting = false,
     disable = { "markdown", "sh", "bash" },
+    -- disable = { "sh", "bash" },
   },
   indent = {
     enable = true
@@ -651,6 +649,8 @@ require('nvim-treesitter.configs').setup {
     "vim",
     "vue",
     "diff",
+    -- "markdown",
+    -- "markdown_inline",
   },
 }
 require('gitsigns').setup {
@@ -697,8 +697,10 @@ require('gitsigns').setup {
   end
 }
 require('fzf-lua').setup {
-  global_git_icons = false,
-  global_file_icons = false,
+  defaults = {
+    file_icons = false,
+    git_icons = false,
+  },
   winopts = {
     height           = 0.6,            -- window height
     width            = 0.8,            -- window width
