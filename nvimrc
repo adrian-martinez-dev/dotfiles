@@ -132,6 +132,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 set scrolloff=5
 set signcolumn=yes:1
 set list
+set showtabline=0
 " set colorcolumn=120
 " set cmdheight=2
 " https://github.com/neovim/neovim/pull/17446
@@ -595,32 +596,48 @@ require('lualine').setup {
   options = {
     globalstatus = true,
     icons_enabled = false,
-    -- component_separators = '|',
-    -- section_separators = '',
   },
   sections = {
     lualine_a = {
       {'mode', fmt = function(str) return str:sub(1,1) end}
     },
+    lualine_c = { 'filename' },
+    lualine_x = { "encoding", "fileformat", "filetype" },
+  },
+  -- tabline = {
+  --   lualine_a = {'tabs'},
+  --   lualine_b = {'CWD'},
+  --   lualine_y = {'buffers'},
+  -- },
+  inactive_sections = {
+    lualine_a = {function() return [[•]] end},
     lualine_c = {
+      {
+        'filename',
+        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+      }
+    },
+  },
+  winbar = {
+    lualine_a = {'tabs'},
+    lualine_b = {'CWD'},
+    lualine_c = {},
+    lualine_z = {
       {
         'filename',
         file_status = true, -- displays file status (readonly status, modified status)
         path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
       }
     },
-    lualine_x = { "encoding", "fileformat" },
   },
-   tabline = {
-     lualine_a = {'tabs'},
-     lualine_b = {'CWD'},
-     lualine_y = {'buffers'},
-  },
-  inactive_sections = {
-    lualine_a = {function() return [[•]] end},
-    lualine_c = {
+  inactive_winbar = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_z = {
       {
         'filename',
+        file_status = true, -- displays file status (readonly status, modified status)
         path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
       }
     },
