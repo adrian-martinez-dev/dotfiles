@@ -25,8 +25,8 @@ endif
 " General
 " LSP
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'mason-org/mason.nvim'
+Plug 'mason-org/mason-lspconfig.nvim'
 
 " Symbols
 " Plug 'simrat39/symbols-outline.nvim'
@@ -42,9 +42,6 @@ Plug 'hrsh7th/cmp-nvim-lua'
 " Snippets
 Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
-
-" LSP Setup
-Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v1.x'}
 
 " Formatter
 Plug 'sbdchd/neoformat'
@@ -540,7 +537,7 @@ command! -nargs=* Test T docker compose -f local.yml run --rm django pytest <arg
 command! PullDotfiles T cd ~/dotfiles; git pull;
 command! PushDotfiles T cd ~/dotfiles; git add .; git commit -m "Quick sync"; git push;
 command! TrailingWhitespaceRemove :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-command! CarriageReturnRemove :%s///g
+command! CarriageReturnRemove :%s/\r//g
 " Fix commit to the wrong branch
 command! GitResetSoft T git reset --soft HEAD^
 
@@ -765,50 +762,33 @@ require('fzf-lua').setup {
 require('leap').add_default_mappings()
 vim.keymap.del({'x', 'o'}, 'x')
 
--- lsp zero
-local lsp = require('lsp-zero')
-lsp.preset('recommended')
-
--- "See :help lsp-zero-preferences
-lsp.set_preferences({
-  set_lsp_keymaps = false, -- "set to false if you want to configure your own keybindings
-  manage_nvim_cmp = true, -- "set to false if you want to configure nvim-cmp on your own
-})
-
--- +lsp.set_preferences({
--- +  set_lsp_keymaps = {omit = {'<F2>', 'gl'}}
--- +})
-
-lsp.setup()
 vim.diagnostic.config({
   virtual_text = true,
 })
-lsp.on_attach(function(client, bufnr)
-  local map = function(mode, lhs, rhs)
-    local opts = {remap = false, buffer = bufnr}
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local map = function(mode, lhs, rhs)
+      local opts = {remap = false, buffer = bufnr}
+      vim.keymap.set(mode, lhs, rhs, opts)
+    end
+    -- LSP actions
+    map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+    map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+    map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+    map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
+    map('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
+    map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+    -- map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+    map('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    map('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    map('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
 
-  -- LSP actions
-  map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
-  map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
-  map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
-  map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
-  map('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
-  map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
-  -- map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-  map('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
-  map('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-  map('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
-
-  -- Diagnostics
-  map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
-  map('n', '<leader>E', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-  map('n', '<leader>e', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-end)
-require("mason-lspconfig").setup {
-    ensure_installed = { "pylsp", "vtsls" },
-}
+    -- Diagnostics
+    map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+    map('n', '<leader>E', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+    map('n', '<leader>e', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+  end,
+})
 require("persistent-colorscheme").setup()
 require("CopilotChat").setup {
   model = 'gpt-4o', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
