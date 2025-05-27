@@ -795,6 +795,7 @@ require("CopilotChat").setup {
   model = 'claude-3.7-sonnet', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
   agent = 'copilot', -- Default agent to use, see ':CopilotChatAgents' for available agents (can be specified manually in prompt via @).
   -- default window options
+  context = 'buffer',
   window = {
     layout = 'float', -- 'vertical', 'horizontal', 'float', 'replace'
     width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
