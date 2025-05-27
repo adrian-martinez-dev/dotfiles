@@ -415,6 +415,7 @@ tnoremap <C-l> <C-\><C-n><C-w>l
 
 " Copilot chat
 nnoremap <leader>cc :CopilotChatToggle<CR>
+vnoremap <leader>cc :CopilotChat<CR>
 
 " Plugins settings
 " netrw
@@ -439,7 +440,7 @@ nnoremap <leader>O :SLoad
 let g:startify_disable_at_vimenter = 1
 let g:startify_custom_indices = ['f', 'd', 's']
 let g:startify_session_number = 7
-let g:startify_files_number = 7 
+let g:startify_files_number = 7
 let g:startify_session_sort = 1
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': [   '   Sessions']       },
@@ -791,7 +792,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 require("persistent-colorscheme").setup()
 require("CopilotChat").setup {
-  model = 'gpt-4o', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
+  model = 'claude-3.7-sonnet', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
   agent = 'copilot', -- Default agent to use, see ':CopilotChatAgents' for available agents (can be specified manually in prompt via @).
   -- default window options
   window = {
