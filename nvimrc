@@ -576,6 +576,10 @@ let g:rainbow_delimiters = {
 \ }
 
 lua <<EOF
+vim.lsp.enable({
+  'pyright',
+  'ts_ls',
+})
 -- Background sync
 vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
   callback = function()
@@ -588,6 +592,7 @@ vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
 vim.api.nvim_create_autocmd("UILeave", {
   callback = function() io.write("\027]111\027\\") end,
 })
+require("mason").setup()
 -- require('symbols-outline').setup()
 require('treesitter-context').setup()
 require('lualine').setup {
