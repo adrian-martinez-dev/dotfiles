@@ -427,6 +427,7 @@ let g:netrw_fastbrowse = 0
 nmap <Leader>gc :T git checkout 
 nmap <Leader>gP :T git push<cr>
 nmap <leader>gT :tab Git<CR>
+nmap <leader>gv :vertical Git<CR>
 " nmap <silent><Leader>gd :-1tabedit %<CR>:Gdiff<cr>
 nmap <silent><Leader>gd :Gvdiffsplit<cr>
 nmap <silent><Leader>gD :Ghdiffsplit<cr>
@@ -578,7 +579,7 @@ let g:rainbow_delimiters = {
 lua <<EOF
 vim.lsp.enable({
   'pyright',
-  'ts_ls',
+  -- 'ts_ls',
 })
 -- Background sync
 vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
