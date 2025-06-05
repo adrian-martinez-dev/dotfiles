@@ -508,7 +508,7 @@ let g:neobones_transparent_background = v:true
 set background=dark
 
 try
-  colorscheme base16-equilibrium-dark
+  colorscheme base16-default-dark
 catch
   " echo 'Colorscheme not found'
 endtry
