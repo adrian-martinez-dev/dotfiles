@@ -245,6 +245,7 @@ augroup DisableThingsFromWindows
     autocmd FileType qf,help,fugitive setlocal foldcolumn=0 signcolumn=no nonumber colorcolumn= nolist
     autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth colorcolumn=
+    autocmd BufWinEnter * if &filetype == 'copilot-chat' | setlocal nonumber foldcolumn=0 | endif
 augroup END
 
 augroup PythonIndent
@@ -579,7 +580,7 @@ let g:rainbow_delimiters = {
 lua <<EOF
 vim.lsp.enable({
   'pyright',
-  -- 'ts_ls',
+  'ts_ls',
 })
 -- Background sync
 vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
@@ -801,10 +802,11 @@ require("CopilotChat").setup {
   model = 'claude-3.7-sonnet', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
   agent = 'copilot', -- Default agent to use, see ':CopilotChatAgents' for available agents (can be specified manually in prompt via @).
   -- default window options
-  context = 'buffer',
+  -- context = 'buffer',
   window = {
-    layout = 'float', -- 'vertical', 'horizontal', 'float', 'replace'
-    width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
+    layout = 'vertical', -- 'vertical', 'horizontal', 'float', 'replace'
+    -- width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
+    width = 0.4, -- fractional width of parent, or absolute width in columns when > 1
     height = 0.6, -- fractional height of parent, or absolute height in rows when > 1
     -- Options below only apply to floating windows
     relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
