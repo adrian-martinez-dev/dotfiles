@@ -48,12 +48,11 @@ Plug 'sbdchd/neoformat'
 
 " CodeGPT
 Plug 'nvim-lua/plenary.nvim'
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
-
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-lualine/lualine.nvim'
-" Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-commentary'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'tpope/vim-eunuch'
@@ -245,24 +244,12 @@ augroup DisableThingsFromWindows
     autocmd FileType qf,help,fugitive setlocal foldcolumn=0 signcolumn=no nonumber colorcolumn= nolist
     autocmd FilterWritePre * if &diff | setlocal foldcolumn=0 | endif
     autocmd TermOpen * setlocal foldcolumn=0 signcolumn=no nonumber winfixheight winfixwidth colorcolumn=
-    autocmd BufWinEnter * if &filetype == 'copilot-chat' | setlocal nonumber foldcolumn=0 | endif
 augroup END
 
 augroup PythonIndent
     autocmd!
     autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 augroup END
-
-" Mix filetypes
-" augroup FileTypes
-"     autocmd!
-"     autocmd BufNewFile,BufRead *.vue set filetype=html.vue
-" augroup END
-
-" augroup StartifyFix
-"   autocmd!
-"   autocmd User StartifyReady let &l:stl = ' Startify'
-" augroup END
 
 function! CWD()
     let l:path = fnamemodify(getcwd(),":t")
@@ -280,17 +267,6 @@ augroup OverrideColor
     autocmd!
     autocmd ColorScheme * hi! link VertSplit LineNr
     autocmd ColorScheme * hi! link Beacon Cursor
-    " autocmd ColorScheme * hi! link IndentBlankLineChar NonText
-    " autocmd ColorScheme * hi! link TreesitterContext DiffAdd
-    " autocmd ColorScheme * hi! Boolean gui=NONE cterm=NONE
-    " autocmd ColorScheme * hi! Comment gui=NONE cterm=NONE
-    " autocmd ColorScheme * hi! Constant gui=NONE cterm=NONE
-    " autocmd ColorScheme * hi! Number gui=NONE cterm=NONE
-    " autocmd ColorScheme * hi! SpecialKey gui=NONE cterm=NONE
-    " autocmd ColorScheme * hi! TroubleSource gui=NONE cterm=NONE
-    " autocmd ColorScheme * hi! WhichKeyValue gui=NONE cterm=NONE
-    " autocmd ColorScheme * hi! diffNewFile gui=NONE cterm=NONE
-    " autocmd ColorScheme * hi! diffOldFile gui=NONE cterm=NONE
 augroup END
 
 " Mappings
@@ -654,8 +630,6 @@ require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
-    disable = { "markdown", "sh", "bash" },
-    -- disable = { "sh", "bash" },
   },
   indent = {
     enable = true
@@ -671,8 +645,8 @@ require('nvim-treesitter.configs').setup {
     "vim",
     "vue",
     "diff",
-    -- "markdown",
-    -- "markdown_inline",
+    "markdown",
+    "markdown_inline",
   },
 }
 require('gitsigns').setup {
@@ -759,14 +733,7 @@ require('fzf-lua').setup {
       ["gutter"]      = { "bg", "Normal" },
   },
 }
--- require('nvim-web-devicons').setup()
--- require'hop'.setup()
--- require("statuscol").setup {
---  foldfunc = "builtin",
---  setopt = true,
---  separator = "   ",
---  -- order = "SNsF",        -- "FSNs order of the fold, sign, line number and separator segments
---}
+require('nvim-web-devicons').setup()
 require('leap').add_default_mappings()
 vim.keymap.del({'x', 'o'}, 'x')
 
@@ -798,90 +765,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 require("persistent-colorscheme").setup()
-require("CopilotChat").setup {
-  model = 'claude-3.7-sonnet', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
-  agent = 'copilot', -- Default agent to use, see ':CopilotChatAgents' for available agents (can be specified manually in prompt via @).
-  -- default window options
-  -- context = 'buffer',
-  window = {
-    layout = 'vertical', -- 'vertical', 'horizontal', 'float', 'replace'
-    -- width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
-    width = 0.4, -- fractional width of parent, or absolute width in columns when > 1
-    height = 0.6, -- fractional height of parent, or absolute height in rows when > 1
-    -- Options below only apply to floating windows
-    relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
-    border = 'single', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-    row = nil, -- row position of the window, default is centered
-    col = nil, -- column position of the window, default is centered
-    title = 'Copilot Chat', -- title of chat window
-    footer = nil, -- footer of chat window
-    zindex = 1, -- determines if window is on top or below other floating windows
-  },
-
-  show_help = true, -- Shows help message as virtual lines when waiting for user input
-  show_folds = true, -- Shows folds for sections in chat
-  highlight_selection = true, -- Highlight selection
-  highlight_headers = true, -- Highlight headers in chat, disable if using markdown renderers (like render-markdown.nvim)
-  auto_follow_cursor = true, -- Auto-follow cursor in chat
-  auto_insert_mode = false, -- Automatically enter insert mode when opening window and on new prompt
-  insert_at_end = false, -- Move cursor to end of buffer when inserting text
-  clear_chat_on_new_prompt = false, -- Clears chat on every new prompt
-  -- Static config starts here (can be configured only via setup function)
-
-  debug = false, -- Enable debug logging (same as 'log_level = 'debug')
-  log_level = 'info', -- Log level to use, 'trace', 'debug', 'info', 'warn', 'error', 'fatal'
-  proxy = nil, -- [protocol://]host[:port] Use this proxy
-  allow_insecure = false, -- Allow insecure server connections
-  chat_autocomplete = true, -- Enable chat autocompletion (when disabled, requires manual `mappings.complete` trigger)
-
-  -- default mappings
-  mappings = {
-    complete = {
-      insert = '<Tab>',
-    },
-    close = {
-      normal = '<Esc>',
-      insert = '<C-c>',
-    },
-    reset = {
-      normal = '',
-      insert = '',
-    },
-    submit_prompt = {
-      normal = '<CR>',
-      insert = '<C-s>',
-    },
-    toggle_sticky = {
-      detail = 'Makes line under cursor sticky or deletes sticky line.',
-      normal = 'gr',
-    },
-    accept_diff = {
-      normal = '<C-y>',
-      insert = '<C-y>',
-    },
-    jump_to_diff = {
-      normal = 'gj',
-    },
-    quickfix_diffs = {
-      normal = 'gq',
-    },
-    yank_diff = {
-      normal = 'gy',
-      register = '"',
-    },
-    show_diff = {
-      normal = 'gd',
-    },
-    show_info = {
-      normal = 'gi',
-    },
-    show_context = {
-      normal = 'gc',
-    },
-    show_help = {
-      normal = 'gh',
-    },
-  },
-}
-vim.cmd([[cab cc CopilotChat]])
 EOF

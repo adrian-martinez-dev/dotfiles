@@ -15,3 +15,5 @@ export PATH
 export PATH=${PATH}:/Android/sdk/tools
 
 . "$HOME/.cargo/env"
+
+. "$HOME/.local/bin/env"
