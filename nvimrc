@@ -49,7 +49,6 @@ Plug 'sbdchd/neoformat'
 " CodeGPT
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
-Plug 'MeanderingProgrammer/render-markdown.nvim'
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-lualine/lualine.nvim'
@@ -645,8 +644,8 @@ require('nvim-treesitter.configs').setup {
     "vim",
     "vue",
     "diff",
-    "markdown",
-    "markdown_inline",
+    -- "markdown",
+    -- "markdown_inline",
   },
 }
 require('gitsigns').setup {
