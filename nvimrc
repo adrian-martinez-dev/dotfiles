@@ -89,6 +89,10 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'alvan/vim-closetag'
 Plug 'github/copilot.vim'
 
+" OpenCode
+Plug 'NickvanDyke/opencode.nvim'
+Plug 'folke/snacks.nvim'
+
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-context'
@@ -207,12 +211,6 @@ endfunction
 augroup resCur
     autocmd!
     autocmd BufWinEnter, BufEnter * call ResCur()
-augroup END
-
-" Term start in insert mode
-augroup TermCmd
-    autocmd!
-    autocmd TermOpen * startinsert
 augroup END
 
 " Quickfix below everything
@@ -611,8 +609,8 @@ require('lualine').setup {
     },
   },
   inactive_winbar = {
-    lualine_a = {},
-    lualine_b = {},
+    lualine_a = {'tabs'},
+    lualine_b = {'CWD'},
     lualine_c = {},
     lualine_z = {
       {
@@ -733,8 +731,8 @@ require('fzf-lua').setup {
   },
 }
 require('nvim-web-devicons').setup()
-require('leap').add_default_mappings()
-vim.keymap.del({'x', 'o'}, 'x')
+vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+vim.keymap.set('n',             'S', '<Plug>(leap-from-window)')
 
 vim.diagnostic.config({
   virtual_text = true,
@@ -764,4 +762,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 require("persistent-colorscheme").setup()
+
+-- Snacks configuration
+require('snacks').setup({
+  input = { enabled = true }
+})
 EOF

@@ -47,3 +47,4 @@ function homestead() {
     ( cd ~/.homestead && vagrant $* )
 }
 
+export PATH="/home/adrian/.opencode/bin:$PATH"

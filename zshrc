@@ -150,7 +150,7 @@ export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/adrian/.local/share/f
 . "$HOME/.local/bin/env"
 
 # opencode
-export PATH=/home/adrian/.opencode/bin:$PATH
+export PATH="/home/adrian/.opencode/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="/home/adrian/.local/share/pnpm"
@@ -167,3 +167,6 @@ esac
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/snap/bin:$PATH"
+
+# opencode
+export PATH=/home/adrian/.opencode/bin:$PATH
