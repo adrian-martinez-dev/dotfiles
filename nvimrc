@@ -28,26 +28,9 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'mason-org/mason.nvim'
 Plug 'mason-org/mason-lspconfig.nvim'
 
-" Symbols
-" Plug 'simrat39/symbols-outline.nvim'
-
-" Autocompletion Engine
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'hrsh7th/cmp-nvim-lua'
-
-" Snippets
-Plug 'L3MON4D3/LuaSnip'
-Plug 'rafamadriz/friendly-snippets'
-
 " Formatter
 Plug 'sbdchd/neoformat'
 
-" CodeGPT
-Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
@@ -60,13 +43,11 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'mhinz/vim-startify'
 Plug 'justinmk/vim-dirvish'
 Plug 'voldikss/vim-browser-search'
-Plug 'mattn/emmet-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
-Plug 'kazhala/close-buffers.nvim'
 Plug 'ggandor/leap.nvim'
 Plug 'hiphish/rainbow-delimiters.nvim'
 
@@ -88,10 +69,6 @@ Plug 'shumphrey/fugitive-gitlab.vim'
 " Snippets & AutoComplete
 Plug 'alvan/vim-closetag'
 Plug 'github/copilot.vim'
-
-" OpenCode
-Plug 'NickvanDyke/opencode.nvim'
-Plug 'folke/snacks.nvim'
 
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -482,7 +459,7 @@ let g:neobones_transparent_background = v:true
 set background=dark
 
 try
-  colorscheme base16-default-dark
+  colorscheme base16-tokyo-night-terminal-dark
 catch
   " echo 'Colorscheme not found'
 endtry
@@ -531,14 +508,6 @@ augroup dirvish_config
 augroup END
 
 let g:dirvish_mode = ':sort ,^.*[\/],'
-
-" emmet
-" c-y to expand
-let g:user_emmet_settings = {
-\  'javascript' : {
-\      'extends' : 'jsx',
-\  },
-\}
 
 " autoclose
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.htmldjango'
