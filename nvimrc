@@ -48,7 +48,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'danilamihailov/beacon.nvim'
 Plug 'romainl/vim-cool'
 Plug 'sQVe/sort.nvim'
-Plug 'ggandor/leap.nvim'
 Plug 'hiphish/rainbow-delimiters.nvim'
 
 " Colorschemes
@@ -592,15 +591,15 @@ require('lualine').setup {
 }
 require('ibl').setup {}
 -- require('rainbow-delimiters').setup {}
-require('nvim-treesitter.configs').setup {
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-    enable = true
-  },
-  ensure_installed = {
+require'nvim-treesitter'.install {
+  -- highlight = {
+  --   enable = true,
+  --   additional_vim_regex_highlighting = false,
+  -- },
+  -- indent = {
+  --   enable = true
+  -- },
+  -- ensure_installed = {
     "typescript",
     "javascript",
     "python",
@@ -613,7 +612,6 @@ require('nvim-treesitter.configs').setup {
     "diff",
     -- "markdown",
     -- "markdown_inline",
-  },
 }
 require('gitsigns').setup {
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
@@ -700,8 +698,6 @@ require('fzf-lua').setup {
   },
 }
 require('nvim-web-devicons').setup()
-vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
-vim.keymap.set('n',             'S', '<Plug>(leap-from-window)')
 
 vim.diagnostic.config({
   virtual_text = true,
@@ -731,9 +727,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 require("persistent-colorscheme").setup()
-
--- Snacks configuration
-require('snacks').setup({
-  input = { enabled = true }
-})
 EOF
