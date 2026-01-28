@@ -24,3 +24,7 @@ export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
 [ -f $HOME/.zshenv.local ] && . $HOME/.zshenv.local
 # . "$HOME/.cargo/env"
+
+# NVM configuration
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
