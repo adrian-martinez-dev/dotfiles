@@ -259,7 +259,7 @@ nnoremap <leader>- :execute "vimgrep /" . expand('<cword>') ."/j %"<CR>
 " console.log
 nnoremap <Leader>L "ayiw<CR>iconsole.log('<C-R>a: ', <C-R>a)<CR><Esc>
 
-nnoremap <leader>M :top 15sp term://$SHELL<cr>
+nnoremap <leader>M :top sp term://$SHELL<cr>
 nnoremap <leader>m :below sp term://$SHELL<cr>
 " nnoremap <leader>G :vertical Git<CR>
 
@@ -357,7 +357,9 @@ nmap <leader>i :set list!<CR>
 " nnoremap <C-L> <C-W><C-L>
 
 " Term move between splits
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n>
+" Compatibility with claude code
+tnoremap <Esc><Esc> <C-\><C-n>
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
