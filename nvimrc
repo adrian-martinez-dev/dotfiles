@@ -66,12 +66,13 @@ Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
 
 " Snippets & AutoComplete
-Plug 'alvan/vim-closetag'
 " Plug 'github/copilot.vim'
 
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-context'
+
+Plug 'sychen52/smart-term-esc.nvim'
 
 call plug#end()
 
@@ -359,7 +360,7 @@ nmap <leader>i :set list!<CR>
 " Term move between splits
 " tnoremap <Esc> <C-\><C-n>
 " Compatibility with claude code
-tnoremap <Esc><Esc> <C-\><C-n>
+" tnoremap <Esc><Esc> <C-\><C-n>
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
@@ -410,10 +411,10 @@ augroup StartifyAu
 augroup END
 
 " Copilot
-let g:copilot_no_tab_map = v:true
-imap <silent><script><expr> <C-L> copilot#Accept()
-imap <silent> <C-j> <Plug>(copilot-next)
-imap <silent> <C-k> <Plug>(copilot-previous)
+" let g:copilot_no_tab_map = v:true
+" imap <silent><script><expr> <C-L> copilot#Accept()
+" imap <silent> <C-j> <Plug>(copilot-next)
+" imap <silent> <C-k> <Plug>(copilot-previous)
 
 " diff
 nnoremap <leader>ch :diffget //2<CR>
@@ -527,6 +528,16 @@ vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
     local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
     if not normal.bg then return end
     io.write(string.format("\027]11;#%06x\027\\", normal.bg))
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+  callback = function()
+    vim.schedule(function()
+      if vim.wo.diff then
+        vim.diagnostic.enable(false, { bufnr = 0 })
+      end
+    end)
   end,
 })
 
@@ -696,6 +707,10 @@ require('fzf-lua').setup {
   },
 }
 require('nvim-web-devicons').setup()
+require('smart-term-esc').setup{
+    key='<Esc>',
+    except={'nvim', 'fzf', 'opencode', 'codex', 'claude'}
+}
 
 vim.diagnostic.config({
   virtual_text = true,
