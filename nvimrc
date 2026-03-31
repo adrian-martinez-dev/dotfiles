@@ -36,7 +36,6 @@ Plug 'vijaymarupudi/nvim-fzf'
 Plug 'ibhagwan/fzf-lua'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'tpope/vim-commentary'
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 Plug 'tpope/vim-eunuch'
 Plug 'justinmk/vim-gtfo'
 Plug 'wesQ3/vim-windowswap'
@@ -51,11 +50,8 @@ Plug 'sQVe/sort.nvim'
 Plug 'hiphish/rainbow-delimiters.nvim'
 
 " Colorschemes
-Plug 'mcchrish/zenbones.nvim'
-Plug 'rktjmp/lush.nvim'
 Plug 'RRethy/base16-nvim'
 Plug 'lcroberts/persistent-colorscheme.nvim'
-
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -64,13 +60,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-rhubarb'
 Plug 'shumphrey/fugitive-gitlab.vim'
-
-" Snippets & AutoComplete
-" Plug 'github/copilot.vim'
-
-" Syntax highlighting
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'nvim-treesitter/nvim-treesitter-context'
 
 Plug 'sychen52/smart-term-esc.nvim'
 
@@ -104,7 +93,7 @@ set mouse=a
 set nospell
 set foldlevel=99
 set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+" set foldexpr=nvim_treesitter#foldexpr()
 set scrolloff=5
 set signcolumn=yes:1
 set list
@@ -545,8 +534,6 @@ vim.api.nvim_create_autocmd("UILeave", {
   callback = function() io.write("\027]111\027\\") end,
 })
 require("mason").setup()
--- require('symbols-outline').setup()
-require('treesitter-context').setup()
 require('lualine').setup {
   options = {
     globalstatus = true,
@@ -559,11 +546,6 @@ require('lualine').setup {
     lualine_c = { 'filename' },
     lualine_x = { "encoding", "fileformat", "filetype" },
   },
-  -- tabline = {
-  --   lualine_a = {'tabs'},
-  --   lualine_b = {'CWD'},
-  --   lualine_y = {'buffers'},
-  -- },
   inactive_sections = {
     lualine_a = {function() return [[•]] end},
     lualine_c = {
@@ -599,29 +581,6 @@ require('lualine').setup {
   },
 }
 require('ibl').setup {}
--- require('rainbow-delimiters').setup {}
-require'nvim-treesitter'.install {
-  -- highlight = {
-  --   enable = true,
-  --   additional_vim_regex_highlighting = false,
-  -- },
-  -- indent = {
-  --   enable = true
-  -- },
-  -- ensure_installed = {
-    "typescript",
-    "javascript",
-    "python",
-    "tsx",
-    "json",
-    "html",
-    "scss",
-    "vim",
-    "vue",
-    "diff",
-    -- "markdown",
-    -- "markdown_inline",
-}
 require('gitsigns').setup {
   signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
   numhl      = false,
@@ -659,10 +618,6 @@ require('gitsigns').setup {
     map('n', '<leader>ge', gs.preview_hunk)
     map('n', '<leader>gB', function() gs.blame_line{full=true} end)
     map('n', '<leader>gS', gs.stage_buffer)
-    -- map('n', '<leader>tb', gs.toggle_current_line_blame)
-    -- map('n', '<leader>hd', gs.diffthis)
-    -- map('n', '<leader>hD', function() gs.diffthis('~') end)
-    -- map('n', '<leader>td', gs.toggle_deleted)
   end
 }
 require('fzf-lua').setup {
@@ -728,7 +683,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
     map('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
     map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
-    -- map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
     map('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
     map('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
     map('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
