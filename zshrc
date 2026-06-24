@@ -86,7 +86,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # So as not to be disturbed by Ctrl-S ctrl-Q in terminals:
-stty -ixon
+if [ -t 0 ]; then
+    stty -ixon
+fi
 
 export NO_AT_BRIDGE=1
 
