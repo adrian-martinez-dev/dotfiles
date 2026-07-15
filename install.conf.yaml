@@ -1,4 +1,4 @@
-- clean: ['~']
+- clean: ['~', '~/.config/nvim']
 
 - defaults:
     link:
@@ -20,16 +20,8 @@
     ~/.zprofile: zprofile
     ~/.ctags.d/typescript.ctags: ctags
     ~/.bash_profile: bash_profile
-    ~/.config/nvim/init.vim: nvimrc
-    ~/.config/nvim/nplug.vim: nvim/nplug.vim
-    ~/.config/nvim/general.vim: nvim/general.vim
-    ~/.config/nvim/autocmd.vim: nvim/autocmd.vim
-    ~/.config/nvim/statusline.vim: nvim/statusline.vim
-    ~/.config/nvim/color.vim: nvim/color.vim
-    ~/.config/nvim/map.vim: nvim/map.vim
-    ~/.config/nvim/plugins.vim: nvim/plugins.vim
+    ~/.config/nvim/init.lua: init.lua
     ~/.config/nvim/ginit.vim: gnvimrc
-    ~/.config/nvim/coc-settings.json: coc-settings.json
     ~/.config/kitty/kitty.conf: kitty
     ~/.config/tmuxinator:
       create: true
