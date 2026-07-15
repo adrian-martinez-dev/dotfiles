@@ -16,3 +16,7 @@ export PATH
 #Android sdk
 export PATH=${PATH}:/Android/sdk/tools
 export ANDROID_HOME=$HOME/Library/Android/sdk
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/adrian/.local/bin:$PATH"

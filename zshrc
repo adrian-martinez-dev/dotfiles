@@ -172,3 +172,8 @@ export PATH="/snap/bin:$PATH"
 
 # opencode
 export PATH=/home/adrian/.opencode/bin:$PATH
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/adrian/.local/bin:$PATH"
+
