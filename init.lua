@@ -8,7 +8,8 @@ vim.g.mapleader = ','
 -- Platform
 -- ============================================================================
 
-local is_windows = vim.fn.has('win16') == 1 or vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1
+local is_windows = vim.fn.has('win32') == 1
+local cfg_dir = is_windows and '~/AppData/Local/nvim' or '~/.config/nvim'
 
 -- ============================================================================
 -- lazy.nvim Bootstrap
@@ -31,6 +32,9 @@ vim.opt.rtp:prepend(lazypath)
 -- Helpers
 -- ============================================================================
 
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+
 local function cwd_component()
   return vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
 end
@@ -40,11 +44,8 @@ local function ensure_dirs()
   local dirs = {
     backup = 'backupdir',
     views = 'viewdir',
+    undo = 'undodir',
   }
-
-  if vim.fn.has('persistent_undo') == 1 then
-    dirs.undo = 'undodir'
-  end
 
   for dirname, optname in pairs(dirs) do
     local dir = base .. dirname .. '/'
@@ -95,7 +96,7 @@ vim.opt.expandtab = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.sessionoptions:remove('folds')
-vim.opt.sessionoptions:append({ 'tabpages', 'globals' })
+vim.opt.sessionoptions:append('globals')
 vim.opt.shortmess:append('c')
 vim.opt.updatetime = 300
 vim.opt.laststatus = 3
@@ -108,28 +109,24 @@ vim.opt.fillchars = { fold = '-', diff = '·', eob = ' ', foldopen = '•', fold
 vim.opt.background = 'dark'
 vim.opt.statusline = '%f%m'
 
-if vim.fn.has('persistent_undo') == 1 then
-  vim.opt.undofile = true
-  vim.opt.undolevels = 10000
-  vim.opt.undoreload = 10000
-end
+vim.opt.undofile = true
+vim.opt.undolevels = 10000
+vim.opt.undoreload = 10000
 
-ensure_dirs()
-vim.cmd('filetype plugin indent on')
-vim.cmd('syntax enable')
+autocmd('UIEnter', {
+  group = augroup('EnsureDirs', { clear = true }),
+  callback = function() vim.schedule(ensure_dirs) end,
+})
 
 -- ============================================================================
 -- Autocommands
 -- ============================================================================
 
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-
-autocmd({ 'BufWinEnter', 'BufEnter' }, {
+autocmd('BufReadPost', {
   group = augroup('resCur', { clear = true }),
-  callback = function()
-    local mark = vim.api.nvim_buf_get_mark(0, '"')
-    if mark[1] > 0 and mark[1] <= vim.api.nvim_buf_line_count(0) then
+  callback = function(args)
+    local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+    if mark[1] > 0 and mark[1] <= vim.api.nvim_buf_line_count(args.buf) then
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
   end,
@@ -141,37 +138,27 @@ autocmd('FileType', {
   command = 'wincmd J',
 })
 
-autocmd('FileType', {
+autocmd('BufReadPost', {
   group = augroup('FirstLineCommit', { clear = true }),
-  pattern = 'gitcommit',
-  callback = function(args)
-    autocmd('BufEnter', {
-      group = augroup('FirstLineCommitBuffer', { clear = true }),
-      buffer = args.buf,
-      pattern = 'COMMIT_EDITMSG',
-      callback = function()
-        vim.fn.setpos('.', { 0, 1, 1, 0 })
-      end,
-    })
+  pattern = { 'COMMIT_EDITMSG', 'MERGE_MSG' },
+  callback = function()
+    vim.fn.setpos('.', { 0, 1, 1, 0 })
   end,
 })
 
+local cursorline_au = augroup('CursorLineOnlyInActiveWindow', { clear = true })
 autocmd({ 'VimEnter', 'WinEnter', 'BufWinEnter', 'InsertLeave' }, {
-  group = augroup('CursorLineOnlyInActiveWindow', { clear = true }),
-  callback = function()
-    vim.opt_local.cursorline = true
-  end,
+  group = cursorline_au,
+  callback = function() vim.opt_local.cursorline = true end,
 })
-
 autocmd({ 'WinLeave', 'InsertEnter' }, {
-  group = augroup('CursorLineOnlyInActiveWindowLeave', { clear = true }),
-  callback = function()
-    vim.opt_local.cursorline = false
-  end,
+  group = cursorline_au,
+  callback = function() vim.opt_local.cursorline = false end,
 })
 
+local disable_au = augroup('DisableThingsFromWindows', { clear = true })
 autocmd({ 'VimEnter', 'WinEnter', 'BufWinEnter' }, {
-  group = augroup('DisableThingsFromWindows', { clear = true }),
+  group = disable_au,
   callback = function()
     if vim.wo.previewwindow then
       vim.opt_local.list = false
@@ -179,9 +166,8 @@ autocmd({ 'VimEnter', 'WinEnter', 'BufWinEnter' }, {
     end
   end,
 })
-
 autocmd('FileType', {
-  group = augroup('DisableThingsFromWindowsFileType', { clear = true }),
+  group = disable_au,
   pattern = { 'qf', 'help', 'fugitive' },
   callback = function()
     vim.opt_local.foldcolumn = '0'
@@ -191,18 +177,14 @@ autocmd('FileType', {
     vim.opt_local.list = false
   end,
 })
-
 autocmd('FilterWritePre', {
-  group = augroup('DisableThingsFromWindowsDiff', { clear = true }),
+  group = disable_au,
   callback = function()
-    if vim.wo.diff then
-      vim.opt_local.foldcolumn = '0'
-    end
+    if vim.wo.diff then vim.opt_local.foldcolumn = '0' end
   end,
 })
-
 autocmd('TermOpen', {
-  group = augroup('DisableThingsFromWindowsTerm', { clear = true }),
+  group = disable_au,
   callback = function()
     vim.opt_local.foldcolumn = '0'
     vim.opt_local.signcolumn = 'no'
@@ -274,7 +256,7 @@ autocmd('BufWritePre', {
 -- ============================================================================
 
 local map = vim.keymap.set
-local opts = { noremap = true, silent = false }
+local opts = { noremap = true }
 local silent = { noremap = true, silent = true }
 
 -- ============================================================================
@@ -326,15 +308,9 @@ map('n', '<S-Tab>', 'gT', silent)
 map('n', '<S-Right>', '<cmd>bnext<CR>', silent)
 map('n', '<S-Left>', '<cmd>bprevious<CR>', silent)
 map('n', '<Space>', 'za', opts)
-map('n', '<leader>cv', '<cmd>e ~/dotfiles/init.lua<CR>', opts)
-map('n', '<leader>sv', '<cmd>source ~/.config/nvim/init.lua<CR>', opts)
-map('n', '<leader>sg', '<cmd>source ~/.config/nvim/ginit.vim<CR>', opts)
-
-if is_windows then
-  map('n', '<leader>cv', [[<cmd>e ~\AppData\Local\nvim\init.lua<CR>]], opts)
-  map('n', '<leader>sv', [[<cmd>source ~\AppData\Local\nvim\init.lua<CR>]], opts)
-  map('n', '<leader>sg', [[<cmd>source ~\AppData\Local\nvim\ginit.vim<CR>]], opts)
-end
+map('n', '<leader>cv', '<cmd>e ' .. (is_windows and '~/AppData/Local/nvim/init.lua' or '~/dotfiles/init.lua') .. '<CR>', opts)
+map('n', '<leader>sv', '<cmd>source ' .. cfg_dir .. '/init.lua<CR>', opts)
+map('n', '<leader>sg', '<cmd>source ' .. cfg_dir .. '/ginit.vim<CR>', opts)
 
 map('n', '<F1>', '<Nop>', opts)
 map('n', 'Q', '<Nop>', opts)
@@ -400,45 +376,43 @@ require('lazy').setup({
   { 'nvim-lua/plenary.nvim', lazy = true },
   { 'nvim-tree/nvim-web-devicons', opts = {} },
   { 'RRethy/base16-nvim', lazy = false, priority = 1000 },
-  { 'lcroberts/persistent-colorscheme.nvim', opts = {} },
+  { 'lcroberts/persistent-colorscheme.nvim', lazy = true, event = 'ColorScheme', opts = {} },
 
   {
     'nvim-lualine/lualine.nvim',
-    opts = {
-      options = {
-        globalstatus = true,
-        icons_enabled = false,
-      },
-      sections = {
-        lualine_a = {
-          { 'mode', fmt = function(str) return str:sub(1, 1) end },
+    event = 'UIEnter',
+    opts = function()
+      local filename_path1 = { 'filename', file_status = true, path = 1 }
+      return {
+        options = {
+          globalstatus = true,
+          icons_enabled = false,
         },
-        lualine_c = { 'filename' },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
-      },
-      inactive_sections = {
-        lualine_a = { function() return '•' end },
-        lualine_c = {
-          { 'filename', path = 1 },
+        sections = {
+          lualine_a = {
+            { 'mode', fmt = function(str) return str:sub(1, 1) end },
+          },
+          lualine_c = { 'filename' },
+          lualine_x = { 'encoding', 'fileformat', 'filetype' },
         },
-      },
-      winbar = {
-        lualine_a = { 'tabs' },
-        lualine_b = { cwd_component },
-        lualine_c = {},
-        lualine_z = {
-          { 'filename', file_status = true, path = 1 },
+        inactive_sections = {
+          lualine_a = { function() return '•' end },
+          lualine_c = { filename_path1 },
         },
-      },
-      inactive_winbar = {
-        lualine_a = { 'tabs' },
-        lualine_b = { cwd_component },
-        lualine_c = {},
-        lualine_z = {
-          { 'filename', file_status = true, path = 1 },
+        winbar = {
+          lualine_a = { 'tabs' },
+          lualine_b = { cwd_component },
+          lualine_c = {},
+          lualine_z = { filename_path1 },
         },
-      },
-    },
+        inactive_winbar = {
+          lualine_a = { 'tabs' },
+          lualine_b = { cwd_component },
+          lualine_c = {},
+          lualine_z = { filename_path1 },
+        },
+      }
+    end,
   },
 
   {
@@ -449,17 +423,17 @@ require('lazy').setup({
     'ibhagwan/fzf-lua',
     dependencies = { 'nvim-tree/nvim-web-devicons', 'vijaymarupudi/nvim-fzf' },
     keys = {
-      { '<Leader>a', '<cmd>FzfLua grep_project<CR>' },
-      { '<Leader>W', '<cmd>FzfLua grep_cword<CR>' },
-      { '<leader>A', '<cmd>FzfLua resume<CR>' },
-      { '<leader>D', '<cmd>FzfLua commands<CR>' },
-      { '<leader>d', '<cmd>FzfLua builtin<CR>' },
-      { '<leader>r', '<cmd>FzfLua registers<CR>' },
-      { '<leader>v', '<cmd>FzfLua buffers<CR>' },
-      { '<leader>l', '<cmd>FzfLua blines file_icons=false<CR>' },
-      { '<leader>F', '<cmd>FzfLua files<CR>' },
-      { '<leader>f', '<cmd>FzfLua git_files<CR>' },
-      { '<leader>G', '<cmd>FzfLua git_status<CR>' },
+      { '<Leader>a', '<cmd>FzfLua grep_project<CR>', desc = 'Grep project' },
+      { '<Leader>W', '<cmd>FzfLua grep_cword<CR>', desc = 'Grep word under cursor' },
+      { '<leader>A', '<cmd>FzfLua resume<CR>', desc = 'Resume last fzf' },
+      { '<leader>D', '<cmd>FzfLua commands<CR>', desc = 'Commands' },
+      { '<leader>d', '<cmd>FzfLua builtin<CR>', desc = 'Fzf builtin' },
+      { '<leader>r', '<cmd>FzfLua registers<CR>', desc = 'Registers' },
+      { '<leader>v', '<cmd>FzfLua buffers<CR>', desc = 'Buffers' },
+      { '<leader>l', '<cmd>FzfLua blines file_icons=false<CR>', desc = 'Buffer lines' },
+      { '<leader>F', '<cmd>FzfLua files<CR>', desc = 'Files' },
+      { '<leader>f', '<cmd>FzfLua git_files<CR>', desc = 'Git files' },
+      { '<leader>G', '<cmd>FzfLua git_status<CR>', desc = 'Git status' },
     },
     opts = {
       defaults = {
@@ -517,12 +491,12 @@ require('lazy').setup({
   },
 
   { 'tpope/vim-commentary' },
-  { 'tpope/vim-eunuch' },
+  { 'tpope/vim-eunuch', cmd = { 'Delete', 'Unlink', 'Move', 'Rename', 'Copy', 'Duplicate', 'Chmod', 'Mkdir', 'Cfind', 'Clocate', 'SudoWrite', 'SudoEdit', 'Wall', 'Touch', 'Remove' } },
   { 'justinmk/vim-gtfo' },
   { 'wesQ3/vim-windowswap' },
   { 'christoomey/vim-tmux-navigator' },
   { 'romainl/vim-cool' },
-  { 'sbdchd/neoformat' },
+  { 'sbdchd/neoformat', cmd = 'Neoformat' },
 
   {
     'voldikss/vim-browser-search',
@@ -579,6 +553,7 @@ require('lazy').setup({
 
   {
     'lewis6991/gitsigns.nvim',
+    event = { 'BufReadPost', 'BufNewFile' },
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       signcolumn = true,
@@ -619,11 +594,13 @@ require('lazy').setup({
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
+    event = { 'BufReadPost', 'BufNewFile' },
     opts = {},
   },
 
   {
     'nvim-treesitter/nvim-treesitter',
+    event = { 'BufReadPost', 'BufNewFile' },
     build = ':TSInstall! lua python javascript typescript tsx',
   },
 
