@@ -23,6 +23,11 @@
     ~/.config/nvim/init.lua: init.lua
     ~/.config/nvim/ginit.vim: gnvimrc
     ~/.config/kitty/kitty.conf: kitty
+    ~/.config/opencode/opencode.json: opencode/opencode.json
+    ~/.config/opencode/tui.json: opencode/tui.json
+    ~/.config/opencode/agent: opencode/agent
+    ~/.config/opencode/commands: opencode/commands
+    ~/.config/opencode/plugins: opencode/plugins
     ~/.config/tmuxinator:
       create: true
       path: tmuxinator
