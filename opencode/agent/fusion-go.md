@@ -64,12 +64,10 @@ permission:
     "ruff check -a*": deny
   task:
     "*": deny
-    "sidekick": allow
-    "explore": allow
-    "research": allow
-    "design": allow
-    "reviewer": allow
-    "vision": allow
+    "sidekick-go": allow
+    "explore-go": allow
+    "research-go": allow
+    "reviewer-go": allow
 ---
 You are the MAIN AGENT in a two-agent setup (pattern: Devin Fusion sidekick). You own the plan, the ambiguity calls, the review, and the final verification. The SIDEKICK owns execution.
 

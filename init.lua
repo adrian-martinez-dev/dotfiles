@@ -376,6 +376,17 @@ require('lazy').setup({
   { 'nvim-lua/plenary.nvim', lazy = true },
   { 'nvim-tree/nvim-web-devicons', opts = {} },
   { 'RRethy/base16-nvim', lazy = false, priority = 1000 },
+  {
+    'Aejkatappaja/cendre',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('cendre').setup({
+        background = 'hard',
+        italic_virtual_text = false,
+      })
+    end,
+  },
   { 'lcroberts/persistent-colorscheme.nvim', lazy = true, event = 'ColorScheme', opts = {} },
 
   {
@@ -529,6 +540,16 @@ require('lazy').setup({
         pattern = 'Startified',
         command = 'setlocal cursorline',
       })
+      autocmd('SessionLoadPost', {
+        group = augroup('OpenCodeOnSessionLoad', { clear = true }),
+        callback = function()
+          vim.schedule(function()
+            vim.cmd('enew')
+            vim.fn.termopen('opencode')
+            vim.cmd('startinsert')
+          end)
+        end,
+      })
     end,
   },
 
@@ -600,8 +621,21 @@ require('lazy').setup({
 
   {
     'nvim-treesitter/nvim-treesitter',
-    event = { 'BufReadPost', 'BufNewFile' },
-    build = ':TSInstall! lua python javascript typescript tsx',
+    lazy = false,
+    config = function()
+      require('nvim-treesitter').setup({
+        install_dir = vim.fn.stdpath('data') .. '/site',
+      })
+      require('nvim-treesitter').install({
+        'lua',
+        'python',
+        'javascript',
+        'typescript',
+        'tsx',
+        'markdown',
+        'markdown_inline',
+      })
+    end,
   },
 
   {
@@ -611,6 +645,15 @@ require('lazy').setup({
       except = { 'nvim', 'fzf', 'opencode', 'codex', 'claude' },
     },
   },
+
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    ft = { 'markdown', 'codecompanion' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
 }, {
   lockfile = vim.fn.expand('~/dotfiles/lazy-lock.json'),
 })
@@ -619,4 +662,4 @@ require('lazy').setup({
 -- Colorscheme
 -- ============================================================================
 
-pcall(vim.cmd.colorscheme, 'base16-tokyo-night-terminal-dark')
+pcall(vim.cmd.colorscheme, 'cendre')
