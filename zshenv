@@ -19,6 +19,7 @@ export EDITOR='nvim'
 export NODE_PATH=:/home/adrian/npm/lib/node_modules
 
 export PATH="$HOME/.linuxbrew/bin:$PATH"
+export PATH="$HOME/.opencode/bin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 
