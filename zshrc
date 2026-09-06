@@ -149,7 +149,7 @@ export NVM_DIR="$HOME/.nvm"
 export COMPOSE_MENU=false
 export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/adrian/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
 
-. "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 # opencode
 export PATH="/home/adrian/.opencode/bin:$PATH"
@@ -176,4 +176,3 @@ export PATH=/home/adrian/.opencode/bin:$PATH
 
 # Added by Antigravity CLI installer
 export PATH="/home/adrian/.local/bin:$PATH"
-
