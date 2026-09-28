@@ -628,6 +628,9 @@ require('lazy').setup({
       })
       require('nvim-treesitter').install({
         'lua',
+        'vim',
+        'vimdoc',
+        'query',
         'python',
         'javascript',
         'typescript',
