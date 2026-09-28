@@ -42,6 +42,8 @@ cat ~/.ssh/id_ed25519.pub
 # Clonar repositorio
 git clone git@github.com:adrian-martinez-dev/dotfiles.git && cd ~/dotfiles && ~/.local/bin/dotbot -c install.conf.yaml
 
+# CLI requerida para compilar parsers de nvim-treesitter
+$ npm install -g tree-sitter-cli
 
 # Instalar/sincronizar plugins de forma no interactiva (lazy.nvim)
 $ nvim --headless "+Lazy! sync" +qa
