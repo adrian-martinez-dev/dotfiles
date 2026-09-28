@@ -652,7 +652,7 @@ require('lazy').setup({
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
-    opts = {},
+    opts = { heading = { enabled = false } },
   },
 }, {
   lockfile = vim.fn.expand('~/dotfiles/lazy-lock.json'),
