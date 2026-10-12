@@ -151,6 +151,9 @@ export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:/home/adrian/.local/share/f
 
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
+# GitHub MCP token
+[ -f "$HOME/.config/github/mcp.env" ] && source "$HOME/.config/github/mcp.env"
+
 # opencode
 export PATH="/home/adrian/.opencode/bin:$PATH"
 

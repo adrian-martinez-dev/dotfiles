@@ -540,16 +540,16 @@ require('lazy').setup({
         pattern = 'Startified',
         command = 'setlocal cursorline',
       })
-      autocmd('SessionLoadPost', {
-        group = augroup('OpenCodeOnSessionLoad', { clear = true }),
-        callback = function()
-          vim.schedule(function()
-            vim.cmd('enew')
-            vim.fn.termopen('opencode')
-            vim.cmd('startinsert')
-          end)
-        end,
-      })
+      -- autocmd('SessionLoadPost', {
+      --   group = augroup('OpenCodeOnSessionLoad', { clear = true }),
+      --   callback = function()
+      --     vim.schedule(function()
+      --       vim.cmd('enew')
+      --       vim.fn.termopen({ 'opencode' }, { env = { PATH = vim.env.PATH } })
+      --       vim.cmd('startinsert')
+      --     end)
+      --   end,
+      -- })
     end,
   },
 
